@@ -14,11 +14,20 @@ body{
 }
 .top__menu__nav{
     margin-left: 20px;
+    display: block;
+    width: max-content;
+    justify-content: right;
+    margin-right: 100px;
+    text-align: right;
 }
 .top__menu{
     height: 0;
     overflow: hidden;
     transition: all .5s;
+    display: flex;
+    justify-content: right;
+    width: 90%;
+    margin: auto;
 }
 .top__menu.active{
     padding-top: 20px;
@@ -26,12 +35,11 @@ body{
     height: auto;
 }
 .top__menu__bottom{
-
+    width: 80%;
+    margin: auto;
     height: 60px;
     display: grid;
     grid-template-columns: 60px 1fr 40px 60px;
-    padding-left: 20px;
-    padding-right: 20px;
     column-gap: 5px;
     padding-top: 5px;
 }
@@ -87,7 +95,6 @@ body{
 .menu__btn__item.active{
     transform: rotate(180deg);
 }
-
 .menu__btn{
     display: flex;
     align-items: center;

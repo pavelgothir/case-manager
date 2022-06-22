@@ -3,8 +3,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Cases from './components/Cases/Cases';
 import Header from './components/Header/Header';
-import Home from './components/Home/Home';
-import Menu from './components/Menu/Menu';
 
 
 function App() {
@@ -35,7 +33,6 @@ function App() {
         <Header />
         <div className='wrap__content'>
           <Routes>
-            <Route path='/' component={Home} />
             <Route path='/cases' element={<Cases />} />
             <Route index element={<div>Default Page Content</div>} />
           </Routes>
