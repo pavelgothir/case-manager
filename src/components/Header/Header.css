@@ -12,6 +12,9 @@ body{
     font-size: 18px;
     text-decoration: none;
 }
+.top__menu a.active{
+    color: gold;
+}
 .top__menu__nav{
     margin-left: 20px;
     display: block;

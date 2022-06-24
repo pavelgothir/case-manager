@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
+import Cards from './components/Cards/Cards';
 import Cases from './components/Cases/Cases';
 import Header from './components/Header/Header';
 
@@ -33,8 +34,11 @@ function App() {
         <Header />
         <div className='wrap__content'>
           <Routes>
+            <Route path='/add-case' element={<Cases />} />
             <Route path='/cases' element={<Cases />} />
-            <Route index element={<div>Default Page Content</div>} />
+            <Route path='/cases' element={<Cases />} />
+            <Route path='/cases' element={<Cases />} />
+            <Route index element={<Cards />} />
           </Routes>
 
         </div>

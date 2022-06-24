@@ -8,16 +8,14 @@ import "./Header.css";
 import Nav from "./Menu/Nav";
 import Search from "./Menu/Search";
 const Header = ()=>{
-    const [active, setActive] = useState("false");
+    const [active, setActive] = useState(false);
     function openMenu(){
         setActive(!active);
         console.log(active)
     }
     return(
         <div className="wrapper__menu">
-              <div className="top__menu" id="top__menu">
-            <Nav />
-            </div>
+            
             <div className="top__menu__bottom">
             <div className="menu__logo">
                 <img src={logo} alt="" />
@@ -32,6 +30,9 @@ const Header = ()=>{
                 <img src={defoltProfile} alt="" />
             </div>
         </div>
+        <div className={`top__menu ${active ? "active" : ""}`} id="top__menu">
+            <Nav />
+            </div>
         </div>
     )
 }
