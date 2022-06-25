@@ -1,0 +1,33 @@
+.add__case{
+    width: 80%;
+    margin: auto;
+    padding-top: 50px;
+}
+.form__add__case{
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 30px;
+}
+.header__text{}
+.section__form{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    padding: 5px;
+}
+.label{
+    width: 100%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+.input__text{
+    padding-left: 10px;
+    height: 30px;
+    font-size: 18px;
+}
+.select{
+    padding-left: 10px;
+    height: 30px;
+    font-size: 18px;
+}
