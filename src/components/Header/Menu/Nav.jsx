@@ -10,6 +10,9 @@ const Nav = ()=>{
             <NavLink to="/">Головна</NavLink>
         </div>
         <div>
+            <NavLink to="/cases">Кейси</NavLink>
+        </div>
+        <div>
             <NavLink to="/add-case">Додати кейс</NavLink>
         </div>
         <div>

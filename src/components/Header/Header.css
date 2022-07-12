@@ -42,7 +42,7 @@ body{
     margin: auto;
     height: 60px;
     display: grid;
-    grid-template-columns: 60px 1fr 40px 60px;
+    grid-template-columns: 60px 1fr 1fr 40px 60px;
     column-gap: 5px;
     padding-top: 5px;
 }
@@ -111,4 +111,22 @@ body{
 .menu__profile{
     display: flex;
     align-items: center;
+}
+.access__header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 15px;
+}
+.access__header__link{
+    text-decoration: none;
+    color: #000;
+}
+.access__header__link.active{
+    color: gold;
+}
+.horisont__line{
+    height: 100%;
+    width: 1px;
+    background-color: #000;
 }

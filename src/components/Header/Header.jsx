@@ -7,6 +7,7 @@ import arrow from "../../img/arrow.png";
 import "./Header.css";
 import Nav from "./Menu/Nav";
 import Search from "./Menu/Search";
+import { NavLink } from "react-router-dom";
 const Header = ()=>{
     const [active, setActive] = useState(false);
     function openMenu(){
@@ -21,6 +22,11 @@ const Header = ()=>{
                 <img src={logo} alt="" />
             </div>
             <Search />
+            <div className="access__header">
+                <div><NavLink className={"access__header__link"} to={"registration"}> Реєстрація </NavLink></div>
+                <div className="horisont__line"></div>
+                <div><NavLink className={"access__header__link"} to={"logIn"}> Увійти </NavLink></div>
+            </div>
             <div className="menu__btn">
                 <div className={`menu__btn__item ${active ? "active" : ""}` } id="menu__btn" onClick={openMenu}>
                     <img src={arrow} alt="" />
