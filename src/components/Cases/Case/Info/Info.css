@@ -1,0 +1,91 @@
+.case__wrap{
+    width: 90%;
+    margin: auto;
+}
+.case__contact__info__img__inner{
+    position: relative;
+}
+.case__contact__info__img img{
+    max-width: 100%;
+    width: 100%;
+}
+.case__contact__info{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    column-gap: 30px;
+    margin-top: 50px;
+}
+.case__contact__info__img{
+    position: relative;
+}
+.case__edit__img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    padding: 2px 5px;
+    cursor: pointer;
+    transition: all .3s;
+}
+.case__edit__img:hover{
+    transform: scale(1.1);
+    background-color: aliceblue;
+}
+#uploadbtn{
+    visibility: hidden;
+}
+.case__info{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 20px;
+}
+.case__info__card{
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    column-gap: 5px;
+}
+.case__info__card__img{
+    display: flex;
+    align-items: center;
+}
+.case__info__card__img img{
+    width: 100%;
+}
+.case__info__text__center > p{
+    text-align: center;
+    margin: 0;
+}
+.case__info__text__center > div{
+width: max-content;
+margin: auto;
+}
+.case__info__inner{
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 10px;
+}
+.case__info__card__text{
+    display: flex;
+    align-items: center;
+}
+.case__info__text__center{
+    box-shadow: 0 0 10px #00000077;
+}
+.case__info__inner a{
+    color: #000;
+    text-decoration: none;
+}
+.activity{
+    min-height: 50vh;
+    background-color: #746d6d39;
+    padding: 15px;
+    max-height: 50vh;
+    overflow-y: scroll;
+}
+.journal__line{
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}

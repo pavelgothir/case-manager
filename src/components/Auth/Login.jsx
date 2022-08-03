@@ -1,48 +1,35 @@
-import React from "react";
-import { useForm } from "react-hook-form";
+import React, { useState } from "react";
+import LoginForm from "./LoginForm";
+import Registration from "./Registration";
 
 import './Registration.css';
 
 
 const Login = ()=>{
-    async function getUser(data){
-        await fetch("http://case.ua/login.php",{
-            method:"POST",
-            header : {'Content-Type': 'application/json;charset=utf-8'},
-            body:  JSON.stringify(data)
-        })
-            .then(res => res.text())
-            .then(data => {
-                console.log(data)
-               // window.location.href =""
-            })
-            .catch(rejected => {
-                console.log(rejected);
-            });
-            reset()
-            console.log(data)
-    }
-    const {register,formState:{errors,isValid},handleSubmit,reset} = useForm({mode:'onChange'});
+    const [selected, setSelected] = useState({
+        show:true,
+        register: "",
+        auth: "active"
+    });
+
  
     return (
         <div className="reg__container">
-            <form action="" className="reg__form" onSubmit={handleSubmit(getUser)}>
-                <h1>Авторизація</h1>
-                <div className="reg__block">
-                    <label>E-mail {errors?.login && <span className="error__mes">{errors?.login?.message || "Обов'язково до заповнення"}</span>}</label>
-                    <input type="email" {...register("login",{required:true,minLength:{value:5,message:"Мінімум 5 символа"}})} />
-                </div>
-                <div className="reg__block">
-                    <label>Пароль {errors?.password && <span className="error__mes">{errors?.password?.message || "Обов'язково до заповнення"}</span>}</label>
-                    <input type="password" {...register("password",{required:true,minLength:{value:5,message:"Мінімум 5 символа"}})} />
-                </div>
-                
-                <div className="reg__block">
-                    <label></label>
-                    <button className={`primary__btn ${!isValid ? 'active' : ""}`} disabled={!isValid}>Авторизація</button>
-                </div>
-            </form>
-         
+            <div className="reg__menu">
+                <div className={`reg__menu__item ${selected.auth}`} onClick={()=>{setSelected({
+                           show:true,
+                           register: "",
+                           auth: "active" 
+                })}}>Авторизація</div>
+                <div className="reg__menu__item__znak">|</div>
+                <div className={`reg__menu__item ${selected.register}`} onClick={()=>{setSelected({
+                           show:false,
+                           register: "active",
+                           auth: "" 
+                })}}>Реєстрація</div>
+            </div>
+            <LoginForm show = {selected.show}/>
+            <Registration show = {!selected.show}/>
         </div>
     )
 }

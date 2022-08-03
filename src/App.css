@@ -26,3 +26,29 @@
     box-shadow: 0 0 0px rgb(64, 96, 156);
     border-radius: 15px;
 }
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #547fa0 #ededed;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 12px;
+    cursor: pointer;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #ededed;
+    cursor: pointer;
+
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #547fa0;
+    border-radius: 10px;
+    border: 2px solid #ffffff;
+    cursor: pointer;
+
+  }

@@ -1,20 +1,32 @@
-import React from "react";
+import React, {useState} from "react";
 import { useForm } from "react-hook-form";
 import {axios} from "axios";
 import './Registration.css';
+import ModalInfo from "../Modals/ModalInfo";
 
 
 
-const Registration = ()=>{
+const Registration = ({show})=>{
+    const [modal, setModal] = useState({showModal:false, message:"123"})
+    function test(){
+        console.log("mergpmgre")
+        setModal({showModal:true,message:"hfewioiw"})
+    }
+
     async function saveUser(data){
         await fetch("http://case.ua/user-register.php",{
             method:"POST",
             header : {'Content-Type': 'application/json;charset=utf-8'},
             body:  JSON.stringify(data)
         })
-            .then(res => res.text())
+            .then(res => res.json())
             .then(data => {
-                console.log(data)
+                if(Object.keys(data).includes("message")){
+                    setModal({
+                        showModal:true,
+                        message:data.message
+                    })
+                }
             })
             .catch(rejected => {
                 console.log(rejected);
@@ -24,10 +36,9 @@ const Registration = ()=>{
     }
     const {register,formState:{errors,isValid},handleSubmit,reset} = useForm({mode:'onChange'});
  
-    return (
-        <div className="reg__container">
+    return show ?(
             <form action="" className="reg__form" onSubmit={handleSubmit(saveUser)}>
-                <h1>Реєстрація нового користувача в системі</h1>
+                
                 <div className="reg__block">
                     <label>ПІБ {errors?.userName && <span className="error__mes">{errors?.userName?.message || "Обов'язково до заповнення"}</span>}</label>
                     <input type="text" {...register("userName" ,{required:true,minLength:{value:3,message:"Мінімум 3 символа"}})}/>
@@ -55,26 +66,32 @@ const Registration = ()=>{
                         <option key={"manager"} value={"manager"}>Менеджер</option>
                         <option key={"expert"} value={"expert"}>Залучений спеціаліст</option>
                         <option key={"worker"} value={"worker"}>Працівник</option>
+                        <option key={"fsr"} value={"fsr"}>ФСР</option>
                         <option key={"administrator"} value={"administrator"}>Адміністратор</option>
                     </select>
                 </div>
                 <div className="reg__block">
-                    <label>Спеціалізація {errors?.userWork && <span className="error__mes">{errors?.userWork?.message || "Обов'язково до заповнення"}</span>}</label>
+                    <label>Спеціалізація / Робота {errors?.userWork && <span className="error__mes">{errors?.userWork?.message || "Обов'язково до заповнення"}</span>}</label>
                     <input type="text" {...register("userWork",{required:true,minLength:{value:3,message:"Мінімум 3 символа"}})} />
-                    
                 </div>
                 <div className="reg__block">
-                    <label>Інші необхідні дані {errors?.userAnotherData && <span className="error__mes">{errors?.userAnotherData?.message || "Обов'язково до заповнення"}</span>}</label>
+                    <label>Розкажіть про себе (хобі, сім'я, цікаві факти) {errors?.userAnotherData && <span className="error__mes">{errors?.userAnotherData?.message || "Обов'язково до заповнення"}</span>}</label>
                     <textarea cols="30" rows="10" {...register("userAnotherData",{required:false,minLength:{value:3,message:"Мінімум 3 символа"}})}></textarea>
-    
                     </div>
+                    <div className="reg__block">
+                    <label>Пароль {errors?.pass && <span className="error__mes">{errors?.pass?.message || "Обов'язково до заповнення"}</span>}</label>
+                    <input type="password" {...register("pass",{required:true,minLength:{value:6,message:"Мінімум 6 символа"}})} />
+                </div>
                 <div className="reg__block">
                     <label></label>
                     <button className={`primary__btn ${!isValid ? 'active' : ""}`} disabled={!isValid}>Реєстрація</button>
                 </div>
+                {modal.showModal ? <ModalInfo info={modal} func={()=>{setModal({showModal:false, message:"123"})}}/> : null}
+            <div onClick={test}>pgrrgerggr</div>
             </form>
          
-        </div>
+    ):(
+        <></>
     )
 }
 export default Registration;

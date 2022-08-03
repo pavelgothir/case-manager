@@ -1,18 +1,16 @@
 .reg__container{
-    width: 80%;
-    display: grid;
-    grid-template-columns: 1fr;
+    width: 50%;
+   display: block;
     row-gap: 30px;
     margin: auto;
-    margin-top: 100px;
+    margin-top: 50px;
+    padding: 50px 0;
 }
 
 .reg__container  h1{
     text-align: center;
 }
-.reg__form{
-    width: 90%;
-    padding: 5%;
+.reg__container{
     border-radius: 20px;
     box-shadow: 0 0 10px #000;
 }
@@ -25,4 +23,22 @@
 }
 .error__mes{
     color: red;
+}
+.reg__menu{
+    width: max-content;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+}
+.reg__menu__item.active{
+    color: gold;
+}
+.reg__menu__item{
+    transition: all .3s;
+}
+.reg__menu__item:hover{
+    cursor: pointer;
+    transform: scale(1.1);
 }

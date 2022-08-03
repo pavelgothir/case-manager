@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import s from "./AddCase.module.css";
 
 const send = async(data)=>{
+    console.log(data);
+    data.userId = localStorage.getItem("id");
     await fetch("http://case.ua/add-first-case.php",{
         method:"POST",
         header : {'Content-Type': 'application/json;charset=utf-8'},
@@ -76,6 +78,52 @@ const AddCase = ()=>{
                 <div className={s.error__message}>{errors?.potreba && <p>{errors?.potreba?.message || "Обов'язково"}</p>}</div>
                </div>
 
+               <div className={s.section__form}>
+                <Input type="text" label={"Надано допомогу"} name={"givingHelp"} register={register} minLength={{value:5,message:"Міннімум 5 символів"}} required={false}/>
+                <div className={s.error__message}>{errors?.givingHelp && <p>{errors?.givingHelp?.message || "Обов'язково"}</p>}</div>
+               </div>
+
+               <div className={s.section__form}>
+                <div>
+                    <label htmlFor="category">Категорія кейсу</label>
+                </div>
+                <div className={s.form__category}>
+                    <div className={s.form__category__block}>
+                        <label htmlFor="orphans">Сирота</label>
+                        <input {...register("category")} type="checkbox" id="orphans" value="orphans" />
+                    </div>
+                    <div className={s.form__category__block}>
+                        <label htmlFor="internat">У інтернаті</label>
+                        <input {...register("category")} type="checkbox" id="internat" value="internat" />
+                    </div>
+                    <div className={s.form__category__block}>
+                        <label htmlFor="szho">СЖО</label>
+                        <input {...register("category")} type="checkbox" id="szho" value="szho" />
+                    </div>
+                    <div className={s.form__category__block}>
+                        <label htmlFor="ps">Прийомна сім'я</label>
+                        <input {...register("category")} type="checkbox" id="ps" value="ps" />
+                    </div>
+                    <div className={s.form__category__block}>
+                        <label htmlFor="dbst">ДБСТ</label>
+                        <input {...register("category")} type="checkbox" id="dbst" value="dbst" />
+                    </div>
+                    <div className={s.form__category__block}>
+                        <label htmlFor="bagatoditna">Багатодітна сім'я</label>
+                        <input {...register("category")} type="checkbox" id="bagatoditna" value="bagatoditna" />
+                    </div>
+                    <div className={s.form__category__block}>
+                        <label htmlFor="invalidnist">З інвалідністю</label>
+                        <input {...register("category")} type="checkbox" id="invalidnist" value="invalidnist" />
+                    </div>
+                    <div className={s.form__category__block}>
+                        <label htmlFor="vpo">ВПО</label>
+                        <input {...register("category")} type="checkbox" id="vpo" value="vpo" />
+                    </div>
+
+                </div>
+                </div>
+                
                 <div>
                     <PrimaryBtn name="Зберегти" />
                 </div>

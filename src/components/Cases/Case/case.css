@@ -1,0 +1,29 @@
+.media__content{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 30px;
+    row-gap: 30px;
+}
+.media__content img, .media__content video{
+    width: 100%;
+}
+.media__content>div{
+    width: 100%;
+    height: auto;
+}
+
+.form__add__media{
+    width: max-content;
+    margin: auto;
+    margin-top: 30px;
+    text-align: center;
+    box-shadow: 0 0 3px 0px #000;
+    padding: 15px;
+    border-radius: 10px;
+}
+.Journal__and__plan{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 50px;
+    
+}
