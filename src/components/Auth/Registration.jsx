@@ -8,10 +8,6 @@ import ModalInfo from "../Modals/ModalInfo";
 
 const Registration = ({show})=>{
     const [modal, setModal] = useState({showModal:false, message:"123"})
-    function test(){
-        console.log("mergpmgre")
-        setModal({showModal:true,message:"hfewioiw"})
-    }
 
     async function saveUser(data){
         await fetch("http://case.ua/user-register.php",{
@@ -24,7 +20,8 @@ const Registration = ({show})=>{
                 if(Object.keys(data).includes("message")){
                     setModal({
                         showModal:true,
-                        message:data.message
+                        message:data.message,
+                        marker:data.marker
                     })
                 }
             })
@@ -87,7 +84,7 @@ const Registration = ({show})=>{
                     <button className={`primary__btn ${!isValid ? 'active' : ""}`} disabled={!isValid}>Реєстрація</button>
                 </div>
                 {modal.showModal ? <ModalInfo info={modal} func={()=>{setModal({showModal:false, message:"123"})}}/> : null}
-            <div onClick={test}>pgrrgerggr</div>
+
             </form>
          
     ):(

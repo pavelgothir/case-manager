@@ -5,7 +5,8 @@ const initialState = {
     token:localStorage.getItem("token"),
     id:localStorage.getItem("id"),
     data:localStorage.getItem("data"),
-    email:localStorage.getItem("email")
+    email:localStorage.getItem("email"),
+    profilePhoto:localStorage.getItem("profilePhoto")
 }
 
 const userSlice = createSlice({
@@ -18,6 +19,7 @@ const userSlice = createSlice({
             state.id = action.payload.id
             state.data = action.payload.data
             state.userName = action.payload.userName
+            state.profilePhoto = action.payload.profilePhoto
         },
         removeUser(state){
             state.email = null
@@ -25,6 +27,7 @@ const userSlice = createSlice({
             state.id = null
             state.data = null
             state.userName = null
+            state.profilePhoto = null
             localStorage.clear()
             window.location.href="/login"
         }

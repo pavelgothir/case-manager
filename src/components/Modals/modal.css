@@ -21,3 +21,11 @@
     background-color: #fff;
     border-radius: 15px;
 }
+.modal__window__message.red{
+    border:solid 2px red;
+    color: red;
+}
+.modal__window__message.green{
+    border:solid 2px green;
+    color: green;
+}

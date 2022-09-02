@@ -11,7 +11,7 @@ const PostsData = ({post})=>{
 let casePost = "";
 const Posts = (pos)=>{
     if(pos.length < 1) return;
-        casePost =  pos.map((post,index)=>{
+            casePost =  pos.map((post,index)=>{
             post = JSON.parse(post);
             return <PostsData key={index} post={post}/>
     })  
@@ -25,7 +25,7 @@ const Cases = ()=>{
         })
         .then(data =>{
             setPosts(data)
-           // console.log(data)
+            console.log(data)
         })
     },[])
     return (    

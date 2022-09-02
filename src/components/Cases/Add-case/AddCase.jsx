@@ -2,10 +2,11 @@ import React from "react";
 import PrimaryBtn from "../../Buttons/Primary";
 import { useForm } from "react-hook-form";
 import s from "./AddCase.module.css";
-
+import "./add-case.css"
 const send = async(data)=>{
-    console.log(data);
+    
     data.userId = localStorage.getItem("id");
+    console.log(data);
     await fetch("http://case.ua/add-first-case.php",{
         method:"POST",
         header : {'Content-Type': 'application/json;charset=utf-8'},
@@ -19,117 +20,243 @@ const send = async(data)=>{
             console.log(rejected);
         });
 }
-const AddCase = ()=>{
-    const Input = ({value,label, register, name, required, type, minLength})=>{
-        return(
-            <>
-                <label className={s.label}>{label}</label>
-                <input type={type} className={s.input__text} {...register(name ,{required:required, minLength, value:value})}/>
-                
-            </>
-        )
+function checkAddCase(){
+    let errors = 0;
+    let objAddCase = {
+        surname: document.querySelector("#surname").value.replace("'", "’"),
+        firstName: document.querySelector("#firstName").value.replace("'", "’"),
+        secondName: document.querySelector("#secondName").value.replace("'", "’"),
+        phone1: document.querySelector("#phone1").value.replace("'", "’"),
+        phone2: document.querySelector("#phone2").value.replace("'", "’"),
+        email: document.querySelector("#email").value.replace("'", "’"),
+        addressPropiska: document.querySelector("#addressPropiska").value.replace("'", "’"),
+        addressLive: document.querySelector("#addressLive").value.replace("'", "’"),
+        chanelComunity: document.querySelector("#chanelComunity").value.replace("'", "’"),
+        firstContact: document.querySelector("#firstContact").value.replace("'", "’"),
+        familyStan: document.querySelector("#familyStan").value.replace("'", "’"),
+        potreba: document.querySelector("#potreba").value.replace("'", "’"),
+        commentar: document.querySelector("#commentar").value.replace("'", "’"),
+        dateDogovir: document.querySelector("#dateDogovir").value.replace("'", "’"),
+        numberDogovir: document.querySelector("#numberDogovir").value.replace("'", "’"),
+        categories:[]
     }
-
+    let checkboxCategory = document.querySelectorAll(".checkbox__category");
+    for(let i = 0; i < checkboxCategory.length; i++){
+        if(checkboxCategory[i].checked){
+           objAddCase.categories.push(checkboxCategory[i].value.replace("'", "*"));
+        }
+    }
     
-    const {register,formState:{errors},handleSubmit} = useForm({mode:'onSubmit'});
-
-
-    const sendCase = (data)=>{
-        send(data);
+    if(objAddCase.surname.length < 1){
+        document.getElementById("surname").parentElement.style.background = "red";
+        errors += "<p>Заповніть поле <b>Прізвище</b></p>"
+    }else {
+        document.getElementById("surname").parentElement.style.background = "white"
     }
+    if(objAddCase.firstName.length < 1){
+        document.getElementById("firstName").parentElement.style.background = "red"
+        errors += "<p>Заповніть поле <b>Ім'я</b></p>"
+    }else {
+        document.getElementById("firstName").parentElement.style.background = "white"
+    }
+    if(objAddCase.phone1.length < 1){
+        document.getElementById("phone1").parentElement.style.background = "red"
+        errors += "<p>Заповніть поле <b>Телефон 1</b></p>"
+    }else {
+        document.getElementById("phone1").parentElement.style.background = "white"
+    }
+    if(objAddCase.firstContact.length < 1){
+        document.getElementById("firstContact").parentElement.style.background = "red"
+        errors += "<p>Заповніть поле <b>Дата першого контакту</b></p>"
+    }else {
+        document.getElementById("firstContact").parentElement.style.background = "white"
+    }
+    if(objAddCase.categories.length == 0){
+        document.getElementsByClassName("add__case__name__of__block")[0].style.background = "red"
+        errors += "<p>Оберіть <b>категорію кейсу</b></p>"
+    }else {
+        document.getElementsByClassName("add__case__name__of__block")[0].style.background = "white"
+    }
+    if(errors.length > 1){
+        document.getElementById("addCaseErrors").innerHTML = errors;
+        return document.getElementById("add__case__modal").classList.add("active")
+    }
+   // objAddCase.categories = JSON.stringify(objAddCase.categories)
+    send(objAddCase);
+}
+const AddCase = ()=>{
     return(
-        <div className={s.add__case}>
-            <form className={s.form__add__case} onSubmit={handleSubmit(sendCase)}>
-                <h1 className={s.header__text}>Додати кейс</h1>
-
-                <div className={s.section__form}>
-                <Input type="text" label={"ПІБ"} name={"caseName"} register={register} minLength={{value:5,message:"Мінімум 5 символів"}} required="Обов'язково до заповнення"/>
-                <div className={s.error__message}>{errors?.caseName && <p>{errors?.caseName?.message || "Обов'язково"}</p>}</div>
-               </div>
-
-               <div className={s.section__form}>
-                <Input value="+380" type="text" label="Номер телефону" name="phone1" register={register} minLength={{value:10,message:"Міннімум 10 символів"}} required="Обов'язково до заповнення"/>
-                <div className={s.error__message}>{errors?.phone1 && <p>{errors?.phone1?.message || "Обов'язково"}</p>}</div>
-               </div>
-                
-               <div className={s.section__form}>
-                <Input type="text" label={"Номер телефону"} name={"phone2"} register={register} minLength={{value:10,message:"Міннімум 10 символів"}} required={false}/>
-                <div className={s.error__message}>{errors?.phone2 && <p>{errors?.phone2?.message || "Обов'язково"}</p>}</div>
-               </div>
-
-               <div className={s.section__form}>
-                <Input type="email" label={"E-mail"} name={"email"} register={register} minLength={{value:3,message:"Міннімум 10 символів"}} required={false}/>
-                <div className={s.error__message}>{errors?.email && <p>{errors?.email?.message || "Обов'язково"}</p>}</div>
-               </div>
-
-
-               <div className={s.section__form}>
-                <Input type="text" label={"Адреса"} name={"address"} register={register} minLength={{value:10,message:"Міннімум 10 символів"}} required={false}/>
-                <div className={s.error__message}>{errors?.address && <p>{errors?.address?.message || "Обов'язково"}</p>}</div>
-               </div>
-
-               <div className={s.section__form}>
-                <Input type="text" label={"Канал комунікації"} name={"chanel"} register={register} minLength={{value:1,message:"Міннімум 1 символів"}} required={false}/>
-                <div className={s.error__message}>{errors?.chanel && <p>{errors?.chanel?.message || "Обов'язково"}</p>}</div>
-               </div>
-
-               <div className={s.section__form}>
-                <Input type="text" label={"Потреба"} name={"potreba"} register={register} minLength={{value:5,message:"Міннімум 5 символів"}} required={true}/>
-                <div className={s.error__message}>{errors?.potreba && <p>{errors?.potreba?.message || "Обов'язково"}</p>}</div>
-               </div>
-
-               <div className={s.section__form}>
-                <Input type="text" label={"Надано допомогу"} name={"givingHelp"} register={register} minLength={{value:5,message:"Міннімум 5 символів"}} required={false}/>
-                <div className={s.error__message}>{errors?.givingHelp && <p>{errors?.givingHelp?.message || "Обов'язково"}</p>}</div>
-               </div>
-
-               <div className={s.section__form}>
-                <div>
-                    <label htmlFor="category">Категорія кейсу</label>
+        <div className="wrap__add__case">
+        <div className="add__case__inner">
+            <div className="add__case__line">
+                <div className="add__case__line__three">
+                    <div className="add__case__item">
+                        <div className="add__case__item__inner__input">
+                            <label htmlFor="surname">Прізвище <span className="color__red">*</span></label>
+                            <input type="text" id="surname" name="surname"/>
+                        </div>
+                    </div>
+                    <div className="add__case__item">
+                        <div className="add__case__item__inner__input">
+                            <label htmlFor="firstName">Ім'я <span className="color__red">*</span></label>
+                            <input type="text" id="firstName" name="firstName"/>
+                        </div>
+                    </div>
+                    <div className="add__case__item">
+                        <div className="add__case__item__inner__input">
+                            <label htmlFor="secondName">По батькові</label>
+                            <input type="text" id="secondName" name="secondName"/>
+                        </div>
+                    </div>
                 </div>
-                <div className={s.form__category}>
-                    <div className={s.form__category__block}>
-                        <label htmlFor="orphans">Сирота</label>
-                        <input {...register("category")} type="checkbox" id="orphans" value="orphans" />
+            </div>
+            <div className="add__case__line">
+                <div className="add__case__line__three">
+                    <div className="add__case__item">
+                        <div className="add__case__item__inner__input">
+                            <label htmlFor="phone1">Номер телефону 1 <span className="color__red">*</span></label>
+                            <input type="text" id="phone1" name="phone1"/>
+                        </div>
                     </div>
-                    <div className={s.form__category__block}>
-                        <label htmlFor="internat">У інтернаті</label>
-                        <input {...register("category")} type="checkbox" id="internat" value="internat" />
+                    <div className="add__case__item">
+                        <div className="add__case__item__inner__input">
+                            <label htmlFor="phone2">Номер телефону 2</label>
+                            <input type="text" id="phone2" name="phone2"/>
+                        </div>
                     </div>
-                    <div className={s.form__category__block}>
-                        <label htmlFor="szho">СЖО</label>
-                        <input {...register("category")} type="checkbox" id="szho" value="szho" />
+                    <div className="add__case__item">
+                        <div className="add__case__item__inner__input">
+                            <label htmlFor="email">Email</label>
+                            <input type="text" id="email" name="email"/>
+                        </div>
                     </div>
-                    <div className={s.form__category__block}>
-                        <label htmlFor="ps">Прийомна сім'я</label>
-                        <input {...register("category")} type="checkbox" id="ps" value="ps" />
-                    </div>
-                    <div className={s.form__category__block}>
-                        <label htmlFor="dbst">ДБСТ</label>
-                        <input {...register("category")} type="checkbox" id="dbst" value="dbst" />
-                    </div>
-                    <div className={s.form__category__block}>
-                        <label htmlFor="bagatoditna">Багатодітна сім'я</label>
-                        <input {...register("category")} type="checkbox" id="bagatoditna" value="bagatoditna" />
-                    </div>
-                    <div className={s.form__category__block}>
-                        <label htmlFor="invalidnist">З інвалідністю</label>
-                        <input {...register("category")} type="checkbox" id="invalidnist" value="invalidnist" />
-                    </div>
-                    <div className={s.form__category__block}>
-                        <label htmlFor="vpo">ВПО</label>
-                        <input {...register("category")} type="checkbox" id="vpo" value="vpo" />
-                    </div>
-
                 </div>
+            </div>
+            <div className="add__case__line">
+                <div className="add__case__line__two">
+                    <div className="add__case__item">
+                        <div className="add__case__item__inner__input">
+                            <label htmlFor="addressPropiska">Адреса по прописці</label>
+                            <textarea name="addressPropiska" id="addressPropiska" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+                    <div className="add__case__item">
+                        <div className="add__case__item__inner__input">
+                            <label htmlFor="addressLive">Адреса фактичного проживання</label>
+                            <textarea name="addressLive" id="addressLive" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
                 </div>
-                
-                <div>
-                    <PrimaryBtn name="Зберегти" />
+            </div>
+            <div className="add__case__line">
+                <div className="add__case__line__three">
+                    <div className="add__case__item">
+                        <div className="add__case__item__inner__input">
+                            <label htmlFor="chanelComunity">Канал комунікації</label>
+                            <input type="text" id="chanelComunity" name="chanelComunity" />
+                        </div>
+                    </div>
+                    <div className="add__case__item">
+                        <div className="add__case__item__inner__input">
+                            <label htmlFor="firstContact">Дата першого контакту <span className="color__red">*</span></label>
+                            <input type="date" id="firstContact" name="firstContact" />
+                        </div>
+                    </div>
+                    <div className="add__case__item">
+                        <div className="add__case__item__inner__input">
+                            <label htmlFor="familyStan">Сімейний стан</label>
+                            <input type="text" id="familyStan" name="familyStan"/>
+                        </div>
+                    </div>
                 </div>
-            </form>
-            
+            </div>
+            <div className="add__case__line">
+                <div className="add__case__line__one">
+                    <div className="add__case__item">
+                        <div className="add__case__item__inner__input">
+                            <label htmlFor="potreba">Потреба, запит</label>
+                            <textarea name="potreba" id="potreba" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="add__case__line">
+                <div className="add__case__line__two">
+                    <div className="add__case__item">
+                        <div className="add__case__item__inner__input">
+                            <label htmlFor="" className="add__case__name__of__block">Категорія кейсу <span className="color__red">*</span></label>
+                            <div className="add__case__item__inner__category">
+                                <div className="add__case__item__inner__category__item">
+                                    <input className="checkbox__category" type="checkbox" name="catSyrota" id="catSyrota" value={"Сирота"}/>
+                                    <label htmlFor="catSyrota">Сирота</label>
+                                </div>
+                                <div className="add__case__item__inner__category__item">
+                                    <input className="checkbox__category" type="checkbox" name="catInternat" id="catInternat" value={"У інтернаті"}/>
+                                    <label htmlFor="catInternat">У інтернаті</label>
+                                </div>
+                                <div className="add__case__item__inner__category__item">
+                                    <input className="checkbox__category" type="checkbox" name="catSZO" id="catSZO" value={"СЖО"}/>
+                                    <label htmlFor="catSZO">СЖО</label>
+                                </div>
+                                <div className="add__case__item__inner__category__item">
+                                    <input  className="checkbox__category" type="checkbox" name="catPS" id="catPS" value={"ПС"} />
+                                    <label htmlFor="catPS">ПС</label>
+                                </div>
+                                <div className="add__case__item__inner__category__item">
+                                    <input className="checkbox__category" type="checkbox" name="catDBST" id="catDBST" value={"ДБСТ"} />
+                                    <label htmlFor="catDBST">ДБСТ</label>
+                                </div>
+                                <div className="add__case__item__inner__category__item">
+                                    <input className="checkbox__category" type="checkbox" name="catBagatodit" id="catBagatodit"  value={"Багатодітна сім'я"} />
+                                    <label htmlFor="catBagatodit">Багатодітна сім'я</label>
+                                </div>
+                                <div className="add__case__item__inner__category__item">
+                                    <input  className="checkbox__category" type="checkbox" name="catInvalid" id="catInvalid" value={"З інвалідністю"} />
+                                    <label htmlFor="catInvalid">З інвалідністю</label>
+                                </div>
+                                <div className="add__case__item__inner__category__item">
+                                    <input className="checkbox__category" type="checkbox" name="catVPO" id="catVPO" value={"ВПО"} />
+                                    <label htmlFor="catVPO">ВПО</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="add__case__item">
+                        <div className="add__case__item__inner__input">
+                            <label htmlFor="" className="add__case__name__of__block">Договір</label>
+                            <div className="add__case__item__inner__input__item">
+                                <label htmlFor="dateDogovir">Дата підписання договору</label>
+                                <input type="date" name="dateDogovir" id="dateDogovir" />
+                            </div>
+                            <div className="add__case__item__inner__input__item">
+                                <label htmlFor="numberDogovir">Номер договору</label>
+                                <input type="text" name="numberDogovir" id="numberDogovir" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="add__case__line">
+                <div className="add__case__line__one">
+                    <div className="add__case__item">
+                        <div className="add__case__item__inner__input">
+                            <label htmlFor="commentar">Коментар до кейсу</label>
+                            <textarea name="commentar" id="commentar" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="add__case__line">
+                <button onClick={checkAddCase} className="add__case__btn">Додати кейс</button>
+            </div>
         </div>
+        <div className="add__case__modal" id="add__case__modal">
+            <div className="add__case__modal__inner">
+                <div id="addCaseErrors"></div>
+                <button onClick={()=>{document.getElementById("add__case__modal").classList.remove("active")}}>OK</button>
+            </div>
+        </div>
+    </div>
     )
 }
 

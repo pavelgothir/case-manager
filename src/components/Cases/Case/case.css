@@ -3,6 +3,7 @@
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 30px;
     row-gap: 30px;
+    margin-top: 50px;
 }
 .media__content img, .media__content video{
     width: 100%;
@@ -25,5 +26,18 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 50px;
+    margin-top: 50px;   
+}
+.grod{
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 20px;
+}
+.grod input{
+    margin-left: 10px;
+}
+.grod button{
+    width: max-content;
+    display: block;
     
 }

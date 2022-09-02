@@ -69,13 +69,24 @@ const CaseShortInfo = ({info})=>{
                     </div>   
                 </div>
                 <div className="case__info__text__center">                             
+                <p>Договір</p>
+                    <div className="case__info__card">
+                        <div className="case__info__card__img">
+                            <img src={socialImg} alt="" />
+                        </div>
+                        <div className="case__info__card__text">     
+                            <p>{info.numberDogovir < 1 ? "Договір не укладено" : info.dateDogovir + " № " + info.numberDogovir }</p>
+                        </div>
+                    </div>
+                </div>
+                <div className="case__info__text__center">                             
                 <p>Канал комунікації</p>
                     <div className="case__info__card">
                         <div className="case__info__card__img">
                             <img src={socialImg} alt="" />
                         </div>
                         <div className="case__info__card__text">     
-                            <p>{info.chanel}</p>
+                            <p>{info.chanelComunity}</p>
                         </div>
                     </div>
                 </div>

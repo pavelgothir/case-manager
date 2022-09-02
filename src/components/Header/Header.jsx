@@ -60,7 +60,7 @@ const Header = ()=>{
                 </div>
             </div>
             <div className="menu__profile">
-                <img src={defoltProfile} alt="" />
+                <img src={localStorage.profilePhoto == 'null' ? defoltProfile : localStorage.profilePhoto } alt="" />
             </div>
         </div>
         <div className={`top__menu ${active ? "active" : ""}`} id="top__menu">

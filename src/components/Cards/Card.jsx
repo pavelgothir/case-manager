@@ -9,7 +9,7 @@ const Card = (props)=>{
             </div>
             <div className="card__info">
                 <div className="card__case__name">
-                    <h2><NavLink to={"/case?" + props.info.id}>{props.info.caseName}</NavLink></h2>
+                    <h2><NavLink to={"/case?" + props.info.id}>{`${props.info.surname} ${props.info.firstName} ${props.info.secondName}`}</NavLink></h2>
                 </div>
                 <div className="card__description">
                 <p>{props.info.phone1}</p>

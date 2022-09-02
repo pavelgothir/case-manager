@@ -22,13 +22,16 @@ const LoginForm = ({show})=>{
                 localStorage.setItem("email", data.email)
                 localStorage.setItem("id", data.id)
                 localStorage.setItem("userName", data.userName)
-                localStorage.setItem("data", JSON.stringify(data.data))
+                localStorage.setItem("profilePhoto", data.profilePhoto)
+                
+
                dispatch(setUser({
                     email:data.email,
                     id: data.id,
                     token: data.token,
                     data:data,
-                    userName:data.userName
+                    userName:data.userName,
+                    profilePhoto:data.profilePhoto
                 }))
 
                 window.location.href ="/"

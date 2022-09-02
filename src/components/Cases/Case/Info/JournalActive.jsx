@@ -21,9 +21,13 @@ const JournalActive = ({info})=>{
         return <Active key={index} elem={elem}/>
 }) 
     return(
-        <div className="activity">
-            {active}
+        <div className="wrap__block">
+            <h2>Журнал активностей</h2>
+            <div className="activity">
+                {active}
+            </div>
         </div>
+        
     )
 }
 export default JournalActive;

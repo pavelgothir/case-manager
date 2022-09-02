@@ -7,10 +7,10 @@ import { Check } from "../Auth/Check";
 
 const ShowLogin = ()=>{
     const dispatch = useDispatch();
-    const {isAuth, email, data, userName} = useAuth();
+    const {isAuth, email, data, userName, id} = useAuth();
     return isAuth ? (
             <div className="access__header">
-                <div><NavLink className={"access__header__link"} to={"user"}> {userName} </NavLink></div>
+                <div><NavLink className={"access__header__link"} to={`/user?${id}`}> {userName} </NavLink></div>
                 <div className="horisont__line"></div>
                 <div><button onClick={()=> dispatch(removeUser())}>Log out {email}</button></div>
             </div>
