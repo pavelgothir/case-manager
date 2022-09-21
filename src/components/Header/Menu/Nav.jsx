@@ -20,6 +20,10 @@ const Nav = ()=>{
         </div>
         <div>
             <NavLink to="/search">Розширений пошук</NavLink>
+            
+        </div>
+        <div>
+        <NavLink to="/settings">Налаштування</NavLink>
         </div>
     </nav>
     )

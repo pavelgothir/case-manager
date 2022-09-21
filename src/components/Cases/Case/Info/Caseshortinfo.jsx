@@ -6,6 +6,15 @@ import emailImg from "../../../../img/icons/email-100.png"
 import addressImg from "../../../../img/icons/address-100.png"
 import dateImg from "../../../../img/icons/date-100.png"
 
+function ShowCategories({cats}){
+    console.log(cats)
+    let cat = ""
+    for(let i = 0; i < cats.length; i++){
+        cat += cats[i].text;
+    }
+    return cat;
+}
+
 const CaseShortInfo = ({info})=>{
     console.log(info)
     return(
@@ -16,17 +25,19 @@ const CaseShortInfo = ({info})=>{
                         <img src={phoneImg} alt="" />
                     </div>
                     <div className="case__info__card__text">
-                        <p><a href={`tel:${info.phone1}`}>{info.phone1}</a></p>
+                        
+                        <p title="Номер телефону 1"><a href={`tel:${info.phone1}`}>{info.phone1}</a></p>
                     </div>
                 </div>
-                <div className="case__info__card">
+                {info.phone2.length > 1 ? <div className="case__info__card">
                 <div className="case__info__card__img">
                         <img src={phoneImg} alt="" />
                     </div>
                     <div className="case__info__card__text">
                         <p><a href={`tel:${info.phone2}`}>{info.phone2}</a></p>
                     </div>
-                </div>
+                </div>:""
+                }
                 <div className="case__info__card">
                     <div className="case__info__card__img">
                         <img src={emailImg} alt="" />
@@ -35,17 +46,43 @@ const CaseShortInfo = ({info})=>{
                         <p><a href={`mailto:${info.email}`}>{info.email}</a></p>
                     </div>
                 </div>
+                
             </div>
           
             <div className="case__info__inner">
-                <div className="case__info__card">
+            <div className="case__info__card">
                 <div className="case__info__card__img">
                         <img src={addressImg} alt="" />
                     </div>
                     <div className="case__info__card__text">
-                        <p>{info.address}</p>
+                        <p title="Адреса по прописці">{info.addressPropiska}</p>
                     </div>
                 </div>
+                {info.addressLive.length > 1 ? <div className="case__info__card">
+                <div className="case__info__card__img">
+                        <img src={addressImg} alt="" />
+                    </div>
+                    <div className="case__info__card__text">
+                        <p title="Фактична адреса проживання">{info.addressLive}</p>
+                    </div>
+                </div>:""}
+                {info.familyStan.length > 1 ? <div className="case__info__card">
+                <div className="case__info__card__img">
+                        <img src={addressImg} alt="" />
+                    </div>
+                    <div className="case__info__card__text">
+                        <p title="Сімейний стан">{info.familyStan}</p>
+                    </div>
+                </div>:""}
+                {info.commentar.length > 1 ? <div className="case__info__card">
+                <div className="case__info__card__img">
+                        <img src={addressImg} alt="" />
+                    </div>
+                    <div className="case__info__card__text">
+                        <p title="Коментар">{info.commentar}</p>
+                    </div>
+                </div>:""}
+                {info.potreba.length > 1 ?
                 <div className="case__info__card">
                 <div className="case__info__card__img">
                         <img src={givingImg} alt="" />
@@ -53,7 +90,7 @@ const CaseShortInfo = ({info})=>{
                     <div className="case__info__card__text">
                         <p>{info.potreba}</p>
                     </div>
-                </div>
+                </div>:""}
             </div>           
             <div className="case__info__inner">
                 <div className="case__info__text__center">
@@ -87,6 +124,17 @@ const CaseShortInfo = ({info})=>{
                         </div>
                         <div className="case__info__card__text">     
                             <p>{info.chanelComunity}</p>
+                        </div>
+                    </div>
+                </div>
+                <div className="case__info__text__center">                             
+                <p>Категорія</p>
+                    <div className="case__info__card">
+                        <div className="case__info__card__img">
+                            <img src={socialImg} alt="" />
+                        </div>
+                        <div className="case__info__card__text">     
+                            <p><ShowCategories cats = {info.categories}/></p>
                         </div>
                     </div>
                 </div>

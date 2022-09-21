@@ -1,0 +1,208 @@
+.set__users__data__line{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: rgb(224, 223, 223);
+    column-gap: 10px;
+}
+.set__users__data__title{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    font-weight: 700;
+    font-size: 18px;
+}
+.set__users__data__lines{
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 10px;
+}
+.set__users__data__line.arc{
+    background-color: rgb(203, 203, 203);
+}
+.set__users__data__line:hover{
+    background-color: rgb(255, 251, 203);
+}
+.settings__page{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 50px;
+    row-gap: 50px;
+    width: 90%;
+    margin: auto;
+}
+.set__user__control__panel__icons{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    column-gap: 10px;
+    width: max-content;
+    float: right;
+    margin-right: 10px;
+
+}
+.set__user__control__panel__icons img{
+    width: 20px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+}
+.set__user__control__panel__icons img:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+#deleteImg{
+    background-color: rgb(255 196 196);
+}
+#bookImg{
+  background-color: rgb(196 243 255);  
+}
+#showImg{
+    background-color: rgb(196 255 217);
+}
+#hideImg{
+    background-color: rgb(252, 196, 255);
+}
+.set__modal__wrap{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: #00000066;
+}
+.set__modal__inner{
+    width: 80%;
+    margin: auto;
+    height: 100vh;
+    overflow-y: scroll;
+    max-height: 100vh;
+    background-color: #fff;
+}
+.set__modal__close{
+    width: 30px;
+    height: 30px;
+    position: fixed;
+    top: 50px;
+    right: 50px;
+    transition: all .3s;
+    cursor: pointer;
+}
+.set__modal__close span{
+    width: 100%;
+    background-color: #fff;
+    height: 4px;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    transform: translate(0,-50%) rotate(45deg);
+}
+.set__modal__close span+span{
+    transform: translate(0,-50%) rotate(-45deg);
+}
+.set__modal__close:hover{
+    transform: rotate(90deg);
+}
+.set__categories__case__list{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 5px;
+    column-gap: 10px;
+    margin-top: 10px;
+}
+.set__categories__case__list__category{
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+}
+.set__categories__case__control img{
+    width: 20px;
+    background-color: rgb(255 196 196);
+    border-radius: 5px;
+    transition: all .3s;
+}
+.set__categories__case__control img:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.set__categories__case__list__category{
+    background-color: #c1c1c117;
+    box-shadow: 0 0 3px 0 #00000066;
+}
+.set__categories__case__control{
+    padding: 5px;
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+    border-radius: 10px;
+}
+.set__modal__content__wraper{
+    width: 95%;
+    margin: auto;
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 25px;
+    row-gap: 25px;
+    padding: 25px 0;
+}
+.set__modal__content__labels{
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 5px;
+    padding: 25px 0;
+
+}
+.set__cont{
+    box-shadow: 0 0 5px 0 #00000066;
+}
+.set__modal__content__labels label{
+    display: block;
+    width: 90%;
+    margin: auto;
+}
+.set__modal > h2{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 25px;
+}
+.set__modal__content__labels h3{
+    width: 90%;
+    margin: 0;
+    margin-left: 5%;
+
+}
+.set__modal{
+    padding: 25px 0;
+}
+.modal__btn{
+    display: block;
+    margin: auto;
+    padding: 5px 30px;
+}
+input[type="color"]{
+    height: 25px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+}
+.set__categories__case__control__inp{
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+.category__circle{
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    border-radius: 50%;
+}
+.set__categories__case__list__category__title{
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+}

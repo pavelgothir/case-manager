@@ -59,3 +59,18 @@ width: 100%;
     align-items: center;
     justify-content: right;
 }
+.category__circle{
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    border-radius: 50%;
+    box-shadow:  0 0 5px 0 #00000077;
+}
+.card__categories{
+    position: absolute;
+    top: -5px;
+    left: 0;
+    width: max-content;
+    display: flex;
+    column-gap: 10px;
+}

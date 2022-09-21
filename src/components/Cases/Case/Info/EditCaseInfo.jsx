@@ -1,15 +1,16 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
-import {serverAddres} from "./../../Functions/serverAddres";
-import "./add-case.css";
+import {serverAddres} from "../../../Functions/serverAddres"
 
 let categoriesStr = "";
 let masCategories = [];
 const send = async(data)=>{
-    
     data.userId = localStorage.getItem("id");
+    data.caseId = window.location.search.slice(1);
+    data.id = localStorage.getItem("id");
+    data.token = localStorage.getItem("token");
     console.log(data);
-    await fetch("http://case.ua/add-first-case.php",{
+    await fetch("http://case.ua/case/save-infoCase.php",{
         method:"POST",
         header : {'Content-Type': 'application/json;charset=utf-8'},
         body:  JSON.stringify(data)
@@ -17,7 +18,7 @@ const send = async(data)=>{
         .then(res => res.text())
         .then(data => {
             console.log(data)
-            alert("Кейс успішно створено")
+            alert("ОНОВЛЕНО")
         })
         .catch(rejected => {
             console.log(rejected);
@@ -95,8 +96,9 @@ function checkAddCase(){
    //return console.log(objAddCase)
     send(objAddCase);
 }
-const AddCase = ()=>{
+const EditCaseInfo = ({caseInfo, active, categoriesMas, close})=>{
     const [categoriesCase, setCategoriesCase] = useState(false)
+    console.log(categoriesMas)
     useEffect(()=>{
         let obj = {
             id: localStorage.getItem("id"),
@@ -117,10 +119,16 @@ const AddCase = ()=>{
         .catch((error)=>console.log(error)) 
     },[])
     const CategoriesData = ({category, index})=>{
-
+        let checkCat = false;
+        console.log(categoriesMas)
+        for(let i = 0; i < categoriesMas.length; i++){
+            if(categoriesMas[i].value == category.value){
+                checkCat = true;
+            }
+        }
         return (
             <div className="add__case__item__inner__category__item">
-                <input className="checkbox__category" type="checkbox" value={category.value} id={`cat${index}`} />
+                <input defaultChecked = {checkCat} className="checkbox__category" type="checkbox" value={category.value} id={`cat${index}`} />
                 <label className="checkbox__category__label" htmlFor={`cat${index}`}>{category.text}</label>
                 <input type="hidden" className="checkbox__category__hidden" value={category.color}/>
             </div>
@@ -131,10 +139,14 @@ const AddCase = ()=>{
         
         if(pos.length < 1 || pos == false) return;
                 categoriesStr =  pos.map((post,index)=>{
-                return <CategoriesData lf={lf} key={index} category={post} index={index}/>
+                return <CategoriesData lf={lf} key={index} category={post} index={index} />
         })  
     }  
-    return(
+    return active ? (
+        <div className="case__edit__info__wrap">
+            <div className="case__edit__info__inner">
+            
+       
         <div className="wrap__add__case">
         <div className="add__case__inner">
             <div className="add__case__line">
@@ -142,19 +154,19 @@ const AddCase = ()=>{
                     <div className="add__case__item">
                         <div className="add__case__item__inner__input">
                             <label htmlFor="surname">Прізвище <span className="color__red">*</span></label>
-                            <input type="text" id="surname" name="surname"/>
+                            <input type="text" id="surname" name="surname" defaultValue={caseInfo.surname}/>
                         </div>
                     </div>
                     <div className="add__case__item">
                         <div className="add__case__item__inner__input">
                             <label htmlFor="firstName">Ім'я <span className="color__red">*</span></label>
-                            <input type="text" id="firstName" name="firstName"/>
+                            <input type="text" id="firstName" name="firstName" defaultValue={caseInfo.firstName}/>
                         </div>
                     </div>
                     <div className="add__case__item">
                         <div className="add__case__item__inner__input">
                             <label htmlFor="secondName">По батькові</label>
-                            <input type="text" id="secondName" name="secondName"/>
+                            <input type="text" id="secondName" name="secondName" defaultValue={caseInfo.secondName}/>
                         </div>
                     </div>
                 </div>
@@ -164,19 +176,19 @@ const AddCase = ()=>{
                     <div className="add__case__item">
                         <div className="add__case__item__inner__input">
                             <label htmlFor="phone1">Номер телефону 1 <span className="color__red">*</span></label>
-                            <input type="text" id="phone1" name="phone1"/>
+                            <input type="text" id="phone1" name="phone1" defaultValue={caseInfo.phone1}/>
                         </div>
                     </div>
                     <div className="add__case__item">
                         <div className="add__case__item__inner__input">
                             <label htmlFor="phone2">Номер телефону 2</label>
-                            <input type="text" id="phone2" name="phone2"/>
+                            <input type="text" id="phone2" name="phone2" defaultValue={caseInfo.phone2}/>
                         </div>
                     </div>
                     <div className="add__case__item">
                         <div className="add__case__item__inner__input">
                             <label htmlFor="email">Email</label>
-                            <input type="text" id="email" name="email"/>
+                            <input type="text" id="email" name="email"  defaultValue={caseInfo.email}/>
                         </div>
                     </div>
                 </div>
@@ -186,13 +198,13 @@ const AddCase = ()=>{
                     <div className="add__case__item">
                         <div className="add__case__item__inner__input">
                             <label htmlFor="addressPropiska">Адреса по прописці</label>
-                            <textarea name="addressPropiska" id="addressPropiska" cols="30" rows="10"></textarea>
+                            <textarea name="addressPropiska" id="addressPropiska" cols="30" rows="10"  defaultValue={caseInfo.addressPropiska}></textarea>
                         </div>
                     </div>
                     <div className="add__case__item">
                         <div className="add__case__item__inner__input">
                             <label htmlFor="addressLive">Адреса фактичного проживання</label>
-                            <textarea name="addressLive" id="addressLive" cols="30" rows="10"></textarea>
+                            <textarea name="addressLive" id="addressLive" cols="30" rows="10" defaultValue={caseInfo.addressLive}></textarea>
                         </div>
                     </div>
                 </div>
@@ -202,19 +214,19 @@ const AddCase = ()=>{
                     <div className="add__case__item">
                         <div className="add__case__item__inner__input">
                             <label htmlFor="chanelComunity">Канал комунікації</label>
-                            <input type="text" id="chanelComunity" name="chanelComunity" />
+                            <input type="text" id="chanelComunity" name="chanelComunity" defaultValue={caseInfo.chanelComunity} />
                         </div>
                     </div>
                     <div className="add__case__item">
                         <div className="add__case__item__inner__input">
                             <label htmlFor="firstContact">Дата першого контакту <span className="color__red">*</span></label>
-                            <input type="date" id="firstContact" name="firstContact" />
+                            <input type="date" id="firstContact" name="firstContact"  defaultValue={caseInfo.firstContact}/>
                         </div>
                     </div>
                     <div className="add__case__item">
                         <div className="add__case__item__inner__input">
                             <label htmlFor="familyStan">Сімейний стан</label>
-                            <input type="text" id="familyStan" name="familyStan"/>
+                            <input type="text" id="familyStan" name="familyStan" defaultValue={caseInfo.familyStan}/>
                         </div>
                     </div>
                 </div>
@@ -224,7 +236,7 @@ const AddCase = ()=>{
                     <div className="add__case__item">
                         <div className="add__case__item__inner__input">
                             <label htmlFor="potreba">Потреба, запит</label>
-                            <textarea name="potreba" id="potreba" cols="30" rows="10"></textarea>
+                            <textarea name="potreba" id="potreba" cols="30" rows="10" defaultValue={caseInfo.potreba}></textarea>
                         </div>
                     </div>
                 </div>
@@ -245,11 +257,11 @@ const AddCase = ()=>{
                             <label htmlFor="" className="add__case__name__of__block">Договір</label>
                             <div className="add__case__item__inner__input__item">
                                 <label htmlFor="dateDogovir">Дата підписання договору</label>
-                                <input type="date" name="dateDogovir" id="dateDogovir" />
+                                <input type="date" name="dateDogovir" id="dateDogovir"  defaultValue={caseInfo.dateDogovir}/>
                             </div>
                             <div className="add__case__item__inner__input__item">
                                 <label htmlFor="numberDogovir">Номер договору</label>
-                                <input type="text" name="numberDogovir" id="numberDogovir" />
+                                <input type="text" name="numberDogovir" id="numberDogovir"  defaultValue={caseInfo.numberDogovir}/>
                             </div>
                         </div>
                     </div>
@@ -260,13 +272,14 @@ const AddCase = ()=>{
                     <div className="add__case__item">
                         <div className="add__case__item__inner__input">
                             <label htmlFor="commentar">Коментар до кейсу</label>
-                            <textarea name="commentar" id="commentar" cols="30" rows="10"></textarea>
+                            <textarea name="commentar" id="commentar" cols="30" rows="10"  defaultValue={caseInfo.commentar}></textarea>
                         </div>
                     </div>
                 </div>
             </div>
             <div className="add__case__line">
-                <button onClick={checkAddCase} className="add__case__btn">Додати кейс</button>
+                <button onClick={checkAddCase} className="add__case__btn good">Оновити інформацію</button>
+                <button onClick={close} className="add__case__btn close">Відмінити</button>
             </div>
         </div>
         <div className="add__case__modal" id="add__case__modal">
@@ -276,8 +289,12 @@ const AddCase = ()=>{
             </div>
         </div>
     </div>
+    </div>
+        </div>
+    ):(
+        <></>
     )
 }
 
 
-export default AddCase;
+export default EditCaseInfo;

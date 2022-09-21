@@ -8,6 +8,7 @@ import CaseShortInfo from "./Info/Caseshortinfo";
 import JournalActive from "./Info/JournalActive";
 import PlanActive from "./Info/PlanActive";
 import axios from "axios";
+import EditCaseInfo from "./Info/EditCaseInfo";
 
 function saveInfoDogovir(){
     let dateDogovir = document.getElementById("dogovirDate");
@@ -33,16 +34,22 @@ function saveInfoDogovir(){
 }
 const Case = (props)=>{
     const [post, setPost] = useState({id:"",contact:{caseName:""},photos:[]});
-
+    const [editActive, setEditActive] = useState(false)
     useEffect(()=>{
         fetch("http://case.ua/get-case.php",{
             method:"POST",
             header : {'Content-Type': 'application/json;charset=utf-8'},
-            body:JSON.stringify({"id":window.location.search.slice(1)})
+            body:JSON.stringify({"id":window.location.search.slice(1),
+                "userId":localStorage.getItem("id"),
+                "token": localStorage.getItem("token")
+            })
             })
             .then(res => res.json())
             .then(res => {
-               console.log(res)
+               if("message" in res){
+               return console.log(res.message)
+               }
+               
                res.contact = JSON.parse(res.contact);
                res.activity = JSON.parse(res.activity);
                res.plan = JSON.parse(res.plan)
@@ -54,7 +61,7 @@ const Case = (props)=>{
                setPost(res)
             })
             .catch(rejected => {
-                console.log("Помилка");
+                console.log(`${rejected}`);
             });
     },[])
     
@@ -64,8 +71,13 @@ const Case = (props)=>{
             <div>
                 <CasePhoto url={`${post.contact.imgUrl}`}/>
             </div>
-            <div><h1>{post.contact.caseName}</h1>
+            <div><h1>{post.contact.surname} {post.contact.firstName} {post.contact.secondName}</h1>
                 <CaseShortInfo info = {post.contact}/>
+            </div>
+            <div>
+                <button onClick={()=>{
+                    setEditActive(true)
+                }}>Редагувати</button>
             </div>     
         </div> 
         <div className="Journal__and__plan">
@@ -85,6 +97,9 @@ const Case = (props)=>{
             <Photo photos = {post.photos}/>
         </div>    
             <PhotosForm photos = {post.photos}/>
+            <EditCaseInfo caseInfo = {post.contact} active = {editActive} categoriesMas = {post.contact.categories} close = {()=>{
+                setEditActive(false)
+            }}/>
         </div>
         
     ):(

@@ -10,6 +10,30 @@ const Registration = ({show})=>{
     const [modal, setModal] = useState({showModal:false, message:"123"})
 
     async function saveUser(data){
+        let levelObj = {
+            activeNewUser: false,
+            addCase: false,
+            addEditCategoriesCase: false,
+            addEditCategoriesUser: false,
+            case: false,
+            cases: false,
+            changeResponsibleCase: false,
+            contacts: false,
+            createIndividualPlan: false,
+            deactivateUsers: false,
+            editOwnCase: false,
+            editSomeonesCase: false,
+            history: false,
+            loadDocument: false,
+            loadPhotoVideo: false,
+            ownCab: false,
+            reports: false,
+            searchCasesUsers: false,
+            settings: false,
+            specificationUsers: false,
+            statistics: false
+        }
+        data.level = levelObj;
         await fetch("http://case.ua/user-register.php",{
             method:"POST",
             header : {'Content-Type': 'application/json;charset=utf-8'},

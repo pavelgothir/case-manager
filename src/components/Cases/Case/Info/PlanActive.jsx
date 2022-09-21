@@ -59,7 +59,7 @@ function saveNewPlan(){
             document.querySelectorAll(".modal__plan__line")[i].classList.add("good");
             obj.start = dateStart;
             obj.end = dateEnd;
-            obj.desc = planDesc.replace("'", "’");
+            obj.desc = planDesc.replaceAll("'", "’").replace(/\n/g, "<br />");
             obj.done = false;
         }
         mas.push(obj)
@@ -69,7 +69,11 @@ function saveNewPlan(){
         nameOfPlan: nameNewPlan.value.replace("'", "’"),
         dateCreated: date.toISOString().split('T')[0],
         plans: mas,
+        donePlan:false,
+        donePlanDate: ""
     }
+   // return console.log(objNewPlan)
+    sendNewPlan(objNewPlan)
 }
 function addModalLine(){
     number++;
@@ -83,14 +87,14 @@ function addModalLine(){
 </div>
 <div>
     <label htmlFor="planStart${number}">Дата початку</label>
-    <input type="date" name="planStart${number}" onBlur=${saveNewPlan} id="planStart${number}"/>
+    <input type="date" name="planStart${number}" id="planStart${number}"/>
 </div>
 <div>
     <label htmlFor="planEnd${number}">Дата кінця</label>
-    <input type="date" name="planEnd${number}" onBlur=${saveNewPlan} id="planEnd${number}"/>
+    <input type="date" name="planEnd${number}" id="planEnd${number}"/>
 </div>
 <div>
-    <textarea name="planDesc${number}" onBlur=${saveNewPlan} id="planDesc${number}" rows="3" placeholder="Елемент плану"></textarea>
+    <textarea name="planDesc${number}" id="planDesc${number}" rows="3" placeholder="Елемент плану"></textarea>
 </div>
     `;
     document.getElementById("planInner").append(div)
@@ -113,7 +117,7 @@ const WindowCreate = ()=>{
                     <div className="plan__icon blue__back" onClick={addModalLine} title="Додати рядок">
                         <img src={editImg} alt="" />
                     </div>
-                    <div className="plan__icon green__back active" id="modalSaveBtn" onClick={sendNewPlan} title="Зберегти план">
+                    <div className="plan__icon green__back active" id="modalSaveBtn" onClick={saveNewPlan} title="Зберегти план">
                         <img src={saveImg} alt="" />
                     </div>
                     <div className="plan__icon red__back" onClick={removeModalLine} title="Видалити рядок">
@@ -122,7 +126,7 @@ const WindowCreate = ()=>{
                 </div>
                 </div>
                
-                <input className="nameNewPlan" type="text" id="nameNewPlan" placeholder="Введіть назву плану" onBlur={saveNewPlan}/>
+                <input className="nameNewPlan" type="text" id="nameNewPlan" placeholder="Введіть назву плану"/>
                 <div className="modal__plan__inner__lines" id="planInner">
                     <div className="modal__plan__line">
                         <div>
