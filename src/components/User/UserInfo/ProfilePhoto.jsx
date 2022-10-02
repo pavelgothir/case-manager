@@ -3,6 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import {useForm} from "react-hook-form";
 import Loadpic from "../../Loading/Interactive/Loadpic";
+import { serverAddres } from "../../Functions/serverAddres";
 
 
 
@@ -20,7 +21,7 @@ const ProfilePhoto = ({url})=>{
         formData.append("id",window.location.search.slice(1));
         formData.append("key","user");
         axios({
-            url: "http://case.ua/upload-case-img.php",
+            url: serverAddres("upload-case-img.php"),
             method: "POST",
             header : {'Content-Type': 'multipart/form-data'},
             data : formData,

@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import {axios} from "axios";
 import './Registration.css';
 import ModalInfo from "../Modals/ModalInfo";
-
+import { serverAddres } from "../Functions/serverAddres";
 
 
 const Registration = ({show})=>{
@@ -34,7 +34,7 @@ const Registration = ({show})=>{
             statistics: false
         }
         data.level = levelObj;
-        await fetch("http://case.ua/user-register.php",{
+        await fetch(serverAddres("user-register.php"),{
             method:"POST",
             header : {'Content-Type': 'application/json;charset=utf-8'},
             body:  JSON.stringify(data)

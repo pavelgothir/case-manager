@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import imgDelete from "./../../../img/icons/delete-48.png";
 import editImg from "./../../../img/icons/edit-50.png";
 import axios from "axios";
+import { serverAddres } from "../../Functions/serverAddres";
 
 let categoriesStr = "";
 const SetCategories = ({props})=>{
@@ -12,7 +13,7 @@ const SetCategories = ({props})=>{
             token: localStorage.getItem("token")
         }
         axios({
-            url: "http://case.ua/manage/get-categories-case.php",
+            url: serverAddres("manage/get-categories-case.php"),
             method: "POST",
             header : {'Content-Type': 'application/json;charset=utf-8'},
             data : JSON.stringify(obj),
@@ -37,7 +38,7 @@ const SetCategories = ({props})=>{
             category: arg
         }
         axios({
-            url: "http://case.ua/manage/delete-categories-case.php",
+            url: serverAddres("manage/delete-categories-case.php"),
             method: "POST",
             header : {'Content-Type': 'application/json;charset=utf-8'},
             data : JSON.stringify(obj),
@@ -62,7 +63,7 @@ const SetCategories = ({props})=>{
             category:category
         }
         axios({
-            url: "http://case.ua/manage/add-categories-case.php",
+            url: serverAddres("manage/add-categories-case.php"),
             method: "POST",
             header : {'Content-Type': 'application/json;charset=utf-8'},
             data : JSON.stringify(obj),

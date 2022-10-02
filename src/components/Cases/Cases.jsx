@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import Card from "../Cards/Card";
+import { serverAddres } from "../Functions/serverAddres";
 
 const PostsData = ({post})=>{
     console.log(post)
@@ -19,7 +20,7 @@ const Posts = (pos)=>{
 const Cases = ()=>{
     const [posts, setPosts] = useState("");
     useEffect(()=>{
-        fetch('http://case.ua/get-cases.php')
+        fetch(serverAddres('get-cases.php'))
         .then(res => {
             return res.json();
         })

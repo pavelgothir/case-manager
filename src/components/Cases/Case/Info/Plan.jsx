@@ -4,19 +4,19 @@ import deleteImg from "../../../../img/icons/delete-48.png";
 import saveImg from "../../../../img/icons/save-50.png";
 import axios from "axios";
 import { useState } from "react";
-function elemPlanDone(index, a, nameOfPlan){
-
+import ModalPlanDone from "./ModalPlanDone";
+import { serverAddres } from "../../../Functions/serverAddres";
+function elemPlanDelete(a){
     let obj = {
         caseId:window.location.search.slice(1),
         id: localStorage.getItem("id"),
         token: localStorage.getItem("token"),
-        index:index,
-        checked: a,
-        nameOfPlan: nameOfPlan
+        index:a.index,
+        nameOfPlan: a.nameOfPlan,
     }
     console.log(obj)
     axios({
-        url: "http://case.ua/case/elem-plan-done.php",
+        url: serverAddres("case/elem-plan-delete.php"),
         method: "POST",
         header : {'Content-Type': 'application/json;charset=utf-8'},
         data : JSON.stringify(obj),
@@ -27,15 +27,43 @@ function elemPlanDone(index, a, nameOfPlan){
     })
     .catch((error)=>console.log(error))  
 }
-function planIsDone(plan){
-    console.log(plan)
+function elemPlanDone(a){
+
+    let obj = {
+        caseId:window.location.search.slice(1),
+        id: localStorage.getItem("id"),
+        token: localStorage.getItem("token"),
+        index:a.index,
+        checked: a.checked,
+        nameOfPlan: a.nameOfPlan,
+        desc: a.desc,
+        start: a.start,
+        end: a.end
+    }
+    console.log(obj)
+    axios({
+        url: serverAddres("case/elem-plan-done.php"),
+        method: "POST",
+        header : {'Content-Type': 'application/json;charset=utf-8'},
+        data : JSON.stringify(obj),
+    })
+    .then((data)=>{ 
+        console.log(data)
+      //  window.location.reload()        
+    })
+    .catch((error)=>console.log(error))  
 }
+
 let pty = -1;
 const Plan = ({plan,index})=>{
+    const [activeModalPlan, setActiveModalPlan] = useState(false);
+    function planIsDone(){
+        setActiveModalPlan(true)
+    }
     let part = ""
     const ElemPlan = ({planis, index})=>{
-        return(
-            <div className="part__plan">
+        return planis.show ? (
+            <div className={`part__plan`}>
                 <div className="part__line">
                     <div className="part__symbol">
                         <div className="part__line__elem">
@@ -45,9 +73,9 @@ const Plan = ({plan,index})=>{
                 </div>
                 <div className="part__line">
                     <div className={`part__plan__date ${planis.done ? "borderGreen" : ""}`}>
-                        <input disabled type="date" name={`start__planID${index}`} id={`start__planID${index}`} value={planis.start} />
+                        <input disabled type="date" name={`start__planID${index}`} id={`start__planID${index}`} defaultValue={planis.start} />
                         <span> | </span>
-                         <input disabled type="date" name={`end__planID${index}`} id={`end__planID${index}`} value={planis.end} />
+                         <input disabled type="date" name={`end__planID${index}`} id={`end__planID${index}`} defaultValue={planis.end} />
                     </div>
                 </div>
                 <div className="part__line">
@@ -60,11 +88,8 @@ const Plan = ({plan,index})=>{
                 <div className="part__line">
                     <div className="part__plan__description">
                         <div className="part__plan__control">
-                            <input disabled defaultChecked={planis.done} type="checkbox" name={`goodPlan${index}`} id={`goodPlan${index}`} onChange={()=>{
-                               let a = document.querySelector(`#goodPlan${index}`).checked
-                                elemPlanDone(index, a, plan.nameOfPlan)
-                            }} />
-                            <img src={editImg} className="editPlan active" alt="Редагувати" id={`editPlan${index}`} title="Редагувати" onClick={()=>{
+                            <input disabled defaultChecked={planis.done} type="checkbox" name={`goodPlan${index}`} id={`goodPlan${index}`} />
+                           {plan.donePlan.done ? "" : <img src={editImg} className="editPlan active" alt="Редагувати" id={`editPlan${index}`} title="Редагувати" onClick={()=>{
                                 console.log("hello")
                                 document.querySelector(`#goodPlan${index}`).disabled = false;
                                 document.querySelector(`#start__planID${index}`).disabled = false;
@@ -72,16 +97,41 @@ const Plan = ({plan,index})=>{
                                 document.querySelector(`#desc__planID${index}`).disabled = false;
                                 document.querySelector(`#savePlan${index}`).classList.toggle("active");
                                 document.querySelector(`#editPlan${index}`).classList.toggle("active");
-                            }} />
-                            <img src={saveImg} alt="Зберегти" className="savePlan green__back" title="Зберегти" id={`savePlan${index}`} />
+                            }} />}
+                            <img src={saveImg} alt="Зберегти" className="savePlan green__back" title="Зберегти" id={`savePlan${index}`} onClick = {()=>{
+                                 let a = {
+                                    checked: document.querySelector(`#goodPlan${index}`).checked,
+                                    index: index,
+                                    nameOfPlan: plan.nameOfPlan,
+                                    desc: document.querySelector(`#desc__planID${index}`).value.replaceAll("'", "’").replace(/\n/g, "<br />"),
+                                    start: document.querySelector(`#start__planID${index}`).value,
+                                    end: document.querySelector(`#end__planID${index}`).value
+                                 }
+                                 elemPlanDone(a)
+                                 document.querySelector(`#goodPlan${index}`).disabled = true;
+                                 document.querySelector(`#start__planID${index}`).disabled = true;
+                                 document.querySelector(`#end__planID${index}`).disabled = true;
+                                 document.querySelector(`#desc__planID${index}`).disabled = true;
+                                 document.querySelector(`#savePlan${index}`).classList.toggle("active");
+                                 document.querySelector(`#editPlan${index}`).classList.toggle("active");
+                                }} />
                         </div>
-                        <textarea disabled name={`desc__planID${index}`} id={`desc__planID${index}`} cols="30" rows="5" value={planis.desc.replaceAll("<br />", "\n")}></textarea>
+                        <textarea disabled name={`desc__planID${index}`} id={`desc__planID${index}`} cols="30" rows="5" defaultValue={planis.desc.replaceAll("<br />", "\n")}></textarea>
                         <div className="deletePlan__wrap">
-                        <img src={deleteImg} className="deletePlan red__back" id={`deletePlan${index}`} alt="Видалити" title="Видалити" />
+                        {plan.donePlan.done ? "" :  <img src={deleteImg} className="deletePlan red__back" id={`deletePlan${index}`} alt="Видалити" title="Видалити" onClick={()=>{
+                            if(!window.confirm("Ви впевнені що хочете видалити пункт плану?")) return;
+                            let a = {
+                                index: index,
+                                nameOfPlan: plan.nameOfPlan
+                             }
+                            elemPlanDelete(a);
+                        }} />}
                         </div>
                     </div>  
                 </div>    
             </div>
+        ):(
+            <></>
         )
         
     }
@@ -94,16 +144,22 @@ const Plan = ({plan,index})=>{
     console.log(plan)
 
     return(
-
-            <div className="wrap__plan">
+            <div className={`wrap__plan ${plan.donePlan.good &&  plan.donePlan.done ? "__done__plan__good" : !plan.donePlan.good &&  plan.donePlan.done ? "__done__plan__notgood" : ""}`}>
                 <div className="plan__created">
                 <span>{plan.dateCreated}</span>
             </div>
             {ElemsPlan()}
             {part}
-            <div className="part__plan__btn">
-                <button onClick={()=>{planIsDone(plan)}}>Завершити план</button>
+            { plan.donePlan.done ? 
+            <div className="plan__comment"><p><b>Коментар до виконаного плану: </b></p><p>{plan.donePlan.commentar}</p></div>:
+              <div className="part__plan__btn">
+                <button onClick={()=>{setActiveModalPlan(true)}}>Завершити план</button>
             </div>
+            }
+            
+            <ModalPlanDone active={activeModalPlan} plan={plan} close = {()=>{
+                setActiveModalPlan(false)
+            }}/>
             </div>
             
     )

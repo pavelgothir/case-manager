@@ -3,6 +3,7 @@ import axios from "axios";
 import Loadpic from "../Loading/Interactive/Loadpic";
 import ModalInfo from "../Modals/ModalInfo";
 import ProfilePhoto from "./UserInfo/ProfilePhoto";
+import { serverAddres } from "../Functions/serverAddres";
 
 const User = ()=>{
     const [loading, setLoading] = useState();
@@ -16,7 +17,7 @@ const User = ()=>{
             token: localStorage.getItem("token")
         }
         axios({
-            url: "http://case.ua/user/get-user.php",
+            url: serverAddres("user/get-user.php"),
             method: "POST",
             header : {'Content-Type': 'application/json;charset=utf-8'},
             data : JSON.stringify(obj),

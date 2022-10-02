@@ -9,7 +9,10 @@ import JournalActive from "./Info/JournalActive";
 import PlanActive from "./Info/PlanActive";
 import axios from "axios";
 import EditCaseInfo from "./Info/EditCaseInfo";
-
+import Notes from "./Info/Notes";
+import CaseGiveHelp from "./Info/CaseGiveHelp";
+import Connections from "./Info/Connections";
+import { serverAddres } from "../../Functions/serverAddres";
 function saveInfoDogovir(){
     let dateDogovir = document.getElementById("dogovirDate");
     let numberDogovir = document.getElementById("dogovirNumber");
@@ -21,7 +24,7 @@ function saveInfoDogovir(){
         numberDogovir:numberDogovir.value
     }
     axios({
-        url: "http://case.ua/case/save-infoCase.php",
+        url: serverAddres("case/save-infoCase.php"),
         method: "POST",
         header : {'Content-Type': 'application/json;charset=utf-8'},
         data : JSON.stringify(obj),
@@ -33,13 +36,14 @@ function saveInfoDogovir(){
     .catch((error)=>console.log(error))  
 }
 const Case = (props)=>{
-    const [post, setPost] = useState({id:"",contact:{caseName:""},photos:[]});
+    const [post, setPost] = useState({id:"",contact:{caseName:""},photos:[],notes:[]});
     const [editActive, setEditActive] = useState(false)
     useEffect(()=>{
-        fetch("http://case.ua/get-case.php",{
+        fetch(serverAddres("get-case.php"),{
             method:"POST",
             header : {'Content-Type': 'application/json;charset=utf-8'},
-            body:JSON.stringify({"id":window.location.search.slice(1),
+            body:JSON.stringify({
+                "id":window.location.search.slice(1),
                 "userId":localStorage.getItem("id"),
                 "token": localStorage.getItem("token")
             })
@@ -52,11 +56,19 @@ const Case = (props)=>{
                
                res.contact = JSON.parse(res.contact);
                res.activity = JSON.parse(res.activity);
-               res.plan = JSON.parse(res.plan)
+               if(res.plan !== 0){
+                res.plan = JSON.parse(res.plan)
+               }
+               
                if(res.photos !== null){
                 res.photos = JSON.parse(res.photos);
                }else{
                 res.photos = [];
+               }
+               if(res.notes !== null){
+                res.notes = JSON.parse(res.notes);
+               }else{
+                res.notes = [];
                }
                setPost(res)
             })
@@ -71,7 +83,8 @@ const Case = (props)=>{
             <div>
                 <CasePhoto url={`${post.contact.imgUrl}`}/>
             </div>
-            <div><h1>{post.contact.surname} {post.contact.firstName} {post.contact.secondName}</h1>
+            <div><h1 className="case__title">{post.contact.surname} {post.contact.firstName} {post.contact.secondName} <span>№ {post.id}</span></h1>
+                
                 <CaseShortInfo info = {post.contact}/>
             </div>
             <div>
@@ -80,6 +93,12 @@ const Case = (props)=>{
                 }}>Редагувати</button>
             </div>     
         </div> 
+        <div className="connections__wrap">
+            <div className="connections__inner">
+                <h1>Зв'язки кейса з іншими кейсами</h1>
+                <Connections />
+            </div>
+        </div>
         <div className="Journal__and__plan">
             <JournalActive info={post.activity} />
             {post.contact.numberDogovir > 1 ? <PlanActive info = {post.plan}/> : 
@@ -92,6 +111,10 @@ const Case = (props)=>{
                     <button onClick={saveInfoDogovir}>Зберегти інформацію</button> 
                 </div>
             </div>}
+        </div>
+        <div className="notes">
+            <Notes notes = {post.notes}/>
+            <CaseGiveHelp />
         </div>
         <div className="media__content">
             <Photo photos = {post.photos}/>

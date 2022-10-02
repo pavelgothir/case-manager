@@ -5,6 +5,7 @@ import saveImg from "../../../../img/icons/save-50.png";
 import delImg from "../../../../img/icons/delete-48.png";
 import axios from "axios";
 import Plan from "./Plan";
+import { serverAddres } from "../../../Functions/serverAddres";
 let number = 0;
 let objNewPlan = {};
 let boolPlan = true;
@@ -22,7 +23,7 @@ function sendNewPlan(){
         plan: objNewPlan
     }
     axios({
-        url: "http://case.ua/case/add-plan.php",
+        url: serverAddres("case/add-plan.php"),
         method: "POST",
         header : {'Content-Type': 'application/json;charset=utf-8'},
         data : JSON.stringify(obj),
@@ -61,6 +62,7 @@ function saveNewPlan(){
             obj.end = dateEnd;
             obj.desc = planDesc.replaceAll("'", "’").replace(/\n/g, "<br />");
             obj.done = false;
+            obj.show = true;
         }
         mas.push(obj)
     }
@@ -69,7 +71,12 @@ function saveNewPlan(){
         nameOfPlan: nameNewPlan.value.replace("'", "’"),
         dateCreated: date.toISOString().split('T')[0],
         plans: mas,
-        donePlan:false,
+        donePlan:{
+            done: false,
+            good: "",
+            date: "",
+            ommentar:""
+        },
         donePlanDate: ""
     }
    // return console.log(objNewPlan)

@@ -9,7 +9,7 @@ const send = async(data)=>{
     
     data.userId = localStorage.getItem("id");
     console.log(data);
-    await fetch("http://case.ua/add-first-case.php",{
+    await fetch(serverAddres("add-first-case.php"),{
         method:"POST",
         header : {'Content-Type': 'application/json;charset=utf-8'},
         body:  JSON.stringify(data)

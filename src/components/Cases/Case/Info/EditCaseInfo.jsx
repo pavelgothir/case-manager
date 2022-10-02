@@ -10,7 +10,7 @@ const send = async(data)=>{
     data.id = localStorage.getItem("id");
     data.token = localStorage.getItem("token");
     console.log(data);
-    await fetch("http://case.ua/case/save-infoCase.php",{
+    await fetch(serverAddres("case/save-infoCase.php"),{
         method:"POST",
         header : {'Content-Type': 'application/json;charset=utf-8'},
         body:  JSON.stringify(data)

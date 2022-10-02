@@ -11,19 +11,19 @@ import ShowLogin from "./ShowLogin";
 import { useDispatch } from "react-redux";
 import { removeUser, setUser } from "../../store/Slices/userSlice";
 import { useAuth } from "../../hooks/use-auth";
-
+import { serverAddres } from "../Functions/serverAddres";
 const Header = ()=>{
     const localToken = localStorage.getItem("token");
     const dispatch = useDispatch();
-   const {isAuth} = useAuth();
+    const {isAuth} = useAuth();
     const [active, setActive] = useState(false);
     function openMenu(){
         setActive(!active);
         console.log(active)
     }
-
+    console.log(serverAddres("kkkk"))
     if(window.location.pathname !== '/login'){
-         fetch('http://case.ua/check-auth.php',{
+         fetch(serverAddres('check-auth.php'),{
         method:"POST",
         header : {'Content-Type': 'application/json;charset=utf-8'},
         body:  JSON.stringify({token:localToken})
@@ -32,6 +32,12 @@ const Header = ()=>{
         return res.text();
     })
     .then(data =>{
+        console.log(data)
+        data = JSON.parse(data)
+        if("message" in data){
+
+            dispatch(removeUser())
+        }
         if(data == "null"){
             console.log(data);
             dispatch(removeUser())
@@ -63,7 +69,9 @@ const Header = ()=>{
                 <img src={localStorage.profilePhoto == 'null' ? defoltProfile : localStorage.profilePhoto } alt="" />
             </div>
         </div>
-        <div className={`top__menu ${active ? "active" : ""}`} id="top__menu">
+        <div className={`top__menu ${active ? "active" : ""}`} id="top__menu" onClick={()=>{
+            setActive(!active);
+        }}>
             <Nav />
             </div>
         </div>

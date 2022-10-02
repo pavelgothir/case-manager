@@ -3,7 +3,7 @@ import s from "./Home.module.css";
 import { useDispatch } from "react-redux";
 import { useAuth } from "../../hooks/use-auth";
 import { removeUser } from "../../store/Slices/userSlice";
-
+import Cases from "../Cases/Cases";
 
 const Home = ()=>{
     const dispatch = useDispatch();
@@ -12,14 +12,12 @@ const Home = ()=>{
     console.log(data)
     return isAuth ? (
         <div>
-            <h1>Hello</h1>
-
-            <button onClick={()=> dispatch(removeUser())}>Log out {email}</button>
+            <h1 className={s.text__center}>Кейси</h1>
+            <Cases />
         </div>
     ) : (
         <div className={s.home}>
            <p>
-            kkkkk
             <button onClick={()=> console.log(localStorage.getItem("username"))}>erfkrk</button>
            </p>
         </div>

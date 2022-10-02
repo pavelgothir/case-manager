@@ -38,6 +38,14 @@
 }
 .grod button{
     width: max-content;
-    display: block;
-    
+    display: block;   
+}
+.notes{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 50px;
+    margin-top: 50px;   
+}
+.case__title span{
+    color: gray;
 }

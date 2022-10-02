@@ -3,28 +3,31 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../store/Slices/userSlice";
-
+import ModalInfo from "../Modals/ModalInfo";
 import './Registration.css';
-
-
+import { serverAddres } from "../Functions/serverAddres";
 const LoginForm = ({show})=>{
+    const [ymodal, setYmodal] = useState({showModal:false,message:""})
+
     const dispatch = useDispatch();
     async function getUser(data){
-        await fetch("http://case.ua/login.php",{
+        await fetch(serverAddres("login.php"),{
             method:"POST",
             header : {'Content-Type': 'application/json;charset=utf-8'},
             body:  JSON.stringify(data)
         })
             .then(res => res.json())
             .then((data) => {
-                
+                if("message" in data){
+                    console.log(data)
+                    data.showModal = true;
+                   return setYmodal(data)
+                }
                 localStorage.setItem("token", data.token)
                 localStorage.setItem("email", data.email)
                 localStorage.setItem("id", data.id)
                 localStorage.setItem("userName", data.userName)
                 localStorage.setItem("profilePhoto", data.profilePhoto)
-                
-
                dispatch(setUser({
                     email:data.email,
                     id: data.id,
@@ -45,7 +48,7 @@ const LoginForm = ({show})=>{
     const {register,formState:{errors,isValid},handleSubmit,reset} = useForm({mode:'onChange'});
  
     return show ?(
-        
+        <>
             <form action="" className="reg__form" onSubmit={handleSubmit(getUser)}>
                 <div className="reg__block">
                     <label>E-mail {errors?.login && <span className="error__mes">{errors?.login?.message || "Обов'язково до заповнення"}</span>}</label>
@@ -61,7 +64,8 @@ const LoginForm = ({show})=>{
                     <button className={`primary__btn ${!isValid ? 'active' : ""}`} disabled={!isValid}>Авторизація</button>
                 </div>
             </form>
-         
+            <ModalInfo info={ymodal} func = {()=>{setYmodal({showModal:false})}}/>
+        </>
        
     ):(
         <></>

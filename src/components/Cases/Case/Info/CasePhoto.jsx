@@ -2,9 +2,8 @@ import React from "react";
 import axios from "axios";
 import "./Info.css";
 import { useState } from "react";
-import {useForm} from "react-hook-form";
-import Loading from "../../../Loading/Loading";
 import Loadpic from "../../../Loading/Interactive/Loadpic";
+import { serverAddres } from "../../../Functions/serverAddres";
 
 const CasePhoto = (props)=>{
 
@@ -20,7 +19,7 @@ const CasePhoto = (props)=>{
         formData.append("id",window.location.search.slice(1));
         formData.append("key","case");
         axios({
-            url: "http://case.ua/upload-case-img.php",
+            url: serverAddres("upload-case-img.php"),
             method: "POST",
             header : {'Content-Type': 'multipart/form-data'},
             data : formData,
@@ -44,7 +43,7 @@ const CasePhoto = (props)=>{
             token: localStorage.getItem("token")
         }
         axios({
-            url: "http://case.ua/save-case-img.php",
+            url: serverAddres("save-case-img.php"),
             method: "POST",
             header : {'Content-Type': 'application/json;charset=utf-8'},
             data : JSON.stringify(obj),

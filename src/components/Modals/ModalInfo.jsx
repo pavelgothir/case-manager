@@ -1,6 +1,4 @@
 import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
 import "./modal.css"
 const ModalInfo = ({info,func})=>{
     console.log(info)

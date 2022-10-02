@@ -12,7 +12,7 @@ const ShowLogin = ()=>{
             <div className="access__header">
                 <div><NavLink className={"access__header__link"} to={`/user?${id}`}> {userName} </NavLink></div>
                 <div className="horisont__line"></div>
-                <div><button onClick={()=> dispatch(removeUser())}>Log out {email}</button></div>
+                <div><button onClick={()=> dispatch(removeUser())}>Вийти</button></div>
             </div>
     ) : (
             <div className="access__header">

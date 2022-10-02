@@ -48,9 +48,7 @@ const Card = (props)=>{
                 <p>{props.info.potreba}</p>
                 </div>
                 <div className="card__info__status">
-                    <div className="card__info__status__on">
-                        <p className={`status__color`}>{props.info.status}</p>
-                    </div>
+                    <div></div>
                     <div className="card__info__status__date">
                         <p>{props.info.createdDate}</p>
                     </div>
