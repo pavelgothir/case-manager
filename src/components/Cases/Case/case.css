@@ -49,3 +49,72 @@
 .case__title span{
     color: gray;
 }
+@media (max-width:600px){
+    .case__contact__info {
+        display: grid;
+        grid-template-columns: 1fr;
+        column-gap: 30px;
+        margin-top: 50px;
+    }
+    .case__info {
+        display: grid;
+        grid-template-columns: 1fr;
+        column-gap: 20px;
+    }
+    .connections__case {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    .Journal__and__plan {
+        display: grid;
+        grid-template-columns: 1fr;
+        column-gap: 50px;
+        margin-top: 50px;
+    }
+    .notes {
+        display: grid;
+        grid-template-columns: 1fr;
+        column-gap: 50px;
+        margin-top: 50px;
+    }
+    .media__content {
+        display: grid;
+        grid-template-columns: 1fr;
+        column-gap: 30px;
+        row-gap: 30px;
+        margin-top: 50px;
+    }
+    #root{
+        padding-bottom: 200px;
+    }
+    .form__add__media {
+        width: 90%;
+        margin: auto;
+        margin-top: 30px;
+        text-align: center;
+        box-shadow: 0 0 3px 0px #000;
+        padding: 15px;
+        border-radius: 10px;
+    }
+    img{
+        width: auto;
+        max-width: 100%;
+    }
+    .media__content img, .media__content video {
+        width: auto;
+        max-width: 100%;
+        margin: auto;
+    }
+    .case__edit__info__wrap, .mod__plan__wrap {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #000000bb;
+        height: auto;
+        overflow-y: scroll;
+        color: #fff;
+        padding-bottom: 200px;
+    }
+}

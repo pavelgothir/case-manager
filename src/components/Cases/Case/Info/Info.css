@@ -500,3 +500,119 @@ margin: auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
+@media (max-width:600px){
+    .case__contact__info {
+        display: grid;
+        grid-template-columns: 1fr;
+        column-gap: 30px;
+        margin-top: 50px;
+    }
+    .case__info {
+        display: grid;
+        grid-template-columns: 1fr;
+        column-gap: 20px;
+    }
+    .connections__case {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    .Journal__and__plan {
+        display: grid;
+        grid-template-columns: 1fr;
+        column-gap: 50px;
+        margin-top: 50px;
+    }
+    .notes {
+        display: grid;
+        grid-template-columns: 1fr;
+        column-gap: 50px;
+        margin-top: 50px;
+    }
+    .media__content {
+        display: grid;
+        grid-template-columns: 1fr;
+        column-gap: 30px;
+        row-gap: 30px;
+        margin-top: 50px;
+    }
+    #root{
+        padding-bottom: 200px;
+    }
+    .form__add__media {
+        width: 90%;
+        margin: auto;
+        margin-top: 30px;
+        text-align: center;
+        box-shadow: 0 0 3px 0px #000;
+        padding: 15px;
+        border-radius: 10px;
+    }
+    img{
+        width: auto;
+        max-width: 100%;
+    }
+    .media__content img, .media__content video {
+        width: auto;
+        max-width: 100%;
+        margin: auto;
+    }
+    .case__edit__info__wrap, .mod__plan__wrap {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #000000bb;
+        height: auto;
+        overflow-y: scroll;
+        color: #fff;
+        padding-bottom: 200px;
+    }
+    .modal__plan__inner {
+        background-color: #fff;
+        min-height: 90vh;
+        max-height: 90vh;
+        width: 90%;
+        overflow-y: scroll;
+        position: relative;
+        padding: 0vh 10px;
+    }
+    .modal__plan__line {
+        display: grid;
+        grid-template-columns: 1fr;
+        column-gap: 10px;
+        row-gap: 10px;
+    }
+    .plan__modal {
+        width: 100%;
+        height: 100vh;
+        background-color: #00000077;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: block;
+        align-items: center;
+        justify-content: center;
+    }
+    .modal__plan__inner {
+        background-color: #fff;
+        min-height: auto;
+        max-height: max-content;
+        width: 90%;
+        overflow-y: scroll;
+        position: relative;
+        padding: 0vh 10px;
+        margin: auto;
+        height: 50vh;
+        padding-bottom: 100px;
+    }
+    .helpes__btn {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 20px;
+        align-items: center;
+        justify-content: space-around;
+    }
+}

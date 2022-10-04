@@ -7,17 +7,17 @@ const Photo = ({photos}) =>{
       }
     const PhotosData = ({pic})=>{
         return (
-                <img src={"http://" + pic.url} />
+                <img src={pic.url} />
         )
     }
     const DocsData = ({pic})=>{
         return (
-                <a target="_blank" href={"http://" + pic.url}>{pic.title}</a>
+                <a target="_blank" href={pic.url}>{pic.title}</a>
         )
     }
     const VideoData = ({pic})=>{
         return (
-                <VideoPlayer src={"http://" + pic.url}/>
+                <VideoPlayer src={pic.url}/>
         )
     }
     let casePost = "";
@@ -26,23 +26,21 @@ const Photo = ({photos}) =>{
            casePost =  pos.map((pic,index)=>{
                 let rozsh = ext(pic.url);
                 rozsh = rozsh.toLowerCase()
-                switch(rozsh){
-                    case "mp4" || "mkv":{
-                        return(
-                            <VideoData key={index} pic = {pic} />
-                        )
-                    }
-                    case "jpg" || "png":{
-                        return(
-                            <PhotosData key={index} pic={pic}/>
-                        )
-                    }
-                    case "pdf" || "xls" || "xlsx" :{
-                        return(
-                            <DocsData key={index} pic={pic}/>
-                        )
-                    }
+                if(rozsh == "mp4" || rozsh == "mkv" || rozsh == "avi" || rozsh == "mov"){
+                    return(
+                        <VideoData key={index} pic = {pic} />
+                    )
+                }else if(rozsh == "jpg" || rozsh == "png" || rozsh == "jpeg"){
+                    return(
+                        <PhotosData key={index} pic={pic}/>
+                    )
+                }else{
+                    return(
+                        <DocsData key={index} pic={pic}/>
+                    )
                 }
+               
+                
             
 
         })  

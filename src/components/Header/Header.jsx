@@ -35,7 +35,6 @@ const Header = ()=>{
         console.log(data)
         data = JSON.parse(data)
         if("message" in data){
-
             dispatch(removeUser())
         }
         if(data == "null"){
