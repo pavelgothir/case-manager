@@ -4,6 +4,7 @@ import Loadpic from "../Loading/Interactive/Loadpic";
 import ModalInfo from "../Modals/ModalInfo";
 import ProfilePhoto from "./UserInfo/ProfilePhoto";
 import { serverAddres } from "../Functions/serverAddres";
+import "./user.css";
 
 const User = ()=>{
     const [loading, setLoading] = useState();

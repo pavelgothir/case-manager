@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { removeUser, setUser } from "../../store/Slices/userSlice";
 import { useAuth } from "../../hooks/use-auth";
 import { serverAddres } from "../Functions/serverAddres";
+import MenuProfile from "./Menu/MenuProfile";
 const Header = ()=>{
     const localToken = localStorage.getItem("token");
     const dispatch = useDispatch();
@@ -21,7 +22,6 @@ const Header = ()=>{
         setActive(!active);
         console.log(active)
     }
-    console.log(serverAddres("kkkk"))
     if(window.location.pathname !== '/login'){
          fetch(serverAddres('check-auth.php'),{
         method:"POST",
@@ -58,14 +58,13 @@ const Header = ()=>{
                 <img src={logo} alt="" />
             </div>
             <Search />
-            <ShowLogin />
             <div className="menu__btn">
                 <div className={`menu__btn__item ${active ? "active" : ""}` } id="menu__btn" onClick={openMenu}>
                     <img src={arrow} alt="" />
                 </div>
             </div>
             <div className="menu__profile">
-                <img src={localStorage.profilePhoto == 'null' ? defoltProfile : localStorage.profilePhoto } alt="" />
+                <MenuProfile />
             </div>
         </div>
         <div className={`top__menu ${active ? "active" : ""}`} id="top__menu" onClick={()=>{

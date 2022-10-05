@@ -9,15 +9,13 @@ const ShowLogin = ()=>{
     const dispatch = useDispatch();
     const {isAuth, email, data, userName, id} = useAuth();
     return isAuth ? (
-            <div className="access__header">
-                <div><NavLink className={"access__header__link"} to={`/user?${id}`}> {userName} </NavLink></div>
-                <div className="horisont__line"></div>
+            <div className="prof__access__header">
+                <div><NavLink className={"prof__access__header__link"} to={`/user?${id}`}> {userName} </NavLink></div>
                 <div><button onClick={()=> dispatch(removeUser())}>Вийти</button></div>
             </div>
     ) : (
             <div className="access__header">
-                <div className="horisont__line"></div>
-                <div><NavLink className={"access__header__link"} to={"logIn"}> Увійти </NavLink></div>
+                <div><NavLink className={"prof__access__header__link"} to={"logIn"}> Увійти </NavLink></div>
             </div>
     )
 }
