@@ -17,6 +17,7 @@ const send = async(data)=>{
         .then(res => res.text())
         .then(data => {
             console.log(data)
+            window.location.href = "/case?"+ data;
             alert("Кейс успішно створено")
         })
         .catch(rejected => {
@@ -91,8 +92,6 @@ function checkAddCase(){
         document.getElementById("addCaseErrors").innerHTML = errors;
         return document.getElementById("add__case__modal").classList.add("active")
     }
-   //objAddCase.categories = JSON.stringify(objAddCase.categories)
-   //return console.log(objAddCase)
     send(objAddCase);
 }
 const AddCase = ()=>{
@@ -110,9 +109,7 @@ const AddCase = ()=>{
         })
         .then((data)=>{ 
            console.log(data.data)
-           setCategoriesCase(data.data);
-           //masCategories = data.data;
-          // window.location.reload()        
+           setCategoriesCase(data.data);       
         })
         .catch((error)=>console.log(error)) 
     },[])

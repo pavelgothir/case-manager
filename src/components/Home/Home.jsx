@@ -4,12 +4,14 @@ import { useDispatch } from "react-redux";
 import { useAuth } from "../../hooks/use-auth";
 import { removeUser } from "../../store/Slices/userSlice";
 import Cases from "../Cases/Cases";
+import { useEffect } from "react";
+import axios from "axios";
+import { serverAddres } from "../Functions/serverAddres";
 
 const Home = ()=>{
     const dispatch = useDispatch();
     const {isAuth, email, data} = useAuth();
-    console.log(isAuth, email)
-    console.log(data)
+    
     return isAuth ? (
         <div>
             <h1 className={s.text__center}>Кейси</h1>
