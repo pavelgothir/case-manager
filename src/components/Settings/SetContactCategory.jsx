@@ -37,7 +37,7 @@ const SetContactCategory = ()=>{
             category: arg
         }
         axios({
-            url: serverAddres("manage/delete-categories-case.php"),
+            url: serverAddres("manage/delete-categories-contact.php"),
             method: "POST",
             header : {'Content-Type': 'application/json;charset=utf-8'},
             data : JSON.stringify(obj),
