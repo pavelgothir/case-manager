@@ -1,8 +1,12 @@
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
 import {serverAddres} from "./../../Functions/serverAddres.js";
+
+
 let categoriesStr = "";
 let masCategories = [];
+let categoriesStrContact = "";
+let masCategoriesContact = [];
 function saveUserSettings(arg){ 
     console.log(arg)
 
@@ -33,6 +37,9 @@ function saveUserSettings(arg){
     for(let i = 0; i < masCategories.length; i++){
         specificationObj[document.querySelector(`#cat${i}`).value] = document.querySelector(`#cat${i}`).checked;
     }
+    for(let i = 0; i < masCategoriesContact.length; i++){
+        specificationObj[document.querySelector(`#con${i}`).value] = document.querySelector(`#con${i}`).checked;
+    }
     console.log(specificationObj)
 
 
@@ -60,6 +67,7 @@ function saveUserSettings(arg){
 }
 const SpecificateForm = ({props, active,close}) =>{
     const [categoriesCase, setCategoriesCase] = useState(false);
+    const [categoriesContact, setCategoriesContact] = useState(false);
 
     
 
@@ -93,6 +101,13 @@ const SpecificateForm = ({props, active,close}) =>{
                         {categoriesStr}
             </div>
         </div>
+        <div className="set__modal__content__categories__of__cases  set__cont">
+            <div className="set__modal__content__labels">
+            <h3>Категорії кейсів, які можна створювати</h3>
+                        {CategoriesMasContact(categoriesContact, level)}
+                        {categoriesStrContact}
+            </div>
+        </div>
         <div className="set__modal__content__page__settings  set__cont">
            
             <div className="set__modal__content__labels">
@@ -120,7 +135,7 @@ const SpecificateForm = ({props, active,close}) =>{
         )
     }
 
-    useEffect(()=>{
+    useEffect(()=>{ 
         let obj = {
             id: localStorage.getItem("id"),
             token: localStorage.getItem("token")
@@ -153,6 +168,44 @@ const SpecificateForm = ({props, active,close}) =>{
                 return <CategoriesData lf={lf} key={index} category={post} index={index}/>
         })  
     }    
+
+
+
+    useEffect(()=>{ 
+        let obj = {
+            id: localStorage.getItem("id"),
+            token: localStorage.getItem("token")
+        }
+        axios({
+            url: serverAddres("manage/get-categories-contact.php"),
+            method: "POST",
+            header : {'Content-Type': 'application/json;charset=utf-8'},
+            data : JSON.stringify(obj),
+        })
+        .then((data)=>{ 
+            console.log(data)
+           setCategoriesContact(data.data);
+           masCategoriesContact = data.data;
+          // window.location.reload()        
+        })
+        .catch((error)=>console.log(error)) 
+    },[])
+    const CategoriesDataContact = ({category, index, lf})=>{
+        return (
+            <label>
+                <input defaultChecked={category.value in lf ? lf[category.value] : false} type="checkbox" value={category.value} id={`con${index}`} /> {category.text}
+            </label>
+        )
+    }
+    const CategoriesMasContact = (pos, lf)=>{
+        console.log(pos)
+        if(pos.length < 1 || pos == false) return;
+                categoriesStrContact =  pos.map((post,index)=>{
+                return <CategoriesDataContact lf={lf} key={index} category={post} index={index}/>
+        })  
+    } 
+
+
    
     return active ?(
         <div className={"set__modal__wrap"} id="set__modal__wrap">
