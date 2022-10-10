@@ -180,6 +180,9 @@ body{
     row-gap: 10px;
 
 }
+.menu__logo img{
+    width: 100%;
+}
 @media (max-width: 500px){
     .menu__profile__inner{
         right: 0;

@@ -53,7 +53,7 @@ const SetCategories = ({props})=>{
     function addNewCategory(id){
         if(document.querySelector("#" + id).value == "") return alert("Заповніть поле");
         let category = {
-            value: transliterate(document.querySelector("#" + id).value),
+            value: "catCase" + transliterate(document.querySelector("#" + id).value),
             text:document.querySelector("#" + id).value.replace("'", "’"),
             color:document.querySelector("#colorBackground").value
         }

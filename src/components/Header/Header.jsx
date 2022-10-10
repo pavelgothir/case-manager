@@ -44,8 +44,6 @@ const Header = ()=>{
             console.log(data)
         
         }
-        
-        
     })
     }
    
@@ -55,7 +53,7 @@ const Header = ()=>{
             
             <div className="top__menu__bottom">
             <div className="menu__logo">
-                <img src={logo} alt="" />
+               <NavLink to={"/"}><img src={logo} alt="" /></NavLink>
             </div>
             <Search />
             <div className="menu__btn">

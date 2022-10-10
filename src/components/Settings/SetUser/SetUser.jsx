@@ -8,32 +8,38 @@ import hideImg from "./../../../img/icons/hide-50.png";
 import SpecificateForm from "./SpecificateForm";
 import {serverAddres} from "./../../Functions/serverAddres";
 let usersStr = "";
-function activateUser(arg,userID){
-    let obj = {
-        id: localStorage.getItem("id"),
-        token: localStorage.getItem("token"),
-        activate: arg,
-        userId:userID
-    }
-    axios({
-        url: serverAddres("user/activate.php"),
-        method: "POST",
-        header : {'Content-Type': 'application/json;charset=utf-8'},
-        data : JSON.stringify(obj),
-    })
-    .then((data)=>{ 
-        console.log(data.data)
 
-      // window.location.reload()        
-    })
-    .catch((error)=>console.log(error)) 
-}
 
 const SetUser = ()=>{
     const [users, setUsers] = useState(null);
     const [specificate, setSpecificate] = useState(null);
     const [activeSpecificate, setActiveSpecificate] = useState(false);
     const [level, setLevel]  = useState({"foo":"bar"})
+    function activateUser(arg,userID, text){
+        let obj = {
+            id: localStorage.getItem("id"),
+            token: localStorage.getItem("token"),
+            activate: arg,
+            userId:userID,
+            text:text
+        }
+        axios({
+            url: serverAddres("user/activate.php"),
+            method: "POST",
+            header : {'Content-Type': 'application/json;charset=utf-8'},
+            data : JSON.stringify(obj),
+        })
+        .then((data)=>{ 
+            console.log(data.data)
+            if(arg == "true"){
+                alert("Користувача активовано")
+            }else{
+                alert("Користувача деактивованро")
+            }
+           window.location.reload()        
+        })
+        .catch((error)=>console.log(error)) 
+    }
     useEffect(()=>{
         let obj = {
             id: localStorage.getItem("id"),
@@ -67,7 +73,7 @@ const SetUser = ()=>{
                             <img id="bookImg" src={bookImg} alt="" onClick={()=>{
                                 changeSpecification(user)
                             }} />
-                            {user.active == "true" ? <img id="showImg" src={showImg} alt="" onClick={()=>{activateUser("false",user.id)}} /> : <img id="hideImg" src={hideImg} alt="" onClick={()=>{activateUser("true",user.id)}} />}
+                            {user.active == "true" ? <img id="showImg" src={showImg} alt="" onClick={()=>{activateUser("false",user.id,"Деактивовано")}} /> : <img id="hideImg" src={hideImg} alt="" onClick={()=>{activateUser("true",user.id, "Активовано")}} />}
                             
                         </div>
     

@@ -16,6 +16,7 @@ function saveUserSettings(arg){
         case: document.querySelector("#case").checked,
         history: document.querySelector("#history").checked,
         reports: document.querySelector("#reports").checked,
+        createCase: document.querySelector("#createCase").checked,
         settings: document.querySelector("#settings").checked,
         activeNewUser: document.querySelector("#active__new__users").checked,
         deactivateUsers: document.querySelector("#deactive__users").checked,
@@ -107,6 +108,7 @@ const SpecificateForm = ({props, active,close}) =>{
             <div className="set__modal__content__labels">
             <h3>Кейс</h3>
                 <label htmlFor="edit__someones__case"><input defaultChecked={"editSomeonesCase" in level ? level.editSomeonesCase : false} type="checkbox" name="edit__someones__case" id="edit__someones__case" className="set__modal__content__common__className" /> Редагувати чужий кейс</label>
+                <label htmlFor="createCase"><input defaultChecked={"createCase" in level ? level.createCase : false} type="checkbox" name="createCase" id="createCase" className="set__modal__content__common__className" /> Створення кейсу</label>
                 <label htmlFor="edit__own__case"><input defaultChecked={"editOwnCase" in level ? level.editOwnCase : false} type="checkbox" name="edit__own__case" id="edit__own__case" className="set__modal__content__common__className" /> Редагувати свій кейс</label>
                 <label htmlFor="load__photo__video"><input defaultChecked={"loadPhotoVideo" in level ? level.loadPhotoVideo : false} type="checkbox" name="load__photo__video" id="load__photo__video" className="set__modal__content__common__className" /> Завантаження фото/відео</label>
                 <label htmlFor="load__document"><input defaultChecked={"loadDocument" in level ? level.loadDocument : false} type="checkbox" name="load__document" id="load__document" className="set__modal__content__common__className" /> Завантаження документів</label>

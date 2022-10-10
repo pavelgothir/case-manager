@@ -5,10 +5,7 @@ const Nav = ()=>{
 
 
     return(
-        <nav className={`top__menu__nav`}>
-        <div>
-            <NavLink to="/">Головна</NavLink>
-        </div>
+        <nav className={`top__menu__nav`}>  
         <div>
             <NavLink to="/cases">Кейси</NavLink>
         </div>

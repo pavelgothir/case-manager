@@ -17,7 +17,7 @@ const send = async(data)=>{
         .then(res => res.text())
         .then(data => {
             console.log(data)
-            alert("Кейс успішно створено")
+           // alert("Кейс успішно створено")
         })
         .catch(rejected => {
             console.log(rejected);
