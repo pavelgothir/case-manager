@@ -17,12 +17,8 @@ const send = async(data)=>{
         .then(res => res.text())
         .then(data => {
             console.log(data)
-<<<<<<< HEAD
-           // alert("Кейс успішно створено")
-=======
             window.location.href = "/case?"+ data;
             alert("Кейс успішно створено")
->>>>>>> e85ff935aaa9bce38a120b7b62bfe13645fd4476
         })
         .catch(rejected => {
             console.log(rejected);
