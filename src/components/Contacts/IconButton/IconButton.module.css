@@ -1,0 +1,22 @@
+.iconButton {
+  margin: 0;
+  padding: 10px;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font: inherit;
+  background-color: #ffd300;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn_close {
+  composes: iconButton;
+  position: absolute;
+  top: 0;
+  right: 600px;
+  background-color: rgb(141 141 141 / 0%);
+}

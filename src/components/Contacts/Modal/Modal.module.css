@@ -1,0 +1,30 @@
+.modal__backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* overflow-y: scroll; */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal__content {
+  /* position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+  /* min-height: 300px; */
+  max-width: 300px;
+  /* width: 100%; */
+  width: max-content;
+  width: max-content;
+  padding: 12px;
+  background-color: #fff;
+  border-radius: 3px;
+  overflow-y: scroll;
+  max-height: 90vh;
+}

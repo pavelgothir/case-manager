@@ -29,7 +29,8 @@ const userSlice = createSlice({
             state.userName = null
             state.profilePhoto = null
             localStorage.clear()
-            window.location.href="/login"
+            if(window.location.pathname !== "/recovery") window.location.href="/login"
+            
         }
     }
 })

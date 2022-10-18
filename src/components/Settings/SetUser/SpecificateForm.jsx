@@ -32,7 +32,8 @@ function saveUserSettings(arg){
         loadPhotoVideo: document.querySelector("#load__photo__video").checked,
         loadDocument: document.querySelector("#load__document").checked,
         changeResponsibleCase: document.querySelector("#change__responsible__for__case").checked,
-        createIndividualPlan: document.querySelector("#create__individual__plan").checked
+        createIndividualPlan: document.querySelector("#create__individual__plan").checked,
+        apiPdfCase: document.querySelector("#api__pdf__case").checked
     }
     for(let i = 0; i < masCategories.length; i++){
         specificationObj[document.querySelector(`#cat${i}`).value] = document.querySelector(`#cat${i}`).checked;
@@ -129,6 +130,12 @@ const SpecificateForm = ({props, active,close}) =>{
                 <label htmlFor="load__document"><input defaultChecked={"loadDocument" in level ? level.loadDocument : false} type="checkbox" name="load__document" id="load__document" className="set__modal__content__common__className" /> Завантаження документів</label>
                 <label htmlFor="change__responsible__for__case"><input defaultChecked={"changeResponsibleCase" in level ? level.changeResponsibleCase : false} type="checkbox" name="change__responsible__for__case" id="change__responsible__for__case" className="set__modal__content__common__className" /> Змінити відповідального за кейс/передати свій кейс</label>
                 <label htmlFor="create__individual__plan"><input defaultChecked={"createIndividualPlan" in level ? level.createIndividualPlan : false} type="checkbox" name="create__individual__plan" id="create__individual__plan" className="set__modal__content__common__className" /> Створення індивідуального плану</label>
+            </div>
+        </div>
+        <div className="set__modal__api__case  set__cont">  
+            <div className="set__modal__content__labels">
+            <h3>API</h3>
+               <label htmlFor="api__pdf__case"><input defaultChecked={"apiPdfCase" in level ? level.apiPdfCase : false} type="checkbox" name="api__pdf__case" id="api__pdf__case" className="set__modal__content__common__className" /> Експорт кейса у ПДФ </label>
             </div>
         </div>
     </div>

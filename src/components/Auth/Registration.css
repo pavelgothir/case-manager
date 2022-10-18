@@ -42,3 +42,13 @@
     cursor: pointer;
     transform: scale(1.1);
 }
+.forget__form{
+    width: 200px;
+    margin: auto;
+    display: grid;
+    margin-top: 150px;
+    row-gap: 10px;
+}
+.forget__form h2{
+    text-align: center;
+}

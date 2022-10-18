@@ -8,6 +8,7 @@ import Registration from "../Auth/Registration";
 import Home from "../Home/Home";
 import User from "../User/User";
 import Settings from "../Settings/Settings";
+import Recovery from "../Recovery/Recovery";
 
 
 const localToken = localStorage.getItem("token");
@@ -27,7 +28,11 @@ const MainContent = ()=>{
           </Routes>
         </div>
     ):(
-        <Login />
+      <Routes>
+         <Route path='/login' element={<Login />} />
+         <Route path='/recovery' element={<Recovery />} />
+      </Routes>
+       
     )
 }
 

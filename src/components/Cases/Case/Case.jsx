@@ -13,6 +13,7 @@ import Notes from "./Info/Notes";
 import CaseGiveHelp from "./Info/CaseGiveHelp";
 import Connections from "./Info/Connections";
 import { serverAddres } from "../../Functions/serverAddres";
+import ExportPDF from "./Info/ExportPDF";
 function saveInfoDogovir(){
     let dateDogovir = document.getElementById("dogovirDate");
     let numberDogovir = document.getElementById("dogovirNumber");
@@ -84,8 +85,8 @@ const Case = (props)=>{
                 <CasePhoto url={`${post.contact.imgUrl}`}/>
             </div>
             <div><h1 className="case__title">{post.contact.surname} {post.contact.firstName} {post.contact.secondName} <span>№ {post.id}</span></h1>
-                
                 <CaseShortInfo info = {post.contact}/>
+                <ExportPDF />
             </div>
             <div>
                 <button onClick={()=>{
