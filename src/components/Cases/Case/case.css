@@ -47,7 +47,7 @@
     margin-top: 50px;   
 }
 .case__title span{
-    color: gray;
+    color: #d2bee3;
 }
 @media (max-width:600px){
     .case__contact__info {

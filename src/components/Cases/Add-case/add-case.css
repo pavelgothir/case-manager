@@ -9,23 +9,7 @@
     grid-template-columns: 1fr;
     row-gap: 30px;
 }
-.add__case__inner textarea, .add__case__inner input[type=text]{
-    resize: none;
-    border: solid 1px rgb(0, 47, 91);
-    border-radius: 5px;
-    padding-left: 3%;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    width: 97%;
-}
-.add__case__inner input[type=date]{
-    padding: 10px;
-}
-.add__case__inner input[type=checkbox]{
-    width: 30px;
-    height: 30px;
-    margin: 0;
-}
+
 .add__case__inner textarea:focus{
     resize: none;
     border: solid 1px rgb(0, 47, 91);
@@ -36,10 +20,6 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 30px;
-}
-.add__case__item__inner__input input{
-    display: block;
-    margin: auto;
 }
 .add__case__item__inner__input label{
     width: max-content;

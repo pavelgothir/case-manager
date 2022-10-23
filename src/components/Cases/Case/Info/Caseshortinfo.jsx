@@ -26,7 +26,7 @@ const CaseShortInfo = ({info})=>{
                     </div>
                     <div className="case__info__card__text">
                         
-                        <p title="Номер телефону 1"><a href={`tel:${info.phone1}`}>{info.phone1}</a></p>
+                       <span><p title="Номер телефону 1"><a href={`tel:${info.phone1}`}>{info.phone1}</a></p></span>
                     </div>
                 </div>
                 {info.phone2.length > 1 ? <div className="case__info__card">
@@ -34,7 +34,7 @@ const CaseShortInfo = ({info})=>{
                         <img src={phoneImg} alt="" />
                     </div>
                     <div className="case__info__card__text">
-                        <p><a href={`tel:${info.phone2}`}>{info.phone2}</a></p>
+                        <span><p><a href={`tel:${info.phone2}`}>{info.phone2}</a></p></span>
                     </div>
                 </div>:""
                 }
@@ -43,19 +43,22 @@ const CaseShortInfo = ({info})=>{
                         <img src={emailImg} alt="" />
                     </div>
                     <div className="case__info__card__text">
-                        <p><a href={`mailto:${info.email}`}>{info.email}</a></p>
+                        <span>
+                            <p><a href={`mailto:${info.email}`}>{info.email}</a></p>
+                        </span>
+                        
                     </div>
                 </div>
                 
-            </div>
+            
           
-            <div className="case__info__inner">
+            
             <div className="case__info__card">
                 <div className="case__info__card__img">
                         <img src={addressImg} alt="" />
                     </div>
                     <div className="case__info__card__text">
-                        <p title="Адреса по прописці">{info.addressPropiska}</p>
+                        <span><p title="Адреса по прописці">{info.addressPropiska}</p></span>
                     </div>
                 </div>
                 {info.addressLive.length > 1 ? <div className="case__info__card">
@@ -63,7 +66,7 @@ const CaseShortInfo = ({info})=>{
                         <img src={addressImg} alt="" />
                     </div>
                     <div className="case__info__card__text">
-                        <p title="Фактична адреса проживання">{info.addressLive}</p>
+                        <span><p title="Фактична адреса проживання">{info.addressLive}</p></span>
                     </div>
                 </div>:""}
                 {info.familyStan.length > 1 ? <div className="case__info__card">
@@ -71,7 +74,7 @@ const CaseShortInfo = ({info})=>{
                         <img src={addressImg} alt="" />
                     </div>
                     <div className="case__info__card__text">
-                        <p title="Сімейний стан">{info.familyStan}</p>
+                        <span><p title="Сімейний стан">{info.familyStan}</p></span>
                     </div>
                 </div>:""}
                 {info.commentar.length > 1 ? <div className="case__info__card">
@@ -79,7 +82,7 @@ const CaseShortInfo = ({info})=>{
                         <img src={addressImg} alt="" />
                     </div>
                     <div className="case__info__card__text">
-                        <p title="Коментар">{info.commentar}</p>
+                        <span><p title="Коментар">{info.commentar}</p></span>
                     </div>
                 </div>:""}
                 {info.potreba.length > 1 ?
@@ -88,64 +91,73 @@ const CaseShortInfo = ({info})=>{
                         <img src={givingImg} alt="" />
                     </div>
                     <div className="case__info__card__text">
-                        <p>{info.potreba}</p>
+                        <span><p title="Потреба">{info.potreba}</p></span>
                     </div>
                 </div>:""}
             </div>           
             <div className="case__info__inner">
                 <div className="case__info__text__center">
-                    <p>Дата створення</p>
+                    
                     <div className="case__info__card">
                         <div className="case__info__card__img">
                             <img src={dateImg} alt="" />
                         </div>
                         <div className="case__info__card__text">
+                            <p>Дата створення</p>
+                            <span>
+                                <p>{info.createdDate}</p>
+                            </span>
                             
-                            <p>{info.createdDate}</p>
                         </div>
                     </div>   
                 </div>
                 <div className="case__info__text__center">                             
-                <p>Договір</p>
+                
                     <div className="case__info__card">
                         <div className="case__info__card__img">
                             <img src={socialImg} alt="" />
                         </div>
-                        <div className="case__info__card__text">     
-                            <p>{info.numberDogovir < 1 ? "Договір не укладено" : info.dateDogovir + " № " + info.numberDogovir }</p>
+                        <div className="case__info__card__text">   
+                            <p>Договір</p>
+                            <span>
+                                <p>{info.numberDogovir < 1 ? "Договір не укладено" : info.dateDogovir + " № " + info.numberDogovir }</p>                                
+                            </span> 
                         </div>
                     </div>
                 </div>
                 <div className="case__info__text__center">                             
-                <p>Канал комунікації</p>
+                
                     <div className="case__info__card">
                         <div className="case__info__card__img">
                             <img src={socialImg} alt="" />
                         </div>
-                        <div className="case__info__card__text">     
-                            <p>{info.chanelComunity}</p>
+                        <div className="case__info__card__text">  
+                            <p>Канал комунікації</p>   
+                            <span><p>{info.chanelComunity}</p></span>
                         </div>
                     </div>
                 </div>
                 <div className="case__info__text__center">                             
-                <p>Категорія</p>
+                
                     <div className="case__info__card">
                         <div className="case__info__card__img">
                             <img src={socialImg} alt="" />
                         </div>
-                        <div className="case__info__card__text">     
-                            <p><ShowCategories cats = {info.categories}/></p>
+                        <div className="case__info__card__text"> 
+                            <p>Категорія</p>    
+                            <span><p><ShowCategories cats = {info.categories}/></p></span>
                         </div>
                     </div>
                 </div>
                 <div className="case__info__text__center">                             
-                <p>Статус</p>
+                
                 <div className="case__info__card">
                 <div className="case__info__card__img">
                         <img src={givingImg} alt="" />
                     </div>
                     <div className="case__info__card__text">
-                        <p>{info.status}</p>
+                        <p>Статус</p>
+                        <span><p>{info.status}</p></span>
                     </div>
                 </div>
             </div>
