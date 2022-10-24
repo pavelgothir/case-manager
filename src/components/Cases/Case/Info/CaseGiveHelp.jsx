@@ -4,7 +4,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useEffect } from "react";
 import { serverAddres } from "../../../Functions/serverAddres";
-
+import imgSend from "../../../../img/icons/send.png";
 
 
 const Active = ({elem})=>{
@@ -16,8 +16,10 @@ const Active = ({elem})=>{
             <span>{elem.date}</span>  
          </div>
          <div className="helpes__viewer__mess">
-            <p> Надавав допомогу <b>{elem.whoHelp}</b>. Дата надання <b>{elem.dateHelp}</b></p>
-             <p><b>Деталі наданої допомоги </b>{elem.mess}</p>
+
+            <p><b>Надавав допомогу</b> {elem.whoHelp}.</p>
+            <p><b>Дата надання</b> {elem.dateHelp}</p>
+             <p><b>Деталі наданої допомоги</b>{elem.mess}</p>
          </div>
      </div>
     )
@@ -47,6 +49,9 @@ const CaseGiveHelp = ()=>{
         .then((data)=>{ 
             console.log(data)
             setActHelp(data.data)  
+            document.querySelector("#mess__help").value = ""
+            document.querySelector("#date__help").value = ""
+            document.querySelector("#who__help").value = ""
         })
         .catch((error)=>console.log(error))  
     }
@@ -83,12 +88,12 @@ const CaseGiveHelp = ()=>{
                         <div className="helpes__mes__inner">
                             <div className="helpes__field">
                                 <textarea name="" id="mess__help" cols="30" rows="5" placeholder="Деталі наданої допомоги"></textarea>
-                                <div className="helpes__btn">
+                                <img onClick={addHelp} src={imgSend} alt="" />
+                            </div>
+                            <div className="helpes__btn">
                                     <input type="date" name="date__help" id="date__help" />
                                     <input type="text" name="who__help" id="who__help" placeholder="Хто надав допомогу"/>
-                                    <button onClick={addHelp}>Надіслати</button>
                                 </div>
-                            </div>
                             
                         </div>
                     </div>

@@ -86,18 +86,23 @@ const Case = (props)=>{
             </div>
             <div><h1 className="case__title">{post.contact.surname} {post.contact.firstName} {post.contact.secondName} <span>№ {post.id}</span></h1>
                 <CaseShortInfo info = {post.contact}/>
-                <ExportPDF />
+                
             </div>
             <div>
-                <button onClick={()=>{
+                <button className="primary__btn"
+                onClick={()=>{
                     setEditActive(true)
                 }}>Редагувати</button>
             </div>     
         </div> 
         <div className="connections__wrap">
             <div className="connections__inner">
-                <h1>Зв'язки кейса з іншими кейсами</h1>
+                <h2>Зв'язки кейса з іншими кейсами</h2>
                 <Connections />
+            </div>
+            <div className="pdf__inner">
+                <h2>Експорт у форматі PDF</h2>
+                <ExportPDF />
             </div>
         </div>
         <div className="Journal__and__plan">

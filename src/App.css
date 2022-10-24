@@ -5,13 +5,17 @@ body{
 h1,h2,h3{
   margin: 0;
 }
+a{
+  text-decoration: none;
+  color: #000;
+}
 .primary__btn {
-  width: max-content;
-  padding: 10px 30px;
+  width: 100%;
+  padding: 10px 0px;
   border: none;
-  background-color: rgb(64, 96, 156);
-  color: #fff;
-  box-shadow: 0 0 3px rgb(64, 96, 156);
+  background-color: #fff;
+  color: #000;
+  box-shadow: 0 0 6px 0 #000000aa;
   transition: all .3s;
   cursor: pointer;
   margin: auto;
@@ -22,18 +26,16 @@ h1,h2,h3{
 }
 
 .primary__btn:hover {
-  box-shadow: 0 0 10px rgb(64, 96, 156);
+  box-shadow: 0 0 10px #b399cb;
   border-radius: 10px;
 }
 
 .primary__btn.active {
-  background-color: gray;
-  box-shadow: 0 0 0px rgb(64, 96, 156);
+  box-shadow: 0 0 0px #b399cb;
 }
 
 .primary__btn.active:hover {
-  background-color: gray;
-  box-shadow: 0 0 0px rgb(64, 96, 156);
+  box-shadow: 0 0 0px #b399cb;
   border-radius: 15px;
 }
 
@@ -42,7 +44,7 @@ h1,h2,h3{
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #547fa0 #ededed;
+  scrollbar-color: #b399cb #ededed;
 }
 
 /* Chrome, Edge, and Safari */
@@ -54,17 +56,21 @@ h1,h2,h3{
 *::-webkit-scrollbar-track {
   background: #ededed;
   cursor: pointer;
-
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #547fa0;
+  background-color: #b399cb;
   border-radius: 10px;
   border: 2px solid #ffffff;
   cursor: pointer;
-
 }
-input[type=text]{
+input[type=text],input[type=number]{
+  border: solid 3px #b399cb;
+  border-radius: 7px;
+  width: calc(100% - 21px);
+  padding: 5px 5px 5px 10px;
+}
+select{
   border: solid 3px #b399cb;
   border-radius: 7px;
   width: calc(100% - 21px);

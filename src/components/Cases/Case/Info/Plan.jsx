@@ -67,21 +67,20 @@ const Plan = ({plan,index})=>{
                 <div className="part__line">
                     <div className="part__symbol">
                         <div className="part__line__elem">
-                            <div className="part__circle"></div>
+                            
                         </div>
                     </div>
                 </div>
                 <div className="part__line">
                     <div className={`part__plan__date ${planis.done ? "borderGreen" : ""}`}>
                         <input disabled type="date" name={`start__planID${index}`} id={`start__planID${index}`} defaultValue={planis.start} />
-                        <span> | </span>
                          <input disabled type="date" name={`end__planID${index}`} id={`end__planID${index}`} defaultValue={planis.end} />
                     </div>
                 </div>
                 <div className="part__line">
                     <div className="part__symbol">
                         <div className="part__line__elem">
-                            <div className="part__circle"></div>
+                            
                         </div>
                     </div>
                 </div>
@@ -153,7 +152,8 @@ const Plan = ({plan,index})=>{
             { plan.donePlan.done ? 
             <div className="plan__comment"><p><b>Коментар до виконаного плану: </b></p><p>{plan.donePlan.commentar}</p></div>:
               <div className="part__plan__btn">
-                <button onClick={()=>{setActiveModalPlan(true)}}>Завершити план</button>
+                <button className="primary__btn"
+                onClick={()=>{setActiveModalPlan(true)}}>Завершити план</button>
             </div>
             }
             

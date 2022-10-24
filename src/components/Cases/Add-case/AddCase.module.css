@@ -8,7 +8,6 @@
     grid-template-columns: 1fr;
     row-gap: 30px;
 }
-.header__text{}
 .section__form{
     display: grid;
     grid-template-columns: 1fr 5fr;

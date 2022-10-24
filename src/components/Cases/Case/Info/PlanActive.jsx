@@ -192,7 +192,7 @@ const WindowCreate = ()=>{
                 <select name="selectPlan" id="selectPlan" onClick={addOptions} onChange={changePlan}>
                     <option value={info[plan]}>{info[plan].nameOfPlan}</option>
                 </select>
-                <button onClick={()=>{setOpenWindowCreate(true)}}>Створити план</button>
+                <button className="primary__btn" onClick={()=>{setOpenWindowCreate(true)}}>Створити план</button>
             </div>
             <div className="plan__active__default__data">
                 <div className="plan__active__default__data__name"></div>

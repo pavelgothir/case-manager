@@ -9,6 +9,19 @@
     max-width: 100%;
     width: 100%;
 }
+.connections__form{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 30px;
+}
+.connect__control{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 30px;
+}
+.connect__for input{
+    height: calc(100% - 16px);
+}
 .case__contact__info{
     display: grid;
     grid-template-columns: 1fr 3fr;
@@ -264,33 +277,30 @@ margin-left: 10%;
     padding-top: 30px;
     max-height: 500px;
 }
-.part__plan{
 
-}
 .part__line__elem{
-    width: 4px;
+    width: 3px;
     height: 20px;
-    background-color: #000;
+    background-color: #b399cb;
     position: relative;
     margin: auto;
 }
-.part__circle{
-    width: 10px;
-    height: 10px;
-    background-color: #000;
-    position: absolute;
-    bottom: -4px;
-    left: -2px;
-    border-radius: 50%;
-}
+
 .part__plan__date,.plan__created{
     width: max-content;
     margin: auto;
     padding: 10px;
-    border: solid 1px #000;
+    border: solid 3px #b399cb;
+    border-radius: 10px;
 }
 .part__plan__description{
     padding: 10px;
+    border: solid 3px #b399cb;
+    border-radius: 10px;
+}
+.part__plan__btn{
+    width: 70%;
+    margin: auto;
 }
 .part__plan__control img{
     width: 20px;
@@ -347,7 +357,8 @@ margin-left: 10%;
     display: block;
 }
 .part__plan__description textarea{
-    width: 100%;
+    width: 96%;
+    margin-top: 5px;
 }
 .part__plan img{
     border-radius: 5px;
@@ -400,18 +411,24 @@ margin-left: 10%;
 .__done__plan__notgood{
     background-color: rgba(255, 3, 3, 0.447);
 }
+.notes__field{
+    position: relative;
+    border: solid 3px #b399cb;
+    display: grid;
+    grid-template-columns: 1fr 30px;
+    align-items: center;
+    border-radius: 15px;
+}
+.notes__field img{
+    cursor: pointer;
+}
+
 .notes__field textarea{
-    width: 100%;
     outline: none;
     resize: none;
     border: none;
-    padding: 5px;
-    width: 90%;
     margin: auto;
     display: block;
-    background-color: aliceblue;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
 }
 .notes__btn{
     margin: auto;
@@ -421,26 +438,50 @@ margin-left: 10%;
 .notes__btn button{
     padding: 5px 20px;
 }
+.select__plan{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
 .notes__viewer{
-    background: aliceblue;
+    background: #fff;
     min-height: 400px;
     max-height: 400px;
     overflow-y: scroll;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
-    width: 90%;
+    width: calc(100% - 16px);
     margin: auto;
     padding: 5px;
     display: grid;
     grid-auto-columns: 1fr;
     row-gap: 10px;
+    border: solid 3px #b399cb;
+    border-radius: 15px;
+    
+}
+.helpes__viewer{
+    background: #fff;
+    min-height: 400px;
+    max-height: 400px;
+    overflow-y: scroll;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    width: calc(100% - 16px);
+    margin: auto;
+    padding: 5px;
+    display: grid;
+    grid-auto-columns: 1fr;
+    row-gap: 10px;
+    border: solid 3px #b399cb;
+    border-radius: 15px;   
 }
 .notes__mes__wrap{
     margin-top: 15px;
 }
-.notes__viewer__line{
-    display: grid;
-    grid-template-columns: 1fr 3fr;
+.notes__viewer__line > div{
+    background: #ded9e2;
+    padding: 5px;
+    border-radius: 15px;
 }
 .notes__viewer__data{
     display: flex;
@@ -457,56 +498,77 @@ margin-left: 10%;
     margin: auto;
     padding: 5px;
     border-radius: 10px;
-    background: aqua;
+    column-gap: 15px;
 }
 .helpes__field{
-    width: 90%;
     margin: auto;
+    border: solid 3px #b399cb;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 1fr 30px;
+    align-items: center;
+}
+.helpes__field img{
+    cursor: pointer;
 }
 .helpes__field > textarea{
-    width: 100%;
-    border: none;
-    box-shadow: 0 0 2px 0 #000;
     resize: none;
+    border: none;
+    outline: none;
 }
 .helpes__btn{
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-columns: 1fr 3fr;
     column-gap: 20px;
     align-items: center;
     justify-content: space-around;
+    margin-top: 15px;
 }
 .helpes__viewer__line{
     width: 90%;
     margin: auto;
-    background: #e4f5f5;
+    background: #ded9e2;
     padding: 5px;
     border-radius: 10px;
+}
+.helpes__viewer__data a{
+    color: #000;
+    text-decoration: none;
+}
+.helpes__viewer__mess p{
+    margin: .5em;
 }
 .helpes__mes__wrap{
     margin-top: 15px;
 }
-.helpes__viewer{
-    background: aliceblue;
-    min-height: 400px;
-    max-height: 400px;
-    overflow-y: scroll;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    width: 90%;
-    margin: auto;
-    padding: 5px;
-    display: grid;
-    grid-auto-columns: 1fr;
-    row-gap: 10px;
-}
+
 .helpes__viewer__data{
     display: flex;
     justify-content: space-between;
 }
 .connections__case{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+}
+.export__pdf__inner{
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 5px;
+}
+.item__pdf > label{
+    margin-left: 15px;
+}
+.pdf__btn{
+    width: 70%;
+    margin: auto;
+    margin-top: 30px;
+}
+.part__plan__date{
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+}
+.part__plan__date input{
+    width: max-content;
 }
 @media (max-width:600px){
     .case__contact__info {

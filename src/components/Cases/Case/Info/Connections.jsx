@@ -82,7 +82,8 @@ const Connections = ()=>{
                     </div>
                     <div className="connect__control">
                         <input type="number" name="connect__id" id="connect__id" placeholder="номер кейса" />
-                        <button onClick={()=>{
+                        <button className="primary__btn"
+                        onClick={()=>{
                             if(document.querySelector("#connect__for").value.trim().length < 1) return;
                             if(document.querySelector("#connect__id").value.trim().length == 0) return;
                             connectFor(document.querySelector("#connect__for").value.trim(),document.querySelector("#connect__id").value)

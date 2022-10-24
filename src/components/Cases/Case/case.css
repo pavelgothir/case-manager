@@ -49,6 +49,12 @@
 .case__title span{
     color: #d2bee3;
 }
+.connections__wrap{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 50px;
+    margin-top: 50px;
+}
 @media (max-width:600px){
     .case__contact__info {
         display: grid;

@@ -55,25 +55,34 @@ const ExportPDF = ()=>{
     <div className="export__pdf__wrap">
     <div className="export__pdf__inner">
         <p>Включити у ПДФ</p>
-        <label htmlFor="pdf__plan"><input type="checkbox" id="pdf__plan"
-        onChange={()=>{
-            objData.plan = !objData.plan
-        }} />Індивідуальний план</label>
-        <label htmlFor="pdf__notes"><input type="checkbox" id="pdf__notes"
+        <div className="item__pdf">
+            <input type="checkbox" id="pdf__plan"
+                onChange={()=>{
+                    objData.plan = !objData.plan
+                }} /><label htmlFor="pdf__plan">Індивідуальний план</label>
+        </div>
+        <div className="item__pdf">
+       <input type="checkbox" id="pdf__notes"
         onChange={()=>{
             objData.notes = !objData.notes
-        }}/>Нотатки</label>
-        <label htmlFor="pdf__help"><input type="checkbox" id="pdf__help"
+        }}/> <label htmlFor="pdf__notes">Нотатки</label></div>
+        <div className="item__pdf">
+        <input type="checkbox" id="pdf__help"
         onChange={()=>{
             objData.help = !objData.help
-        }}/>Надано допомогу</label>
-        <label htmlFor="pdf__media"><input type="checkbox" id="pdf__media"
+        }}/><label htmlFor="pdf__help">Надано допомогу</label></div>
+       <div className="item__pdf">
+        <input type="checkbox" id="pdf__media"
         onChange={()=>{
             objData.media = !objData.media
-        }}/>Фотографії</label>
-        <button onClick={()=>{
+        }}/><label htmlFor="pdf__media">Фотографії</label></div>
+        <div className="pdf__btn">
+            <button className="primary__btn"
+        onClick={()=>{
             getPdf()
         }}>Експорт у ПДФ</button>
+        </div>
+        
     </div>
 </div>
     )

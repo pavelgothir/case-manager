@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { serverAddres } from "../../../Functions/serverAddres";
-
+import imgSend from "../../../../img/icons/send.png";
 
 
 const Active = ({elem})=>{
@@ -19,7 +19,7 @@ const Active = ({elem})=>{
              
          </div>
          <div className="notes__viewer__mess">
-             <span>{elem.mess}</span>
+             <span>{elem.mess.replaceAll("<br />", " ")}</span>
          </div>
      </div>
     )
@@ -28,6 +28,7 @@ const Active = ({elem})=>{
 const Notes = ({notes})=>{
     function addNote(){
         let mess = document.querySelector("#mess__note").value.replaceAll("'", "’").replace(/\n/g, "<br />");
+        if(mess == "") return alert("Ви не ввели повідомлення")
         let obj = {
             caseId:window.location.search.slice(1),
             id: localStorage.getItem("id"),
@@ -45,6 +46,7 @@ const Notes = ({notes})=>{
         .then((data)=>{ 
             console.log(data)
             setActNote(data.data)  
+            document.querySelector("#mess__note").value = "";
         })
         .catch((error)=>console.log(error))  
     }
@@ -66,9 +68,7 @@ const Notes = ({notes})=>{
                         <div className="notes__mes__inner">
                             <div className="notes__field">
                                 <textarea name="" id="mess__note" cols="30" rows="5"></textarea>
-                            </div>
-                            <div className="notes__btn">
-                                <button onClick={addNote}>Надіслати</button>
+                                <img src={imgSend} onClick={addNote} alt="" />
                             </div>
                         </div>
                     </div>
