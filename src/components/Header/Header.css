@@ -65,10 +65,9 @@
     display: grid;
     grid-template-columns: 30px 1fr;
     background-color: #f0f2f5;
-    width: 90%;
+    width: 60%;
     padding: 1% 5% 1% 1%;
     border-radius: 25px;
-    margin: auto;
 }
 .menu__search__input__inner > img{
     width: 100%;
@@ -139,7 +138,7 @@
     position: absolute;
     left: 20px;
     top: 50px;
-    width: calc(90% - 20px);
+    width: calc(62% - 20px);
     padding-left: 20px;
     background: #f0f2f5;
     z-index: 100;
@@ -169,6 +168,7 @@
     min-width: 150px;
     text-align: center;
     background-color: #fff;
+    z-index: 99;
 
 }
 .prof__access__header{
@@ -180,7 +180,10 @@
 .menu__logo img{
     width: 100%;
 }
-@media (max-width: 500px){
+@media (max-width: 600px){
+    .menu__search__input__inner{
+        width: 90%;
+    }
     .menu__profile__inner{
         right: 0;
     }
@@ -189,9 +192,9 @@
         margin: auto;
         height: 60px;
         display: grid;
-        grid-template-columns: 60px 1fr 30px 30px;
-        column-gap: 5px;
-        padding-top: 5px;
+        grid-template-columns: 60px 1fr 30px 40px;
+            column-gap: 0px;
+            padding-top: 5px;
     }
   .add__case__line__three {
     display: grid;

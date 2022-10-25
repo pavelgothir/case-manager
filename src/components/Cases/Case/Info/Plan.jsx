@@ -28,7 +28,6 @@ function elemPlanDelete(a){
     .catch((error)=>console.log(error))  
 }
 function elemPlanDone(a){
-
     let obj = {
         caseId:window.location.search.slice(1),
         id: localStorage.getItem("id"),
@@ -98,9 +97,10 @@ const Plan = ({plan,index})=>{
                                 document.querySelector(`#editPlan${index}`).classList.toggle("active");
                             }} />}
                             <img src={saveImg} alt="Зберегти" className="savePlan green__back" title="Зберегти" id={`savePlan${index}`} onClick = {()=>{
+                                 let ind = index;
                                  let a = {
                                     checked: document.querySelector(`#goodPlan${index}`).checked,
-                                    index: index,
+                                    index: ind,
                                     nameOfPlan: plan.nameOfPlan,
                                     desc: document.querySelector(`#desc__planID${index}`).value.replaceAll("'", "’").replace(/\n/g, "<br />"),
                                     start: document.querySelector(`#start__planID${index}`).value,

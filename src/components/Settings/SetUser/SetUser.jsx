@@ -65,10 +65,13 @@ const SetUser = ()=>{
         console.log(user.active)
         return (
                 <div className={`set__users__data__line ${index%2 == 0 ? "arc" : ""}`}>
-                    <div className="set__user__name"><a href={`/user?${user.id}`}>{user.userName}</a></div>
-                    <div className="set__user__type"><span>{user.type}</span></div>
+                    <div className={`set__user__wr ${user.active == "true" ? "arc":""}`}>
+                        <div className="set__user__name"><a href={`/user?${user.id}`}>{user.userName}</a></div>
+                        <div className="set__user__type"><span>{user.type}</span></div>
+                    </div>
+                    
                     <div className="set__user__control__panel">
-                        <div className="set__user__control__panel__icons">
+                        <div className={`set__user__control__panel__icons ${user.active == "true" ? "arc":""}`}>
                             <img id="deleteImg" src={deleteImg} alt="" />
                             <img id="bookImg" src={bookImg} alt="" onClick={()=>{
                                 changeSpecification(user)
@@ -103,9 +106,14 @@ const SetUser = ()=>{
                     <h2>Користувачі</h2>
                     <div className="set__users__data">
                         <div className="set__users__data__title">
-                            <div><span>ПІБ</span></div>
-                            <div><span>Тип</span></div>
-                            <div><span>Панель керування</span></div>
+                            <div className="set__users__data__title__text">
+                                <div><span>ПІБ</span></div>
+                                <div><span>Тип</span></div>              
+                            </div>
+
+                            <div className="set__users__data__title__panel">
+                               <div><span>Панель керування</span></div> 
+                            </div>
                         </div>
                         <div className="set__users__data__lines">
                             {UserMas(users)}

@@ -263,13 +263,14 @@ const AddCase = ()=>{
                 </div>
             </div>
             <div className="add__case__line">
-                <button onClick={checkAddCase} className="add__case__btn">Додати кейс</button>
+                <button onClick={checkAddCase} className="primary__btn">Додати кейс</button>
             </div>
         </div>
         <div className="add__case__modal" id="add__case__modal">
             <div className="add__case__modal__inner">
                 <div id="addCaseErrors"></div>
-                <button onClick={()=>{document.getElementById("add__case__modal").classList.remove("active")}}>OK</button>
+                <button className="primary__btn"
+                onClick={()=>{document.getElementById("add__case__modal").classList.remove("active")}}>OK</button>
             </div>
         </div>
     </div>

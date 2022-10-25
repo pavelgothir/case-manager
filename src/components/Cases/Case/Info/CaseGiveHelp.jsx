@@ -86,14 +86,15 @@ const CaseGiveHelp = ()=>{
                     </div>
                     <div className="helpes__mes__wrap">
                         <div className="helpes__mes__inner">
+                        <div className="helpes__btn">
+                                    <input type="date" name="date__help" id="date__help" />
+                                    <input type="text" name="who__help" id="who__help" placeholder="Хто надав допомогу"/>
+                                </div>
                             <div className="helpes__field">
                                 <textarea name="" id="mess__help" cols="30" rows="5" placeholder="Деталі наданої допомоги"></textarea>
                                 <img onClick={addHelp} src={imgSend} alt="" />
                             </div>
-                            <div className="helpes__btn">
-                                    <input type="date" name="date__help" id="date__help" />
-                                    <input type="text" name="who__help" id="who__help" placeholder="Хто надав допомогу"/>
-                                </div>
+                          
                             
                         </div>
                     </div>

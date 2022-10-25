@@ -205,7 +205,7 @@ const WindowCreate = ()=>{
         <div className="not__active__plan">
             <h2>Індивідуальний план</h2>
             <p>Ще не має індивідуального плану</p>
-            <button onClick={()=>{setOpenWindowCreate(true)}}>Створити план</button>
+            <button className="primary__btn" onClick={()=>{setOpenWindowCreate(true)}}>Створити план</button>
             <WindowCreate/>
         </div>
     )

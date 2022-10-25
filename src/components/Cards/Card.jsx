@@ -29,26 +29,35 @@ const Card = (props)=>{
     return(
         <div className="card">
             <div className="card__img">
-                <div className="card__categories">
-                       <CategoriesMas pos = {props.info.categories == undefined ? false : props.info.categories}/> 
-                       
+                <div className="card__img__img">
+                    <img src={`${ props.info.imgUrl}`} alt="" />
                 </div>
-                <img src={`${ props.info.imgUrl}`} alt="" />
+                <div className="card__categories">
+                    <div className="card__categories__inner">
+                        <CategoriesMas pos = {props.info.categories == undefined ? false : props.info.categories}/> 
+                    </div>   
+                </div>
             </div>
             <div className="card__info">
                 <div className="card__case__name">
                     <h2><NavLink to={"/case?" + props.info.id}>{`${props.info.surname} ${props.info.firstName} ${props.info.secondName}`}</NavLink></h2>
                 </div>
                 <div className="card__description">
-                <p>{props.info.phone1}</p>
-                <p>{props.info.phone2}</p>
-                <p>{props.info.email}</p>
-                <p>{props.info.address}</p>
-                <p>{props.info.chanel}</p>
-                <p>{props.info.potreba}</p>
+                    <div className="card__description__phones">
+                        <a href={`"tel:"${props.info.phone1}`}>{props.info.phone1}</a>
+                        <a href={`"tel:"${props.info.phone2}`}>{props.info.phone2}</a>
+                    </div>
+                    <div className="card__description__email">
+                        <a href={`"mailto:"${props.info.email}`}>{props.info.email}</a>
+                    </div>
+                    <div className="card__description__potreba">
+                        <p>{props.info.potreba}</p>
+                    </div>
                 </div>
                 <div className="card__info__status">
-                    <div></div>
+                    <div>
+                        {props.info.numberDogovir.length > 0?<p>№ <b>{props.info.numberDogovir}</b></p>:""}
+                    </div>
                     <div className="card__info__status__date">
                         <p>{props.info.createdDate}</p>
                     </div>

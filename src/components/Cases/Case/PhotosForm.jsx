@@ -42,13 +42,21 @@ const PhotosForm = (props)=>{
            
             <form className="form__add__media" onSubmit={handleSubmit(onSubmit)}>
                 <h3>Додати медіа файли</h3>
-                <input multiple type="file" {...register("pic", { required: true })}/>
-                <input type="text" {...register('title', { required: true })} placeholder="Назва файлу"/>
-                <button>Надіслати</button>
+                <div className="form__inp__wr">
+                    <div className="form__inp__wr__upl">
+                        <input multiple type="file" {...register("pic", { required: true })}/>
+                    </div>
+                    <div className="form__inp__wr__grid">
+                        <input type="text" {...register('title', { required: true })} placeholder="Назва файлу"/>
+                        <button className="primary__btn">Надіслати</button>
+                    </div>
+                
                 <div>
                 {errors.pic && <span>Оберіть файл для завантаження</span>}
                 {errors.title && <span>Введіть ім'я завантаженого файлу</span>}
                 </div>
+                </div>
+                
             </form>
             <Loading timer={loading.timer} message={loading.message} active={loading.active}/>
         </>

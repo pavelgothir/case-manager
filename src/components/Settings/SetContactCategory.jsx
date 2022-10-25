@@ -77,7 +77,7 @@ const SetContactCategory = ()=>{
     const CategoriesData = ({category, index})=>{
         console.log(category)
         return (
-        <div className="set__categories__case__list__category">
+        <div className={`set__categories__case__list__category ${index % 2 == 0 ?  "arc":""}`}>
             <div className="set__categories__case__list__category__title">
                 <div className="category__circle" style={{backgroundColor: category.color}}></div>
                 <span>{category.text}</span>
@@ -107,11 +107,12 @@ const SetContactCategory = ()=>{
                 </div>
                 <div className="set__categories__case__control">
                     <div className="set__categories__case__control__inp">
-                        <input title="Нова категорія" type="text" id="set__categories__contact__control__inp" />
-                        <input title="Колір категорії" type="color" name="colorBackground__contact" id="colorBackground__contact" />
+                        <input title="Нова категорія" type="text" id="set__categories__contact__control__inp" placeholder={"Назва категорії"}/>
+                        <input title="Колір категорії" type="color" name="colorBackground__contact" id="colorBackground__contact" defaultValue={"#ffa800"}/>
                     </div>
                     <div className="set__categories__contact__control__btn">
-                        <button onClick={()=>{addNewCategory("set__categories__contact__control__inp")}}>Додати нову категорію</button>
+                        <button className="primary__btn padding20px"
+                        onClick={()=>{addNewCategory("set__categories__contact__control__inp")}}>Додати нову категорію</button>
                     </div>
                 </div>
                 <div className="set__categories__case__list">

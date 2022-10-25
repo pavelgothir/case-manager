@@ -12,34 +12,54 @@
 }
 .card{
     box-shadow: 0 0 10px 0 gray;
-    padding-bottom: 50px;
     position: relative;
-}
-.card__img > img{
-width: 100%;
+    border-radius: 10px;
+    background-color: #ded9e2;
 }
 .card__img{
-    height: 200px;
+    display: grid;
+    grid-template-columns: 1fr 30px;
+    column-gap: 30px;
+    width: 90%;
+    margin: auto;
+    margin-top: 15px;
+    max-height: 200px;
     overflow: hidden;
+}
+
+
+.card__img img{
+width: 100%;
+border-radius: 10px;
 }
 .card__case__name{
     text-align: center;
 }
 .card__info{
     margin-top: 30px;
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 20px;
 }
 .card__description{
     width: 90%;
     margin: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 20px;
 }
 .card__info__status{
-    position: absolute;
-    bottom: 0;
-    left: 5%;
     display: grid;
-    grid-template-columns: 30px 1fr;
+    grid-template-columns: 1fr 2fr;
     width: 90%;
     margin: auto;
+}
+.card__description__phones{
+    display: flex;
+    justify-content: space-between;
+}
+.card__description__email{
+    text-align: center;
 }
 .status__color{
     display: block;
@@ -65,14 +85,19 @@ width: 100%;
     background-color: black;
     border-radius: 50%;
     box-shadow:  0 0 5px 0 #00000077;
+    margin: auto;
 }
 .card__categories{
-    position: absolute;
-    top: -5px;
-    left: 0;
-    width: max-content;
-    display: flex;
-    column-gap: 10px;
+   display: flex;
+   flex-direction: column;
+   grid-template-columns: 1fr;
+   row-gap: 10px;
+   align-items: top;
+}
+.card__categories__inner{
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 20px;
 }
 @media (max-width:600px){
     .inner__cards {

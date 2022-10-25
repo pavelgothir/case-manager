@@ -10,9 +10,9 @@ const Active = ({elem})=>{
          <div className="connect__viewer__line">
          <div className="connect__viewer__data">
              <div>
-             <a href={`/case?${elem.connectId}`} >{elem.connectFor} Номер кейсу {elem.connectId}</a>
-                 <span>Дата створення зв'язку{elem.date}</span>  
-                 <span>Створив зв'язок <NavLink to={`/user?${elem.userId}`}>{elem.userName}</NavLink> </span>  
+                <p><a href={`/case?${elem.connectId}`} ><b>Зв'язок </b> {elem.connectFor} {elem.connectId}</a></p>
+                 <p><span><b>Дата створення зв'язку</b> {elem.date}</span></p>
+                 <p><span><b> Створив зв'язок</b> <NavLink to={`/user?${elem.userId}`}>{elem.userName}</NavLink> </span>  </p>
              </div>        
          </div>
      </div>
@@ -90,11 +90,13 @@ const Connections = ()=>{
                         }}>З'єднати</button>
                     </div>
                 </div>
-                <div className="connections__items">
+                <h3>Зв'язок створено</h3>
+                <div className="connections__items">      
                     {conFor}
                 </div>
             </div>
             <div className="connections__from">
+            <h3>Зв'язок від</h3>
                 <div className="connections__items">
                     {conFrom}
                 </div>
