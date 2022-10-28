@@ -1,113 +1,19 @@
-.form_contact {
+.wr__contact__list{
+  width: 90%;
+  margin: auto;
+  margin-top: 50px;
   display: grid;
-  grid-template-columns: 1fr;
-  /* width: 613px;
-  margin: 10px auto;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-items: center; */
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  column-gap: 30px;
+  row-gap: 30px;
 }
-
-.select_contact {
-  /* appearance: none; */
-  /* -moz-appearance: none; */
-  /* -webkit-appearance: none; */
-
-  padding-left: 5px;
-  height: 42px;
-  margin-bottom: 10px;
-  width: 300px;
-  max-width: 100%;
-  border: 1px solid black;
-  border-radius: 5px;
-
-  color: #757575;
+.contact_list{
+  padding: 15px;
+  border: solid 3px #b399cb;
+  border-radius: 15px;
 }
-
-.input_contact {
-  width: 300px;
-  max-width: 100%;
-  box-sizing: border-box;
-  height: 42px;
-  padding-left: 5px;
-  margin-bottom: 10px;
-  border: 1px solid black;
-  border-radius: 5px;
-}
-
-.textarea_contact {
-  width: 300px;
-  padding-left: 5px;
-  padding-top: 7px;
-  padding-bottom: 7px;
-  box-sizing: border-box;
-  font: inherit;
-  line-height: 16px;
-  letter-spacing: 0.01em;
-  resize: vertical;
-  margin-bottom: 12px;
-  border: 1px solid black;
-  border-radius: 5px;
-}
-
-.table {
-  width: 100%;
-  margin-bottom: 20px;
-  border: 5px solid #fff;
-  border-top: 5px solid #fff;
-  border-bottom: 3px solid #fff;
-  border-collapse: collapse;
-  outline: 3px solid #ffd300;
-  font-size: 15px;
-  background: #fff !important;
-}
-.table th {
-  font-weight: bold;
-  padding: 7px;
-  background: #ffd300;
-  border: none;
-  text-align: left;
-  font-size: 15px;
-  border-top: 3px solid #fff;
-  border-bottom: 3px solid #ffd300;
-}
-.table td {
-  padding: 7px;
-  border: none;
-  border-top: 3px solid #fff;
-  border-bottom: 3px solid #fff;
-  font-size: 15px;
-}
-.table tbody tr:nth-child(even) {
-  background: #f8f8f8 !important;
-}
-
-.contact_list {
+.contact_list_item_phones{
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 15px;
-  margin-bottom: 20px;
-  padding-bottom: 5px;
-  border-bottom: 1px solid black;
-}
-
-.contact_list_item {
-}
-
-.name {
-}
-
-.phone {
-}
-
-.categoty {
-}
-
-.info {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
+  justify-content: space-between;
 }

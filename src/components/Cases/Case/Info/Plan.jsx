@@ -6,7 +6,10 @@ import axios from "axios";
 import { useState } from "react";
 import ModalPlanDone from "./ModalPlanDone";
 import { serverAddres } from "../../../Functions/serverAddres";
+let ind;
 function elemPlanDelete(a){
+   // return console.log(a)
+
     let obj = {
         caseId:window.location.search.slice(1),
         id: localStorage.getItem("id"),
@@ -97,16 +100,16 @@ const Plan = ({plan,index})=>{
                                 document.querySelector(`#editPlan${index}`).classList.toggle("active");
                             }} />}
                             <img src={saveImg} alt="Зберегти" className="savePlan green__back" title="Зберегти" id={`savePlan${index}`} onClick = {()=>{
-                                 let ind = index;
+                                 ind = index;
                                  let a = {
                                     checked: document.querySelector(`#goodPlan${index}`).checked,
-                                    index: ind,
+                                    index: 0+ind,
                                     nameOfPlan: plan.nameOfPlan,
                                     desc: document.querySelector(`#desc__planID${index}`).value.replaceAll("'", "’").replace(/\n/g, "<br />"),
                                     start: document.querySelector(`#start__planID${index}`).value,
                                     end: document.querySelector(`#end__planID${index}`).value
                                  }
-                                 elemPlanDone(a)
+                                 elemPlanDone(a)    
                                  document.querySelector(`#goodPlan${index}`).disabled = true;
                                  document.querySelector(`#start__planID${index}`).disabled = true;
                                  document.querySelector(`#end__planID${index}`).disabled = true;
@@ -120,7 +123,7 @@ const Plan = ({plan,index})=>{
                         {plan.donePlan.done ? "" :  <img src={deleteImg} className="deletePlan red__back" id={`deletePlan${index}`} alt="Видалити" title="Видалити" onClick={()=>{
                             if(!window.confirm("Ви впевнені що хочете видалити пункт плану?")) return;
                             let a = {
-                                index: index,
+                                index: 0+index,
                                 nameOfPlan: plan.nameOfPlan
                              }
                             elemPlanDelete(a);

@@ -21,7 +21,7 @@ const ContactListItem = ({
   const handleEditContact = (e) => {
     toggleEditContact(id);
   };
-
+console.log(category)
   return (
     <>
       {isEditContact === id && (
@@ -44,7 +44,7 @@ const ContactListItem = ({
         <div className={`${style.contact_list_item} ${style.name}`}>{pib}</div>
         {phones.map(({ title, number }) => (
           <div
-            className={`${style.contact_list_item} ${style.phone}`}
+            className={`${style.contact_list_item_phones} ${style.phone}`}
             key={"phone" + number + id}
           >
             <div>{title}</div>

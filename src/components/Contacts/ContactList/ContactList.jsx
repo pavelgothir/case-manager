@@ -8,6 +8,7 @@ import React from "react";
 // import ContactForm from "../ContactForm/ContactForm";
 // import Modal from "../Modal/Modal";
 import ContactListItem from "../ContactListItem/ContactListItem";
+import s from "../Contacts.module.css"
 
 const ContactList = ({
   contacts,
@@ -17,7 +18,7 @@ const ContactList = ({
   toggleEditContact,
 }) => {
   return (
-    <div>
+    <div className={s.wr__contact__list}>
       {contacts.map((contact) => (
         <ContactListItem
           onDeleteContact={onDeleteContact}
