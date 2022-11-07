@@ -37,11 +37,12 @@ function saveUserSettings(arg){
     }
     for(let i = 0; i < masCategories.length; i++){
         specificationObj[document.querySelector(`#cat${i}`).value] = document.querySelector(`#cat${i}`).checked;
+        console.log(document.querySelector(`#cat${i}`).value)
     }
     for(let i = 0; i < masCategoriesContact.length; i++){
         specificationObj[document.querySelector(`#con${i}`).value] = document.querySelector(`#con${i}`).checked;
     }
-    console.log(specificationObj)
+   console.log(specificationObj)
 
 
     let obj = {
