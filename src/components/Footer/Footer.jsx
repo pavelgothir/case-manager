@@ -71,7 +71,7 @@ const Footer = ()=>{
                 <p className="copyright">© Case Manager | 2022 | powered by <a href="https://studio.itclub.in.ua">Studio IT Club</a></p>
                 <p className="footer__contact">Version - {version}</p>
                 {newVersion > version ? <p>Доступне оновлення<button onClick={()=>{updateCaseManager()}}>ОНОВИТИ</button> {newVersion}</p>:"У вас остання версія програми"}
-                
+                <p>Good -^_^-</p>
             </div>
         </footer>
     )
