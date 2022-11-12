@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 import { useForm } from "react-hook-form";
-import {axios} from "axios";
 import './Registration.css';
-import ModalInfo from "../Modals/ModalInfo";
 import { serverAddres } from "../Functions/serverAddres";
+import ModalSimple from "../Modals/ModalSimple";
 
 
-const Registration = ({show})=>{
-    const [modal, setModal] = useState({showModal:false, message:"123"})
+const Registration = ()=>{
+    const [modal, setModal] = useState(false)
+    const [modalInfo, setModalInfo] = useState(false);
 
     async function saveUser(data){
         let levelObj = {
@@ -34,6 +34,7 @@ const Registration = ({show})=>{
             statistics: false
         }
         data.level = levelObj;
+
         await fetch(serverAddres("user-register.php"),{
             method:"POST",
             header : {'Content-Type': 'application/json;charset=utf-8'},
@@ -42,11 +43,8 @@ const Registration = ({show})=>{
             .then(res => res.json())
             .then(data => {
                 if(Object.keys(data).includes("message")){
-                    setModal({
-                        showModal:true,
-                        message:data.message,
-                        marker:data.marker
-                    })
+                    setModal(true)
+                    setModalInfo(data)
                 }
             })
             .catch(rejected => {
@@ -57,7 +55,7 @@ const Registration = ({show})=>{
     }
     const {register,formState:{errors,isValid},handleSubmit,reset} = useForm({mode:'onChange'});
  
-    return show ?(
+    return(
             <form action="" className="reg__form" onSubmit={handleSubmit(saveUser)}>
                 
                 <div className="reg__block">
@@ -107,12 +105,12 @@ const Registration = ({show})=>{
                     <label></label>
                     <button className={`primary__btn ${!isValid ? 'active' : ""}`} disabled={!isValid}>Реєстрація</button>
                 </div>
-                {modal.showModal ? <ModalInfo info={modal} func={()=>{setModal({showModal:false, message:"123"})}}/> : null}
-
+                {modal ? <ModalSimple>
+                    <p>{modalInfo.message}</p>
+                    <button className="primary__btn padding20px" onClick={()=>{setModal(false)}}>ОК</button>
+                </ModalSimple> : ""}
             </form>
          
-    ):(
-        <></>
     )
 }
 export default Registration;

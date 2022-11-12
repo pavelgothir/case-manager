@@ -1,19 +1,14 @@
-.wr__contact__list{
-  width: 90%;
-  margin: auto;
-  margin-top: 50px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  column-gap: 30px;
-  row-gap: 30px;
+.section_contact {
+  position: relative;
+  min-width: 320px;
+  margin: 65px auto;
 }
-.contact_list{
-  padding: 15px;
-  border: solid 3px #b399cb;
-  border-radius: 15px;
+
+.responsive {
+  max-width: 1200px;
 }
-.contact_list_item_phones{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+
+.section_contact h2 {
+  font-size: 40px;
+  text-align: center;
 }

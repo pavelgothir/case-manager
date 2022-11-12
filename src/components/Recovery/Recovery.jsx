@@ -3,9 +3,9 @@ import axios from "axios";
 import { serverAddres } from "../Functions/serverAddres";
 import { useState } from "react";
 import { useEffect } from "react";
-import ModalInfo from "../Modals/ModalInfo";
 import { NavLink } from "react-router-dom";
 import "./recovery.css";
+import ModalSimple from "../Modals/ModalSimple";
 
 
 const Recovery = ()=>{
@@ -13,7 +13,8 @@ const Recovery = ()=>{
    const [recoveryPass, setRecoveryPass] = useState("")
    const [recoveryPassto, setRecoveryPassto] = useState("")
    const [recoveryError, setRecoveryError] = useState("")
-   const [modal, setModal] = useState({showModal:false})
+   const [modal, setModal] = useState(false)
+   const [modalInfo, setModalInfo] = useState(false);
     const [showForm, setShowForm] = useState(false);
     useEffect(()=>{
         axios({
@@ -31,7 +32,7 @@ const Recovery = ()=>{
     
     return !showForm ? (
         <div className="recovery__wrap">
-            Відновлення
+            Відновлення...
         </div>
     ):(
         <div className="wrap__rec__form">
@@ -54,7 +55,8 @@ const Recovery = ()=>{
                 <p>{recoveryError}</p>
             </div>
             <div>
-                 <button onClick={()=>{
+                 <button className="primary__btn"
+                 onClick={()=>{
                     if(recoveryPass !== recoveryPassto){
                         setRecoveryError("Паролі не збігаються");
                         return
@@ -73,25 +75,28 @@ const Recovery = ()=>{
                     })
                     .then((data)=>{ 
                         if(data.data.good){
-                            setModal({
+                            setModalInfo({
                                 showModal:true,
                                 message:data.data.message,
                                 marker:"green"
                             })
                         }else{
-                            setModal({
+                            setModalInfo({
                                 showModal:true,
                                 message:data.data.message,
                                 marker:"red"
                             })
-                        }      
+                        } 
+                        setModal(true)     
                     })
                     .catch((error)=>console.log(error))  
             }}>Надіслати запит</button>
             </div>
-            <ModalInfo info = {modal} func = {()=>{
+            {modal ? <ModalSimple>
+                <p>{modalInfo.message}</p>
                 <NavLink to = "/login">Перейти до авторизації</NavLink>
-            }}/>
+                <button className="primary__btn padding20px" onClick={()=>{setModal(false)}}>ОК</button>
+            </ModalSimple> : ""}
         </div>
     )
 }

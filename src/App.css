@@ -31,11 +31,11 @@ a{
 }
 
 .primary__btn.active {
-  box-shadow: 0 0 0px #b399cb;
+  box-shadow: 0 0 6px 0px #b399cb;
 }
 
 .primary__btn.active:hover {
-  box-shadow: 0 0 0px #b399cb;
+  box-shadow: 0 0 6px 0 #b399cb;
   border-radius: 15px;
 }
 
@@ -64,7 +64,7 @@ a{
   border: 2px solid #ffffff;
   cursor: pointer;
 }
-input[type=text],input[type=number]{
+input[type=text],input[type=number],input[type=email],input[type=password]{
   border: solid 3px #b399cb;
   border-radius: 7px;
   width: calc(100% - 21px);

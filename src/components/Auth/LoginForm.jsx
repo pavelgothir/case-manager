@@ -3,12 +3,12 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../store/Slices/userSlice";
-import ModalInfo from "../Modals/ModalInfo";
 import './Registration.css';
 import { serverAddres } from "../Functions/serverAddres";
+import ModalSimple from "../Modals/ModalSimple";
 const LoginForm = ({show})=>{
-    const [ymodal, setYmodal] = useState({showModal:false,message:""})
-
+    const [modal, setModal] = useState(false);
+    const [modalInfo, setModalInfo] = useState(false);
     const dispatch = useDispatch();
     async function getUser(data){
         await fetch(serverAddres("login.php"),{
@@ -19,9 +19,8 @@ const LoginForm = ({show})=>{
             .then(res => res.json())
             .then((data) => {
                 if("message" in data){
-                    console.log(data)
-                    data.showModal = true;
-                   return setYmodal(data)
+                    setModal(true)
+                   return setModalInfo(data)
                 }
                 localStorage.setItem("token", data.token)
                 localStorage.setItem("email", data.email)
@@ -46,8 +45,7 @@ const LoginForm = ({show})=>{
            
     }
     const {register,formState:{errors,isValid},handleSubmit,reset} = useForm({mode:'onChange'});
- 
-    return show ?(
+    return (
         <>
             <form action="" className="reg__form" onSubmit={handleSubmit(getUser)}>
                 <div className="reg__block">
@@ -64,11 +62,12 @@ const LoginForm = ({show})=>{
                     <button className={`primary__btn ${!isValid ? 'active' : ""}`} disabled={!isValid}>Авторизація</button>
                 </div>
             </form>
-            <ModalInfo info={ymodal} func = {()=>{setYmodal({showModal:false})}}/>
+            {modal ? <ModalSimple>
+                <p>{modalInfo.message}</p>
+                <button className="primary__btn padding20px" onClick={()=>{setModal(false)}}>ОК</button>
+            </ModalSimple> : ""}
         </>
        
-    ):(
-        <></>
     )
 }
 export default LoginForm;

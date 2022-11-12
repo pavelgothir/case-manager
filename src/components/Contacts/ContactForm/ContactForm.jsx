@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import style from "../Contacts.module.css";
+
+import style from "./ContactForm.module.css";
 import { fetchCategories } from "../../../services/contacts-api";
 import IconButton from "../IconButton/IconButton";
 import { ReactComponent as Add } from "../../../img/icons/add.svg";
 import { ReactComponent as Minus } from "../../../img/icons/minus.svg";
+import { ReactComponent as Close } from "../../../img/icons/close.svg";
 
 export class ContactForm extends Component {
   state = {
@@ -133,6 +135,14 @@ export class ContactForm extends Component {
 
     return (
       <form className={style.form_contact} onSubmit={this.handleSubmit}>
+        <IconButton
+          showModal={this.props.showModal}
+          onClick={this.props.toggleModal}
+          aria-label="Закрити"
+        >
+          <Close width="20" height="20" />
+        </IconButton>
+
         <label>
           <div>Прізвище Ім'я По батькові</div>
           <input
@@ -151,57 +161,54 @@ export class ContactForm extends Component {
             className={style.select_contact}
             value={category.map(({ text }) => text).toString()}
             onChange={this.handleChangeSelect}
+            required
           >
-            <option value="Виберіть одне із значень">
-              Виберіть одне із значень
-            </option>
+            <option value="">Виберіть одне із значень</option>
             {categori.map(({ text }, index) => (
-              <>
-                <option key={index} value={text}>
-                  {text}
-                </option>
-              </>
+              <option key={index} value={text}>
+                {text}
+              </option>
             ))}
           </select>
         </label>
 
-        <label>
-          {phones.map((phone, i) => (
-            <>
-              <div>Телефон</div>
-              <div key={phone.i}>
-                <input
-                  className={style.input_contact}
-                  name="title"
+        {phones.map((phone, i) => (
+          <label key={i}>
+            <div>
+              Телефон
+              {i ? (
+                <button
+                  className={style.btnClose}
                   data-index={i}
-                  value={phone.title}
-                  onChange={this.handleChangeTel}
-                  required
-                />
-                <input
-                  className={style.input_contact}
-                  name="number"
-                  data-index={i}
-                  value={phone.number}
-                  onChange={this.handleChangeTel}
-                  required
-                />
-                {i ? (
-                  // <button data-index={i} onClick={this.delPhone}>
-                  //   x
-                  // </button>
-                  <IconButton data-index={i} onClick={this.delPhone}>
-                    <Minus width="10" height="10" />
-                  </IconButton>
-                ) : null}
-              </div>
-            </>
-          ))}
-        </label>
-
-        <div>
-          <IconButton onClick={this.addPhone}>
-            <Add width="10" height="10" />
+                  onClick={this.delPhone}
+                >
+                  -
+                </button>
+              ) : null}
+            </div>
+            <div className={style.wraper_phone} key={phone.i}>
+              <input
+                className={style.input_contact}
+                name="title"
+                data-index={i}
+                value={phone.title}
+                onChange={this.handleChangeTel}
+                required
+              />
+              <input
+                className={style.input_contact}
+                name="number"
+                data-index={i}
+                value={phone.number}
+                onChange={this.handleChangeTel}
+                required
+              />
+            </div>
+          </label>
+        ))}
+        <div className={style.positionBtn}>
+          <IconButton onClick={this.addPhone} aria-label="Додати">
+            <Add width="20" height="20" />
           </IconButton>
         </div>
 
@@ -235,6 +242,7 @@ export class ContactForm extends Component {
             name="whoisit"
             value={whoisit}
             onChange={this.handleChangeInfo}
+            required
           />
         </label>
 
@@ -249,18 +257,21 @@ export class ContactForm extends Component {
           />
         </label>
 
-        <label>
-          <div>Додаткова інформація</div>
-          <textarea
-            className={style.textarea_contact}
-            value={info}
-            onChange={this.handleChangeText}
-          ></textarea>
-        </label>
+        <div className={style.wraper_dop_info}>
+          <label>
+            <div>Додаткова інформація</div>
+            <textarea
+              maxLength={10}
+              className={style.textarea_contact}
+              value={info}
+              onChange={this.handleChangeText}
+            ></textarea>
+          </label>
 
-        <button type="submit">
-          {this.state.id ? "Редагувати" : "Зберегти"}
-        </button>
+          <button type="submit">
+            {this.state.id ? "Редагувати" : "Зберегти"}
+          </button>
+        </div>
       </form>
     );
   }

@@ -33,7 +33,8 @@ function saveUserSettings(arg){
         loadDocument: document.querySelector("#load__document").checked,
         changeResponsibleCase: document.querySelector("#change__responsible__for__case").checked,
         createIndividualPlan: document.querySelector("#create__individual__plan").checked,
-        apiPdfCase: document.querySelector("#api__pdf__case").checked
+        apiPdfCase: document.querySelector("#api__pdf__case").checked,
+        apiUpdateProgram: document.querySelector("#api__update__program").checked
     }
     for(let i = 0; i < masCategories.length; i++){
         specificationObj[document.querySelector(`#cat${i}`).value] = document.querySelector(`#cat${i}`).checked;
@@ -137,6 +138,7 @@ const SpecificateForm = ({props, active,close}) =>{
             <div className="set__modal__content__labels">
             <h3>API</h3>
                <label htmlFor="api__pdf__case"><input defaultChecked={"apiPdfCase" in level ? level.apiPdfCase : false} type="checkbox" name="api__pdf__case" id="api__pdf__case" className="set__modal__content__common__className" /> Експорт кейса у ПДФ </label>
+               <label htmlFor="api__pdf__case"><input defaultChecked={"apiUpdateProgram" in level ? level.apiUpdateProgram : false} type="checkbox" name="api__update__program" id="api__update__program" className="set__modal__content__common__className" /> Оновлення програми </label>
             </div>
         </div>
     </div>
@@ -225,7 +227,9 @@ const SpecificateForm = ({props, active,close}) =>{
                 <div className="set__modal">
                    <h2>Налаштування прав доступу для {props.userName}</h2> 
                    <FormsSpecificate level={props.level} />
-                   <button className="modal__btn" onClick={()=>{saveUserSettings(props.id)}}>Зберегти</button>
+                   <div className="set__modal__btn">
+                        <button className="primary__btn" onClick={()=>{saveUserSettings(props.id)}}>Зберегти</button>
+                   </div>
                 </div>
             </div>
             

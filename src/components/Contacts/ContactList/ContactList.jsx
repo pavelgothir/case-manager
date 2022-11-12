@@ -1,14 +1,7 @@
 import React from "react";
-// import style from "../Contacts.module.css";
 
-// import IconButton from "../IconButton/IconButton";
-// import { ReactComponent as DeleteContact } from "../../../img/icons/delete.svg";
-// import { ReactComponent as ChangeContact } from "../../../img/icons/change.svg";
-// import { ReactComponent as Close } from "../../../img/icons/close.svg";
-// import ContactForm from "../ContactForm/ContactForm";
-// import Modal from "../Modal/Modal";
+import style from "./ContactList.module.css";
 import ContactListItem from "../ContactListItem/ContactListItem";
-import s from "../Contacts.module.css"
 
 const ContactList = ({
   contacts,
@@ -18,16 +11,25 @@ const ContactList = ({
   toggleEditContact,
 }) => {
   return (
-    <div className={s.wr__contact__list}>
-      {contacts.map((contact) => (
-        <ContactListItem
-          onDeleteContact={onDeleteContact}
-          {...contact}
-          key={"kard" + contact.id}
-          isEditContact={isEditContact}
-          toggleEditContact={toggleEditContact}
-          editContact={editContact}
-        />
+    <div className={style.wr__contact__list}>
+      {contacts.map((contact, indx) => (
+        <div key={indx}>
+          {indx !== 0 && contacts[indx - 1].pib[0] !== contact.pib[0] ? (
+            <h2>{contact.pib[0]}</h2>
+          ) : (
+            ""
+          )}
+          {indx === 0 ? <h2>{contact.pib[0]}</h2> : ""}
+          <ContactListItem
+            onDeleteContact={onDeleteContact}
+            {...contact}
+            indx={indx}
+            key={"kard" + contact.id}
+            isEditContact={isEditContact}
+            toggleEditContact={toggleEditContact}
+            editContact={editContact}
+          />
+        </div>
       ))}
     </div>
   );

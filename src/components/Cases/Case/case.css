@@ -119,9 +119,6 @@
         row-gap: 30px;
         margin-top: 50px;
     }
-    #root{
-        padding-bottom: 200px;
-    }
     .form__add__media {
         width: 90%;
         margin: auto;

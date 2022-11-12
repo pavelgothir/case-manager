@@ -35,20 +35,34 @@
 .reg__menu__item.active{
     color: gold;
 }
+.reg__form__recovery__btn.active{
+    color: gold;
+}
 .reg__menu__item{
     transition: all .3s;
+    font-weight: 900;
 }
 .reg__menu__item:hover{
     cursor: pointer;
     transform: scale(1.1);
 }
 .forget__form{
-    width: 200px;
+    width: 80%;
     margin: auto;
     display: grid;
-    margin-top: 150px;
+    margin-top: 30px;
     row-gap: 10px;
 }
 .forget__form h2{
     text-align: center;
+}
+.reg__form__recovery{
+    width: max-content;
+    margin: auto;
+}
+.reg__form__recovery__btn{
+    cursor: pointer;
+}
+.reg__form__recovery__btn:hover{
+    color: #00000099;
 }

@@ -1,32 +1,49 @@
 import React, { Component } from "react";
 
+import style from "./Contacts.module.css";
 import ContactList from "./ContactList/ContactList";
 import ContactForm from "./ContactForm/ContactForm";
 import Modal from "./Modal/Modal";
 import IconButton from "./IconButton/IconButton";
-import { ReactComponent as Close } from "../../img/icons/close.svg";
+// import { ReactComponent as Close } from "../../img/icons/close.svg";
+import { ReactComponent as Add } from "../../img/icons/add.svg";
 import {
   fetchContscts,
   addContact,
   deleteContact,
   editContact,
 } from "../../services/contacts-api";
+import Loadpic from "../Loading/Interactive/Loadpic";
 
 export class Contacts extends Component {
   state = {
     contacts: [],
     showModal: false,
     isEditContact: "",
+    isLoading: false,
+    elementHeight: 0,
   };
 
   componentDidMount() {
+    this.toggleLoading();
     fetchContscts()
-      .then((data) =>
+      .then((data) => {
+        let arreyContact = data.sort(function (a, b) {
+          let nameA = a.pib.toLowerCase(),
+            nameB = b.pib.toLowerCase();
+          if (nameA < nameB) return -1;
+          if (nameA > nameB) return 1;
+          return 0;
+        });
+
+        console.log(arreyContact);
+
         this.setState({
-          contacts: data,
-        })
-      )
-      .catch((error) => console.log(error));
+          contacts: arreyContact,
+        });
+      })
+      .catch((error) => console.log(error))
+      .finally(this.toggleLoading);
 
     // const contacts = localStorage.getItem("contacts");
     // const parsedContacts = JSON.parse(contacts);
@@ -62,15 +79,26 @@ export class Contacts extends Component {
       category,
     };
 
+    this.toggleLoading();
+
     addContact(contact)
       .then((data) => {
+        let arreyContact = data.sort(function (a, b) {
+          let nameA = a.pib.toLowerCase(),
+            nameB = b.pib.toLowerCase();
+          if (nameA < nameB) return -1;
+          if (nameA > nameB) return 1;
+          return 0;
+        });
+
         this.setState(() => ({
-          contacts: data,
+          contacts: arreyContact,
         }));
 
         this.toggleModal();
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
+      .finally(this.toggleLoading);
 
     // this.toggleModal();
   };
@@ -88,9 +116,12 @@ export class Contacts extends Component {
       contactID: contactId,
     };
 
+    this.toggleLoading();
+
     deleteContact(deleteСontact)
       .then((data) => alert(data.text))
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
+      .finally(this.toggleLoading);
 
     this.setState((prevState) => ({
       contacts: prevState.contacts.filter(
@@ -110,12 +141,15 @@ export class Contacts extends Component {
       contactID: id,
     };
 
+    this.toggleLoading();
+
     editContact(editedContact)
       .then((data) => {
         this.setState({ isEditContact: "" });
         alert(data.text);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
+      .finally(this.toggleLoading);
 
     this.setState((prevState) => ({
       contacts: [
@@ -130,36 +164,56 @@ export class Contacts extends Component {
     this.setState({ isEditContact: id });
   };
 
+  toggleLoading = () => {
+    this.setState((prevState) => ({
+      isLoading: !prevState.isLoading,
+    }));
+  };
+
   render() {
-    const { contacts, showModal, isEditContact } = this.state;
+    const { contacts, showModal, isEditContact, isLoading } = this.state;
 
     return (
       <>
-        <h2>Contacts</h2>
-        <button type="button" onClick={this.toggleModal}>
-          Додати новий контакт
-        </button>
-        <ContactList
-          isEditContact={isEditContact}
-          contacts={contacts}
-          onDeleteContact={this.deleteContact}
-          toggleEditContact={this.toggleEditContact}
-          editContact={this.editContact}
-          toggleModal={this.toggleModal}
-        />
+        {isLoading && <Loadpic show={"active"} />}
+        <section className={`${style.section_contact} ${style.responsive}`}>
+          <h2>Контакти</h2>
 
-        {showModal && (
-          <Modal onClose={this.toggleModal}>
-            <ContactForm onSubmit={this.addContact} />
-            <IconButton
-              showModal={showModal}
-              onClick={this.toggleModal}
-              aria-label="Закрити"
-            >
-              <Close width="40" height="40" />
-            </IconButton>
-          </Modal>
-        )}
+          <IconButton
+            onClick={this.toggleModal}
+            color={"#fcaf1d"}
+            position={true}
+            aria-label="Додати контакт"
+          >
+            <Add width="50" height="50" />
+          </IconButton>
+
+          <ContactList
+            isEditContact={isEditContact}
+            contacts={contacts}
+            onDeleteContact={this.deleteContact}
+            toggleEditContact={this.toggleEditContact}
+            editContact={this.editContact}
+            toggleModal={this.toggleModal}
+          />
+
+          {showModal && (
+            <Modal onClose={this.toggleModal}>
+              <ContactForm
+                onSubmit={this.addContact}
+                toggleModal={this.toggleModal}
+                showModal={showModal}
+              />
+              {/* <IconButton
+                showModal={showModal}
+                onClick={this.toggleModal}
+                aria-label="Закрити"
+              >
+                <Close width="40" height="40" />
+              </IconButton> */}
+            </Modal>
+          )}
+        </section>
       </>
     );
   }
