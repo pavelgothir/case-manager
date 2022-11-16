@@ -11,7 +11,6 @@ import Settings from "../Settings/Settings";
 import Recovery from "../Recovery/Recovery";
 import Contacts from "../Contacts/Contacts";
 
-
 const localToken = localStorage.getItem("token");
 
 const MainContent = ()=>{

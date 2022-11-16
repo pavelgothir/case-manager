@@ -4,25 +4,21 @@ import {serverAddres} from "./../../Functions/serverAddres";
 import "./add-case.css";
 
 let categoriesStr = "";
-let masCategories = [];
 const send = async(data)=>{
     
     data.userId = localStorage.getItem("id");
-    console.log(data);
-    await fetch(serverAddres("add-first-case.php"),{
-        method:"POST",
-        header : {'Content-Type': 'application/json;charset=utf-8'},
-        body:  JSON.stringify(data)
-    })
-        .then(res => res.text())
-        .then(data => {
-            console.log(data)
-            window.location.href = "/case?"+ data;
-            alert("Кейс успішно створено")
+        axios({
+            url: serverAddres("add-first-case.php"),
+            method: "POST",
+            header : {'Content-Type': 'application/json;charset=utf-8'},
+            data : JSON.stringify(data),
         })
-        .catch(rejected => {
-            console.log(rejected);
-        });
+        .then((data)=>{ 
+            if(data.data?.message) return alert(data.data.message)
+            window.location.href = "/case?"+ data;
+            alert("Кейс успішно створено")     
+        })
+        .catch((error)=>console.log(error)) 
 }
 function checkAddCase(){
     let errors = 0;
