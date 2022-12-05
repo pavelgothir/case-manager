@@ -106,7 +106,7 @@ function addModalLine(){
     `;
     document.getElementById("planInner").append(div)
 }
-const PlanActive = ({info})=>{
+const PlanActive = ({info,level})=>{
     const [openWindowCreate, setOpenWindowCreate] = useState(false);
     const [plan, setPlan] = useState(0);
     console.log(info)
@@ -192,20 +192,20 @@ const WindowCreate = ()=>{
                 <select name="selectPlan" id="selectPlan" onClick={addOptions} onChange={changePlan}>
                     <option value={info[plan]}>{info[plan].nameOfPlan}</option>
                 </select>
-                <button className="primary__btn" onClick={()=>{setOpenWindowCreate(true)}}>Створити план</button>
+                {level ? <button className="primary__btn" onClick={()=>{setOpenWindowCreate(true)}}>Створити план</button> : ""}
             </div>
             <div className="plan__active__default__data">
                 <div className="plan__active__default__data__name"></div>
                 <div className="plan__active__default__data__date"></div>
             </div>
-           <Plan plan={info[plan]} ind={plan} />
+           <Plan plan={info[plan]} ind={plan} level = {level}/>
            <WindowCreate/>
         </div>
     ):(
         <div className="not__active__plan">
             <h2>Індивідуальний план</h2>
             <p>Ще не має індивідуального плану</p>
-            <button className="primary__btn" onClick={()=>{setOpenWindowCreate(true)}}>Створити план</button>
+            {level ? <button className="primary__btn" onClick={()=>{setOpenWindowCreate(true)}}>Створити план</button> : ""}
             <WindowCreate/>
         </div>
     )

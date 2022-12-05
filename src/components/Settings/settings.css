@@ -262,3 +262,8 @@ input[type="color"]{
     column-gap: 10px;
     align-items: center;
 }
+@media (max-width:600px) {
+    .settings__page{
+        grid-template-columns: 1fr;
+    }
+}

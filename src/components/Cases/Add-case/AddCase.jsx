@@ -7,6 +7,7 @@ let categoriesStr = "";
 const send = async(data)=>{
     
     data.userId = localStorage.getItem("id");
+   // return console.log(data);
         axios({
             url: serverAddres("add-first-case.php"),
             method: "POST",
@@ -14,9 +15,10 @@ const send = async(data)=>{
             data : JSON.stringify(data),
         })
         .then((data)=>{ 
+           // return console.log(data.data)
             if(data.data?.message) return alert(data.data.message)
-            window.location.href = "/case?"+ data;
-            alert("Кейс успішно створено")     
+            window.location.href = "/case?"+ data.data;
+            alert("Кейс успішно створено " + data.data)     
         })
         .catch((error)=>console.log(error)) 
 }
@@ -105,7 +107,7 @@ const AddCase = ()=>{
         })
         .then((data)=>{ 
            console.log(data.data)
-           setCategoriesCase(data.data);       
+           setCategoriesCase(data.data.mas);       
         })
         .catch((error)=>console.log(error)) 
     },[])

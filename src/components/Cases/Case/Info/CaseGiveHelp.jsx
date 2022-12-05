@@ -25,7 +25,7 @@ const Active = ({elem})=>{
     )
 }
 
-const CaseGiveHelp = ()=>{
+const CaseGiveHelp = ({level})=>{
     function addHelp(){
         let mess = document.querySelector("#mess__help").value.replaceAll("'", "’").replace(/\n/g, "<br />");
         let dateHelp = document.querySelector("#date__help").value;
@@ -84,7 +84,7 @@ const CaseGiveHelp = ()=>{
                     <div className="helpes__viewer">
                        {active}
                     </div>
-                    <div className="helpes__mes__wrap">
+                    {level ? <div className="helpes__mes__wrap">
                         <div className="helpes__mes__inner">
                         <div className="helpes__btn">
                                     <input type="date" name="date__help" id="date__help" />
@@ -97,7 +97,7 @@ const CaseGiveHelp = ()=>{
                           
                             
                         </div>
-                    </div>
+                    </div>:""}
                 </div>
             </div>
     )

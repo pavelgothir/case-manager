@@ -19,7 +19,9 @@ const ContactList = ({
           ) : (
             ""
           )}
+
           {indx === 0 ? <h2>{contact.pib[0]}</h2> : ""}
+
           <ContactListItem
             onDeleteContact={onDeleteContact}
             {...contact}

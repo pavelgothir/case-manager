@@ -5,19 +5,25 @@ import Search from "./Search";
 import defoltProfile from "../../../img/default_profile.png";
 import { useState } from "react";
 
-const MenuProfile = ()=>{
-    const [profileMenu, setProfileMenu] = useState(false);
-    return(
-        <div className="menu__profile__wrap">
-            <img src={localStorage.profilePhoto == 'null' ? defoltProfile : localStorage.profilePhoto } onClick = {()=>{
-                setProfileMenu(!profileMenu)
-            }} alt="" />
-            
-            {profileMenu ? <div className="menu__profile__inner">
-                <ShowLogin />
-            </div> : <></>}
-        </div>
-        
-    )
-}
+const MenuProfile = () => {
+  const [profileMenu, setProfileMenu] = useState(false);
+  const togleProfileMeny = () => {
+    setProfileMenu(!profileMenu);
+  };
+  return (
+    <div className="menu__profile__wrap">
+      <img
+        src={
+          localStorage.profilePhoto == "null"
+            ? defoltProfile
+            : localStorage.profilePhoto
+        }
+        onClick={togleProfileMeny}
+        alt=""
+      />
+
+      {profileMenu ? <ShowLogin togleProfileMeny={togleProfileMeny} /> : <></>}
+    </div>
+  );
+};
 export default MenuProfile;

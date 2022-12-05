@@ -10,8 +10,8 @@ const Home = ()=>{
     
     return isAuth ? (
         <div>
-            <h1 className={s.text__center}>Кейси</h1>
-            <Cases />
+            <h1 className={s.text__center}>ГОЛОВНА</h1>
+            
         </div>
     ) : (
         <div className={s.home}>

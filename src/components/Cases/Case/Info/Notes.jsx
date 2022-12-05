@@ -25,7 +25,7 @@ const Active = ({elem})=>{
     )
 }
 
-const Notes = ({notes})=>{
+const Notes = ({notes,level})=>{
     function addNote(){
         let mess = document.querySelector("#mess__note").value.replaceAll("'", "’").replace(/\n/g, "<br />");
         if(mess == "") return alert("Ви не ввели повідомлення")
@@ -64,14 +64,14 @@ const Notes = ({notes})=>{
                     <div className="notes__viewer">
                        {active}
                     </div>
-                    <div className="notes__mes__wrap">
+                    {level ?<div className="notes__mes__wrap">
                         <div className="notes__mes__inner">
-                            <div className="notes__field">
+                             <div className="notes__field">
                                 <textarea name="" id="mess__note" cols="30" rows="5"></textarea>
                                 <img src={imgSend} onClick={addNote} alt="" />
                             </div>
                         </div>
-                    </div>
+                    </div>:""}
                 </div>
             </div>
         </>

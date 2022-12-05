@@ -10,6 +10,7 @@ const Footer = ()=>{
 
     const [version, setVersion] = useState(false)
     const [newVersion, setNewVersion] = useState(false)
+    const [right, setRight] = useState(false)
     function checkVersion(){
         let obj = {
             id: localStorage.getItem("id"),
@@ -40,9 +41,9 @@ const Footer = ()=>{
         })
         .then((data)=>{ 
             console.log(data)
+            if(!data.data?.message) setRight(true)
             setVersion(data.data.version);
-            checkVersion()
-          // window.location.reload()        
+            checkVersion()    
         })
         .catch((error)=>console.log(error)) 
     },[])
@@ -70,7 +71,10 @@ const Footer = ()=>{
                 <p className="footer__contact">Якшо виникли проблеми, пропозиції - пишіть на поштову скриньку <a href="mailto:teenitclub@gmail.com">teenitclub@gmail.com</a></p>
                 <p className="footer__contact">Якшо питання супер термінове дзвоніть за номером <a href="tel:+380932080760">+380932080760</a></p>
                 <p className="footer__contact">Version - {version}</p>
-                {newVersion > version ? <p>Доступне оновлення<button onClick={()=>{updateCaseManager()}}>ОНОВИТИ</button> {newVersion}</p>:"У вас остання версія програми"}
+                {newVersion > version ? <p>Доступне оновлення {newVersion}</p>:<p>У вас остання версія програми</p>}
+                {newVersion > version && right ? <button onClick={()=>{
+                    updateCaseManager();
+                }}>Оновити програму</button> : ""}
                 <p className="copyright">© Case Manager | 2022 | powered by <a href="https://studio.itclub.in.ua">Studio IT Club</a></p>
             </div>
         </footer>

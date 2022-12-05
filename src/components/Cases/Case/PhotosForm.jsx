@@ -7,7 +7,7 @@ import { serverAddres } from "../../Functions/serverAddres";
 
 
 
-const PhotosForm = (props)=>{
+const PhotosForm = ({show})=>{
     const {register, handleSubmit,formState: { errors }} = useForm();
     const [loading, setLoading] = useState({timer:"",message:"",active:""});
     const onSubmit = (data) =>{
@@ -37,7 +37,8 @@ const PhotosForm = (props)=>{
         })
         .catch((error)=>console.log(error))     
     } 
-    return(
+    
+    return show ?(
         <>
            
             <form className="form__add__media" onSubmit={handleSubmit(onSubmit)}>
@@ -60,6 +61,8 @@ const PhotosForm = (props)=>{
             </form>
             <Loading timer={loading.timer} message={loading.message} active={loading.active}/>
         </>
+    ):(
+        <></>
     )
 }
 

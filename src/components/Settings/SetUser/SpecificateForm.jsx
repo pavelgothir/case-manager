@@ -7,72 +7,83 @@ let categoriesStr = "";
 let masCategories = [];
 let categoriesStrContact = "";
 let masCategoriesContact = [];
-function saveUserSettings(arg){ 
-    console.log(arg)
-
-    let specificationObj = {
-        ownCab: document.querySelector("#own__cab").checked,
-        cases: document.querySelector("#cases").checked,
-        addCase: document.querySelector("#add__case").checked,
-        contacts: document.querySelector("#contacts").checked,
-        searchCasesUsers: document.querySelector("#search__cases__users").checked,
-        statistics: document.querySelector("#statistics").checked,
-        case: document.querySelector("#case").checked,
-        history: document.querySelector("#history").checked,
-        reports: document.querySelector("#reports").checked,
-        createCase: document.querySelector("#createCase").checked,
-        settings: document.querySelector("#settings").checked,
-        activeNewUser: document.querySelector("#active__new__users").checked,
-        deactivateUsers: document.querySelector("#deactive__users").checked,
-        specificationUsers: document.querySelector("#distribution__of__users__rights").checked,
-        addEditCategoriesCase: document.querySelector("#add__and__edit__categories__of__cases").checked,
-        addEditCategoriesUser: document.querySelector("#add__and__edit__categories__of__users").checked,
-        editSomeonesCase: document.querySelector("#edit__someones__case").checked,
-        editOwnCase: document.querySelector("#edit__own__case").checked,
-        loadPhotoVideo: document.querySelector("#load__photo__video").checked,
-        loadDocument: document.querySelector("#load__document").checked,
-        changeResponsibleCase: document.querySelector("#change__responsible__for__case").checked,
-        createIndividualPlan: document.querySelector("#create__individual__plan").checked,
-        apiPdfCase: document.querySelector("#api__pdf__case").checked,
-        apiUpdateProgram: document.querySelector("#api__update__program").checked
-    }
-    for(let i = 0; i < masCategories.length; i++){
-        specificationObj[document.querySelector(`#cat${i}`).value] = document.querySelector(`#cat${i}`).checked;
-        console.log(document.querySelector(`#cat${i}`).value)
-    }
-    for(let i = 0; i < masCategoriesContact.length; i++){
-        specificationObj[document.querySelector(`#con${i}`).value] = document.querySelector(`#con${i}`).checked;
-    }
-   console.log(specificationObj)
+let categoriesStrAccess ="";
+let masCategoriesAccess = [];
 
 
-    let obj = {
-        id: localStorage.getItem("id"),
-        token: localStorage.getItem("token"),
-        settings: specificationObj,
-        userId: arg
-    }
-    //return console.log(obj)
-    axios({
-        url: serverAddres("user/set-user-settings.php"),
-        method: "POST",
-        header : {'Content-Type': 'application/json;charset=utf-8'},
-        data : JSON.stringify(obj),
-    })
-    .then((data)=>{ 
-        console.log(data.data)
-      // window.location.reload()        
-    })
-    .catch((error)=>console.log(error)) 
-
-
-
-}
 const SpecificateForm = ({props, active,close}) =>{
     const [categoriesCase, setCategoriesCase] = useState(false);
     const [categoriesContact, setCategoriesContact] = useState(false);
-
+    const [categoriesAccess, setCategoriesAccess] = useState(false);
     
+    function saveUserSettings(arg){ 
+        console.log(arg)
+    
+        let specificationObj = {
+            ownCab: document.querySelector("#own__cab").checked,
+            cases: document.querySelector("#cases").checked,
+            addCase: document.querySelector("#add__case").checked,
+            contacts: document.querySelector("#contacts").checked,
+            searchCasesUsers: document.querySelector("#search__cases__users").checked,
+            statistics: document.querySelector("#statistics").checked,
+            case: document.querySelector("#case").checked,
+            history: document.querySelector("#history").checked,
+            reports: document.querySelector("#reports").checked,
+            createCase: document.querySelector("#createCase").checked,
+            settings: document.querySelector("#settings").checked,
+            activeNewUser: document.querySelector("#active__new__users").checked,
+            deactivateUsers: document.querySelector("#deactive__users").checked,
+            specificationUsers: document.querySelector("#distribution__of__users__rights").checked,
+            addEditCategoriesCase: document.querySelector("#add__and__edit__categories__of__cases").checked,
+            addEditCategoriesUser: document.querySelector("#add__and__edit__categories__of__users").checked,
+            editSomeonesCase: document.querySelector("#edit__someones__case").checked,
+            editOwnCase: document.querySelector("#edit__own__case").checked,
+            loadCaseFiles: document.querySelector("#loadCaseFiles").checked,
+            changeResponsibleCase: document.querySelector("#change__responsible__for__case").checked,
+            createIndividualPlan: document.querySelector("#create__individual__plan").checked,
+            apiPdfCase: document.querySelector("#api__pdf__case").checked,
+            apiUpdateProgram: document.querySelector("#api__update__program").checked,
+            yourCases: document.querySelector("#yourCases").checked,
+            createContact:document.querySelector("#createContact").checked,
+            connectionsCase:document.querySelector("#connectionsCase").checked,
+            notesCase:document.querySelector("#notesCase").checked,
+            helpesCase:document.querySelector("#helpesCase").checked
+        }
+        for(let i = 0; i < masCategories.length; i++){
+            specificationObj[document.querySelector(`#cat${i}`).value] = document.querySelector(`#cat${i}`).checked;
+        }
+        for(let i = 0; i < masCategoriesContact.length; i++){
+            specificationObj[document.querySelector(`#con${i}`).value] = document.querySelector(`#con${i}`).checked;
+        }
+        for(let i = 0; i < masCategoriesAccess.length; i++){
+            specificationObj[document.querySelector(`#acs${i}`).value] = document.querySelector(`#acs${i}`).checked;
+        }
+       console.log(specificationObj)
+    
+    
+        let obj = {
+            id: localStorage.getItem("id"),
+            token: localStorage.getItem("token"),
+            settings: specificationObj,
+            userId: arg
+        }
+        //return console.log(obj)
+        axios({
+            url: serverAddres("user/set-user-settings.php"),
+            method: "POST",
+            header : {'Content-Type': 'application/json;charset=utf-8'},
+            data : JSON.stringify(obj),
+        })
+        .then((data)=>{ 
+            console.log(data.data)
+            alert(data.data.message)
+            window.location.reload()        
+        })
+        .catch((error)=>console.log(error)) 
+    
+    
+    
+    }
 
     const FormsSpecificate = ({level})=>{
         console.log(level)
@@ -106,9 +117,17 @@ const SpecificateForm = ({props, active,close}) =>{
         </div>
         <div className="set__modal__content__categories__of__cases  set__cont">
             <div className="set__modal__content__labels">
-            <h3>Категорії кейсів, які можна створювати</h3>
+            <h3>Категорії контактів, які можна створювати</h3>
                         {CategoriesMasContact(categoriesContact, level)}
                         {categoriesStrContact}
+            </div>
+        </div>
+        <div className="set__modal__content__categories__of__cases  set__cont">
+            <div className="set__modal__content__labels">
+            <h3>Доступ до кейсів</h3>
+                <label htmlFor="yourCases"><input defaultChecked={"yourCases" in level ? level.yourCases : false} type= "checkbox" name="yourCases" id="yourCases" className="set__modal__content__common__className" /> До власних</label>
+                        {CategoriesMasAccess(categoriesAccess, level)}
+                        {categoriesStrAccess}
             </div>
         </div>
         <div className="set__modal__content__page__settings  set__cont">
@@ -120,6 +139,7 @@ const SpecificateForm = ({props, active,close}) =>{
                 <label htmlFor="distribution__of__users__rights"><input defaultChecked={"specificationUsers" in level ? level.specificationUsers : false} type="checkbox" name="distribution__of__users__rights" id="distribution__of__users__rights" className="set__modal__content__common__className" /> Розподіл прав доступу</label>
                 <label htmlFor="add__and__edit__categories__of__cases"><input defaultChecked={"addEditCategoriesCase" in level ? level.addEditCategoriesCase : false} type="checkbox" name="add__and__edit__categories__of__cases" id="add__and__edit__categories__of__cases" className="set__modal__content__common__className" /> Додавати і редагувати категорії кейсів</label>
                 <label htmlFor="add__and__edit__categories__of__users"><input defaultChecked={"addEditCategoriesUser" in level ? level.addEditCategoriesUser : false} type="checkbox" name="add__and__edit__categories__of__users" id="add__and__edit__categories__of__users" className="set__modal__content__common__className" /> Додавати і редагувати категорії користувачів</label>
+                <label htmlFor="createContact"><input defaultChecked={"createContact" in level ? level.createContact : false} type="checkbox" name="createContact" id="createContact" className="set__modal__content__common__className" /> Додавати і редагувати категорії контактів</label>
             </div>
         </div>
         <div className="set__modal__content__case  set__cont">  
@@ -128,17 +148,19 @@ const SpecificateForm = ({props, active,close}) =>{
                 <label htmlFor="edit__someones__case"><input defaultChecked={"editSomeonesCase" in level ? level.editSomeonesCase : false} type="checkbox" name="edit__someones__case" id="edit__someones__case" className="set__modal__content__common__className" /> Редагувати чужий кейс</label>
                 <label htmlFor="createCase"><input defaultChecked={"createCase" in level ? level.createCase : false} type="checkbox" name="createCase" id="createCase" className="set__modal__content__common__className" /> Створення кейсу</label>
                 <label htmlFor="edit__own__case"><input defaultChecked={"editOwnCase" in level ? level.editOwnCase : false} type="checkbox" name="edit__own__case" id="edit__own__case" className="set__modal__content__common__className" /> Редагувати свій кейс</label>
-                <label htmlFor="load__photo__video"><input defaultChecked={"loadPhotoVideo" in level ? level.loadPhotoVideo : false} type="checkbox" name="load__photo__video" id="load__photo__video" className="set__modal__content__common__className" /> Завантаження фото/відео</label>
-                <label htmlFor="load__document"><input defaultChecked={"loadDocument" in level ? level.loadDocument : false} type="checkbox" name="load__document" id="load__document" className="set__modal__content__common__className" /> Завантаження документів</label>
+                <label htmlFor="loadCaseFiles"><input defaultChecked={"loadCaseFiles" in level ? level.loadCaseFiles : false} type="checkbox" name="loadCaseFiles" id="loadCaseFiles" className="set__modal__content__common__className" /> Завантаження файлів</label>
                 <label htmlFor="change__responsible__for__case"><input defaultChecked={"changeResponsibleCase" in level ? level.changeResponsibleCase : false} type="checkbox" name="change__responsible__for__case" id="change__responsible__for__case" className="set__modal__content__common__className" /> Змінити відповідального за кейс/передати свій кейс</label>
                 <label htmlFor="create__individual__plan"><input defaultChecked={"createIndividualPlan" in level ? level.createIndividualPlan : false} type="checkbox" name="create__individual__plan" id="create__individual__plan" className="set__modal__content__common__className" /> Створення індивідуального плану</label>
+                <label htmlFor="connectionsCase"><input defaultChecked={"connectionsCase" in level ? level.connectionsCase : false} type="checkbox" name="connectionsCase" id="connectionsCase" className="set__modal__content__common__className" /> Створення зв'язків між кейсами</label>
+                <label htmlFor="notesCase"><input defaultChecked={"notesCase" in level ? level.notesCase : false} type="checkbox" name="notesCase" id="notesCase" className="set__modal__content__common__className" /> Додавати нотатки</label>
+                <label htmlFor="helpesCase"><input defaultChecked={"helpesCase" in level ? level.helpesCase : false} type="checkbox" name="helpesCase" id="helpesCase" className="set__modal__content__common__className" /> Додавати надану допомогу</label>
             </div>
         </div>
         <div className="set__modal__api__case  set__cont">  
             <div className="set__modal__content__labels">
             <h3>API</h3>
                <label htmlFor="api__pdf__case"><input defaultChecked={"apiPdfCase" in level ? level.apiPdfCase : false} type="checkbox" name="api__pdf__case" id="api__pdf__case" className="set__modal__content__common__className" /> Експорт кейса у ПДФ </label>
-               <label htmlFor="api__pdf__case"><input defaultChecked={"apiUpdateProgram" in level ? level.apiUpdateProgram : false} type="checkbox" name="api__update__program" id="api__update__program" className="set__modal__content__common__className" /> Оновлення програми </label>
+               <label htmlFor="api__update__program"><input defaultChecked={"apiUpdateProgram" in level ? level.apiUpdateProgram : false} type="checkbox" name="api__update__program" id="api__update__program" className="set__modal__content__common__className" /> Оновлення програми </label>
             </div>
         </div>
     </div>
@@ -158,8 +180,10 @@ const SpecificateForm = ({props, active,close}) =>{
         })
         .then((data)=>{ 
             console.log(data)
-           setCategoriesCase(data.data);
-           masCategories = data.data;
+           setCategoriesCase(data.data.mas);
+           setCategoriesAccess(data.data.mas);
+           masCategories = data.data.mas;
+           masCategoriesAccess = data.data.mas;
           // window.location.reload()        
         })
         .catch((error)=>console.log(error)) 
@@ -194,9 +218,8 @@ const SpecificateForm = ({props, active,close}) =>{
         })
         .then((data)=>{ 
             console.log(data)
-           setCategoriesContact(data.data);
-           masCategoriesContact = data.data;
-          // window.location.reload()        
+           setCategoriesContact(data.data.mas);
+           masCategoriesContact = data.data;  
         })
         .catch((error)=>console.log(error)) 
     },[])
@@ -207,11 +230,26 @@ const SpecificateForm = ({props, active,close}) =>{
             </label>
         )
     }
+    const CategoriesDataAccess = ({category, index, lf})=>{
+        console.log(category,index,lf)
+        return (
+            <label>
+                <input defaultChecked={"acs"+category.value in lf ? lf["acs"+category.value] : false} type="checkbox" value={"acs"+category.value} id={`acs${index}`} /> {category.text}
+            </label>
+        )
+    }
     const CategoriesMasContact = (pos, lf)=>{
         console.log(pos)
         if(pos.length < 1 || pos == false) return;
                 categoriesStrContact =  pos.map((post,index)=>{
                 return <CategoriesDataContact lf={lf} key={index} category={post} index={index}/>
+        })  
+    } 
+    const CategoriesMasAccess = (pos, lf)=>{
+        console.log(pos)
+        if(pos.length < 1 || pos == false) return;
+                categoriesStrAccess =  pos.map((post,index)=>{
+                return <CategoriesDataAccess lf={lf} key={index} category={post} index={index}/>
         })  
     } 
 

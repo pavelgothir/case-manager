@@ -204,13 +204,6 @@ export class Contacts extends Component {
                 toggleModal={this.toggleModal}
                 showModal={showModal}
               />
-              {/* <IconButton
-                showModal={showModal}
-                onClick={this.toggleModal}
-                aria-label="Закрити"
-              >
-                <Close width="40" height="40" />
-              </IconButton> */}
             </Modal>
           )}
         </section>

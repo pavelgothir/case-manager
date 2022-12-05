@@ -112,7 +112,7 @@ const EditCaseInfo = ({caseInfo, active, categoriesMas, close})=>{
         })
         .then((data)=>{ 
            console.log(data.data)
-           setCategoriesCase(data.data);
+           setCategoriesCase(data.data.mas);
            //masCategories = data.data;
           // window.location.reload()        
         })

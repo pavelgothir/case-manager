@@ -2,10 +2,12 @@ import React, {useEffect, useState} from "react";
 import imgDelete from "./../../img/icons/delete-48.png";
 import axios from "axios";
 import { serverAddres } from "../Functions/serverAddres";
+import LoadingPage from "../Loading/LoadingPage";
 
 let categoriesStr = "";
 const SetContactCategory = ()=>{
     const [categoriesContact, setCategoriesContact] = useState(false)
+    const [page, setPage] = useState({loading:true,effload:false,message:""})
     useEffect(()=>{
         let obj = {
             id: localStorage.getItem("id"),
@@ -18,15 +20,23 @@ const SetContactCategory = ()=>{
             data : JSON.stringify(obj),
         })
         .then((data)=>{ 
-            console.log(data)
-           setCategoriesContact(data.data);
+          //  return console.log(data.data)
+            if(data.data?.message){
+              setPage({loading:true,effload:false,message:data.data.message})
+              setCategoriesContact(data.data.mas);  
+            }else{
+                setCategoriesContact(data.data.mas);
+                setPage({loading:false,effload:true})
+            }
           // window.location.reload()        
         })
         .catch((error)=>console.log(error)) 
     },[])
         function transliterate(key){
+
             var a = {"Ё":"YO","Й":"I","Ц":"TS","У":"U","К":"K","Е":"E","Н":"N","Г":"G","Ш":"SH","Щ":"SCH","З":"Z","Х":"H","Ъ":"","ё":"yo","й":"i","ц":"ts","у":"u","к":"k","е":"e","н":"n","г":"g","ш":"sh","щ":"sch","з":"z","х":"h","ъ":"","Ф":"F","Ы":"I","В":"V","А":"a","П":"P","Р":"R","О":"O","Л":"L","Д":"D","Ж":"ZH","Э":"E","ф":"f","ы":"i","в":"v","а":"a","п":"p","р":"r","о":"o","л":"l","д":"d","ж":"zh","э":"e","Я":"Ya","Ч":"CH","С":"S","М":"M","И":"I","Т":"T","Ь":"i","Б":"B","Ю":"YU","я":"ya","ч":"ch","с":"s","м":"m","и":"i","т":"t","ь":"i","ъ":"i","Ъ":"i","'":"i","б":"b","ю":"yu"," ":"_"};
-          return key.split('').map(function (char) { 
+            key = key.replace(/ /g,'');
+            return key.split('').map(function (char) { 
             return a[char] || char; 
           }).join("");
         }
@@ -83,7 +93,9 @@ const SetContactCategory = ()=>{
                 <span>{category.text}</span>
             </div>
             <div className="set__categories__case__control">
-                <img src={imgDelete} alt="" onClick={()=>{deleteCategory(category)}}/>
+                <img src={imgDelete} alt="" onClick={()=>{
+                    if(page.effload) deleteCategory(category);
+                }}/>
             </div>
         </div>
         )
@@ -105,7 +117,7 @@ const SetContactCategory = ()=>{
                     </h2>
                    
                 </div>
-                <div className="set__categories__case__control">
+                {!page.loading ? <div className="set__categories__case__control">
                     <div className="set__categories__case__control__inp">
                         <input title="Нова категорія" type="text" id="set__categories__contact__control__inp" placeholder={"Назва категорії"}/>
                         <input title="Колір категорії" type="color" name="colorBackground__contact" id="colorBackground__contact" defaultValue={"#ffa800"}/>
@@ -114,7 +126,9 @@ const SetContactCategory = ()=>{
                         <button className="primary__btn padding20px"
                         onClick={()=>{addNewCategory("set__categories__contact__control__inp")}}>Додати нову категорію</button>
                     </div>
-                </div>
+                </div>:<div className="block__loading">
+                            <LoadingPage message={page.message} effload = {page.effload}/>
+                        </div>}
                 <div className="set__categories__case__list">
                         {CategoriesMas(categoriesContact)}
                         {categoriesStr}

@@ -68,7 +68,16 @@
     column-gap: 50px;
     margin-top: 50px;
 }
+.container__grid__two{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    margin-top: 50px;
+}
 @media (max-width:600px){
+    .container__grid__two{
+        grid-template-columns: 1fr;
+    }
     .connections__wrap{
         grid-template-columns: 1fr;
         row-gap: 30px;

@@ -4,6 +4,8 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import { serverAddres } from "../../../Functions/serverAddres";
+import { checkRight } from "../../../Functions/checkRight";
+
 const Active = ({elem})=>{
     console.log(elem)
     return(
@@ -43,7 +45,7 @@ function connectFor(conFor, conId){
     })
     .catch((error)=>console.log(error))  
 }
-const Connections = ()=>{
+const Connections = ({level})=>{
     useEffect(()=>{
         let obj = {
             caseId:window.location.search.slice(1),
@@ -76,7 +78,7 @@ const Connections = ()=>{
     return(
         <div className="connections__case">
             <div className="connections__to">
-                <div className="connections__form">
+                {level ? <div className="connections__form">
                     <div className="connect__for">
                         <input type="text" name="connect__for" id="connect__for" placeholder="Причина зв'язку" />
                     </div>
@@ -89,7 +91,7 @@ const Connections = ()=>{
                             connectFor(document.querySelector("#connect__for").value.trim(),document.querySelector("#connect__id").value)
                         }}>З'єднати</button>
                     </div>
-                </div>
+                </div>:""}
                 <h3>Зв'язок створено</h3>
                 <div className="connections__items">      
                     {conFor}

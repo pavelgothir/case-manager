@@ -27,6 +27,10 @@
   right: 80px;
 }
 
+button > span {
+  width: 30px;
+}
+
 @media (max-width: 1490px) {
   .btn_plus_contact {
     position: absolute;

@@ -57,11 +57,12 @@ function elemPlanDone(a){
 }
 
 let pty = -1;
-const Plan = ({plan,index})=>{
+const Plan = ({plan,index,level})=>{
     const [activeModalPlan, setActiveModalPlan] = useState(false);
     function planIsDone(){
         setActiveModalPlan(true)
     }
+    console.log(level)
     let part = ""
     const ElemPlan = ({planis, index})=>{
         return planis.show ? (
@@ -88,7 +89,7 @@ const Plan = ({plan,index})=>{
                 </div>
                 <div className="part__line">
                     <div className="part__plan__description">
-                        <div className="part__plan__control">
+                        {level ? <div className="part__plan__control">
                             <input disabled defaultChecked={planis.done} type="checkbox" name={`goodPlan${index}`} id={`goodPlan${index}`} />
                            {plan.donePlan.done ? "" : <img src={editImg} className="editPlan active" alt="Редагувати" id={`editPlan${index}`} title="Редагувати" onClick={()=>{
                                 console.log("hello")
@@ -117,17 +118,17 @@ const Plan = ({plan,index})=>{
                                  document.querySelector(`#savePlan${index}`).classList.toggle("active");
                                  document.querySelector(`#editPlan${index}`).classList.toggle("active");
                                 }} />
-                        </div>
+                        </div>:""}
                         <textarea disabled name={`desc__planID${index}`} id={`desc__planID${index}`} cols="30" rows="5" defaultValue={planis.desc.replaceAll("<br />", "\n")}></textarea>
                         <div className="deletePlan__wrap">
-                        {plan.donePlan.done ? "" :  <img src={deleteImg} className="deletePlan red__back" id={`deletePlan${index}`} alt="Видалити" title="Видалити" onClick={()=>{
+                        {!plan.donePlan.done && level ? <img src={deleteImg} className="deletePlan red__back" id={`deletePlan${index}`} alt="Видалити" title="Видалити" onClick={()=>{
                             if(!window.confirm("Ви впевнені що хочете видалити пункт плану?")) return;
                             let a = {
                                 index: 0+index,
                                 nameOfPlan: plan.nameOfPlan
                              }
                             elemPlanDelete(a);
-                        }} />}
+                        }} /> :  ""}
                         </div>
                     </div>  
                 </div>    
@@ -152,13 +153,11 @@ const Plan = ({plan,index})=>{
             </div>
             {ElemsPlan()}
             {part}
-            { plan.donePlan.done ? 
-            <div className="plan__comment"><p><b>Коментар до виконаного плану: </b></p><p>{plan.donePlan.commentar}</p></div>:
-              <div className="part__plan__btn">
+            { plan.donePlan.done ? <div className="plan__comment"><p><b>Коментар до виконаного плану: </b></p><p>{plan.donePlan.commentar}</p></div>:""}
+            {level ? <div className="part__plan__btn">
                 <button className="primary__btn"
                 onClick={()=>{setActiveModalPlan(true)}}>Завершити план</button>
-            </div>
-            }
+            </div>:""}
             
             <ModalPlanDone active={activeModalPlan} plan={plan} close = {()=>{
                 setActiveModalPlan(false)

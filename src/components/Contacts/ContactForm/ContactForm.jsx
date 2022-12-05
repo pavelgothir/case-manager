@@ -4,7 +4,6 @@ import style from "./ContactForm.module.css";
 import { fetchCategories } from "../../../services/contacts-api";
 import IconButton from "../IconButton/IconButton";
 import { ReactComponent as Add } from "../../../img/icons/add.svg";
-import { ReactComponent as Minus } from "../../../img/icons/minus.svg";
 import { ReactComponent as Close } from "../../../img/icons/close.svg";
 
 export class ContactForm extends Component {
@@ -261,7 +260,6 @@ export class ContactForm extends Component {
           <label>
             <div>Додаткова інформація</div>
             <textarea
-              maxLength={10}
               className={style.textarea_contact}
               value={info}
               onChange={this.handleChangeText}

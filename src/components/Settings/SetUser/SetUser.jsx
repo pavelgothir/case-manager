@@ -7,6 +7,7 @@ import showImg from "./../../../img/icons/show-50.png";
 import hideImg from "./../../../img/icons/hide-50.png";
 import SpecificateForm from "./SpecificateForm";
 import {serverAddres} from "./../../Functions/serverAddres";
+import ModalSimple from "../../Modals/ModalSimple";
 let usersStr = "";
 
 
@@ -15,13 +16,16 @@ const SetUser = ()=>{
     const [specificate, setSpecificate] = useState(null);
     const [activeSpecificate, setActiveSpecificate] = useState(false);
     const [level, setLevel]  = useState({"foo":"bar"})
-    function activateUser(arg,userID, text){
+    const [modal,setModal] = useState(false)
+    const [modalInfo, setModalInfo] = useState(false)
+    function activateUser(arg,userID, text,keyt){
         let obj = {
             id: localStorage.getItem("id"),
             token: localStorage.getItem("token"),
             activate: arg,
             userId:userID,
-            text:text
+            text:text,
+            keyt:keyt
         }
         axios({
             url: serverAddres("user/activate.php"),
@@ -31,10 +35,9 @@ const SetUser = ()=>{
         })
         .then((data)=>{ 
             console.log(data.data)
-            if(arg == "true"){
-                alert("Користувача активовано")
-            }else{
-                alert("Користувача деактивованро")
+            if(data.data?.message){
+                setModal(true);
+                return setModalInfo({message:data.data.message});
             }
            window.location.reload()        
         })
@@ -53,30 +56,52 @@ const SetUser = ()=>{
         })
         .then((data)=>{ 
             console.log(data)
-            setUsers(data.data);
-           // console.log(data.data.level)
-          //  setLevel(data.data.level)
-          // window.location.reload()        
+            setUsers(data.data);      
         })
         .catch((error)=>console.log(error)) 
     },[])
 
     const UsersData = ({user, index})=>{
-        console.log(user.active)
+        console.log(user)
         return (
                 <div className={`set__users__data__line ${index%2 == 0 ? "arc" : ""}`}>
                     <div className={`set__user__wr ${user.active == "true" ? "arc":""}`}>
                         <div className="set__user__name"><a href={`/user?${user.id}`}>{user.userName}</a></div>
-                        <div className="set__user__type"><span>{user.type}</span></div>
+                        <div className="set__user__type"><span>{user.phone}</span></div>
                     </div>
                     
                     <div className="set__user__control__panel">
                         <div className={`set__user__control__panel__icons ${user.active == "true" ? "arc":""}`}>
                             <img id="deleteImg" src={deleteImg} alt="" />
-                            <img id="bookImg" src={bookImg} alt="" onClick={()=>{
+                            {<img id="bookImg" src={bookImg} alt="" onClick={()=>{
+                               if(user.id == localStorage.getItem("id") || user?.type == "root"){
+                                setModal(true); 
+                                console.log(user)
+                                setModalInfo({message: "Ви не можете змінювати права доступу для цього користувача"})
+                               }else{
                                 changeSpecification(user)
-                            }} />
-                            {user.active == "true" ? <img id="showImg" src={showImg} alt="" onClick={()=>{activateUser("false",user.id,"Деактивовано")}} /> : <img id="hideImg" src={hideImg} alt="" onClick={()=>{activateUser("true",user.id, "Активовано")}} />}
+                               }
+                               
+                            }} />}
+                            {user.active == "true" ? <img id="showImg" src={showImg} alt="" onClick={()=>{
+                                if(user.id == localStorage.getItem("id") || user?.type == "root"){
+                                    setModal(true); 
+                                    setModalInfo({message: "Ви не можете деактивувати даний обліковий запис"})
+                                   }else{
+                                    activateUser("false",user.id,"Деактивовано","deactivateUsers")
+                                   }
+                                }
+                                } /> : <img id="hideImg" src={hideImg} alt="" onClick={()=>{
+                                    
+                                    if(user.id == localStorage.getItem("id") || user?.type == "root"){
+                                        setModal(true); 
+                                        setModalInfo({message: "Ви не можете активувати даний обліковий запис"})
+                                       }else{
+                                        activateUser("true",user.id, "Активовано","activeNewUser")
+                                       }
+
+                                    
+                                    }} />}
                             
                         </div>
     
@@ -100,7 +125,7 @@ const SetUser = ()=>{
         
         <><Loadpic show="active"/></>
     ):(
-        
+        <>
          <div className="set__users__wrap">
                 <div className="set__users__inner">
                     <h2>Користувачі</h2>
@@ -108,7 +133,7 @@ const SetUser = ()=>{
                         <div className="set__users__data__title">
                             <div className="set__users__data__title__text">
                                 <div><span>ПІБ</span></div>
-                                <div><span>Тип</span></div>              
+                                <div><span>Телефон</span></div>              
                             </div>
 
                             <div className="set__users__data__title__panel">
@@ -123,6 +148,12 @@ const SetUser = ()=>{
                 </div>
             <SpecificateForm props = {specificate} active = {activeSpecificate} levela = {level} close = {()=>{setActiveSpecificate(false)}}/>
         </div>
+        
+        {modal ? <ModalSimple>
+            <p>{modalInfo.message}</p>
+            <button className="primary__btn padding20px" onClick={()=>{setModal(false)}}>Зрозумів</button>
+        </ModalSimple> : ""}
+        </>
     )
 }
 export default SetUser;

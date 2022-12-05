@@ -6,54 +6,62 @@ let fetchObj = {
   token: localStorage.getItem("token"),
 };
 
-export const fetchContscts = () => {
+export const fetchCases = () => {
   return axios({
-    url: serverAddres("manage/get-contacts.php"),
+    url: serverAddres("get-cases.php"),
     method: "POST",
     header: { "Content-Type": "application/json;charset=utf-8" },
     data: JSON.stringify(fetchObj),
   }).then((response) => response.data);
 };
 
-export const fetchCategories = () => {
-  return axios({
-    url: serverAddres("manage/get-categories-contact.php"),
-    method: "POST",
-    header: { "Content-Type": "application/json;charset=utf-8" },
-    data: JSON.stringify(fetchObj),
-  }).then((response) => {
-   if(response.data?.message){
-    ///
-    console.log(response.data)
-    return response.data.mas
-   }else{
-    return response.data.mas
-   }});
+let obj = {
+  userId: window.location.search.slice(1),
+  id: localStorage.getItem("id"),
+  token: localStorage.getItem("token"),
 };
 
-export const addContact = (contact) => {
+export const fetchUser = () => {
   return axios({
-    url: serverAddres("manage/add-new-contact.php"),
+    url: serverAddres("user/get-user.php"),
     method: "POST",
     header: { "Content-Type": "application/json;charset=utf-8" },
-    data: JSON.stringify(contact),
+    data: JSON.stringify(obj),
   }).then((response) => response.data);
 };
 
-export const deleteContact = (contact) => {
+export const addReport = (obj) => {
   return axios({
-    url: serverAddres("manage/delete-contact.php"),
+    url: serverAddres(""),
     method: "POST",
     header: { "Content-Type": "application/json;charset=utf-8" },
-    data: JSON.stringify(contact),
+    data: JSON.stringify(obj),
   }).then((response) => response.data);
 };
 
-export const editContact = (contact) => {
+export const addHistory = (obj) => {
   return axios({
-    url: serverAddres("manage/edit-contact.php"),
+    url: serverAddres(""),
     method: "POST",
     header: { "Content-Type": "application/json;charset=utf-8" },
-    data: JSON.stringify(contact),
+    data: JSON.stringify(obj),
+  }).then((response) => response.data);
+};
+
+export const fetchReport = () => {
+  return axios({
+    url: serverAddres(""),
+    method: "POST",
+    header: { "Content-Type": "application/json;charset=utf-8" },
+    data: JSON.stringify(obj),
+  }).then((response) => response.data);
+};
+
+export const fetchHistory = () => {
+  return axios({
+    url: serverAddres(""),
+    method: "POST",
+    header: { "Content-Type": "application/json;charset=utf-8" },
+    data: JSON.stringify(obj),
   }).then((response) => response.data);
 };
