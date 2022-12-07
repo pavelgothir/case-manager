@@ -3,6 +3,7 @@ import s from "./Home.module.css";
 import { useDispatch } from "react-redux";
 import { useAuth } from "../../hooks/use-auth";
 import Cases from "../Cases/Cases";
+import Statistic from "./Statistic/Statistic";
 
 const Home = ()=>{
     const dispatch = useDispatch();
@@ -10,8 +11,8 @@ const Home = ()=>{
     
     return isAuth ? (
         <div>
-            <h1 className={s.text__center}>ГОЛОВНА</h1>
-            
+            <h1 className={s.text__center}>СТАТИСТИКА</h1>
+            <Statistic />
         </div>
     ) : (
         <div className={s.home}>

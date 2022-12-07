@@ -6,118 +6,13 @@ import { fetchUser, fetchReport, fetchHistory } from "../../services/user-api";
 
 import UserReportHistory from "./UserReport/UserReportHistory";
 import UserCasesList from "./UserCasesList/UserCasesList";
+import LoadingPage from "../Loading/LoadingPage";
 
 export class User extends Component {
   state = {
     user: {},
-    report: [
-      {
-        title: "Зібраний гуманітарний пакет",
-        date: "10.09.2022",
-      },
-      {
-        title: "Зібраний гуманітарний пакет",
-        date: "11.09.2022",
-      },
-      {
-        title: "Зібраний гуманітарний пакет",
-        date: "12.09.2022",
-      },
-      {
-        title: "Зібраний гуманітарний пакет",
-        date: "13.09.2022",
-      },
-      {
-        title: "Зібраний гуманітарний пакет",
-        date: "14.09.2022",
-      },
-      {
-        title: "Зібраний гуманітарний пакет",
-        date: "15.09.2022",
-      },
-      {
-        title: "Зібраний гуманітарний пакет",
-        date: "16.09.2022",
-      },
-      {
-        title: "Зібраний гуманітарний пакет",
-        date: "17.09.2022",
-      },
-      {
-        title: "Зібраний гуманітарний пакет",
-        date: "18.09.2022",
-      },
-      {
-        title: "Зібраний гуманітарний пакет",
-        date: "19.09.2022",
-      },
-      {
-        title: "Зібраний гуманітарний пакет",
-        date: "20.09.2022",
-      },
-      {
-        title: "Зібраний гуманітарний пакет",
-        date: "21.09.2022",
-      },
-      {
-        title: "Зібраний гуманітарний пакет",
-        date: "22.09.2022",
-      },
-      {
-        title: "Зібраний гуманітарний пакет",
-        date: "23.09.2022",
-      },
-      {
-        title: "Зібраний гуманітарний пакет",
-        date: "24.09.2022",
-      },
-    ],
-    history: [
-      {
-        title: "Сім'я після окупації",
-        date: "10.09.2022",
-      },
-      {
-        title: "Важкий сімейний стан",
-        date: "11.09.2022",
-      },
-      {
-        title: "Багатодінта родина",
-        date: "12.09.2022",
-      },
-      {
-        title: "Малозабезпечена робина",
-        date: "13.09.2022",
-      },
-      {
-        title: "Переселенці",
-        date: "14.09.2022",
-      },
-      {
-        title: "Переселенці",
-        date: "15.09.2022",
-      },
-      {
-        title: "Переселенці",
-        date: "16.09.2022",
-      },
-      {
-        title: "Переселенці",
-        date: "17.09.2022",
-      },
-      {
-        title: "Переселенці",
-        date: "18.09.2022",
-      },
-      {
-        title: "Переселенці",
-        date: "19.09.2022",
-      },
-      {
-        title: "Переселенці",
-        date: "20.09.2022",
-      },
-    ],
+    report: [],
+    history: [],
     currentPageReport: 1,
     casesPerPageReport: 6,
     currentPageHistory: 1,
@@ -176,12 +71,14 @@ export class User extends Component {
     );
 
     const { user } = this.state;
-    return (
+    return user && !user?.fail ? (
       <div className="user__wrap">
         <ProfilePhoto
           url={user.profileUrl}
           userName={user.userName}
           email={user.email}
+          changePass = {user?.changePass}
+          phone = {user.phone}
         />
         <UserCasesList id={user.id} />
 
@@ -207,7 +104,22 @@ export class User extends Component {
           />
         </div>
       </div>
-    );
+    ):(
+       <div>
+        {user?.userName ?
+        <ProfilePhoto
+          url={user.profileUrl}
+          userName={user.userName}
+          email={user.email}
+          phone = {user.phone}
+        /> : <div>
+          <div className="page__loading">
+          <LoadingPage effload={false} message = {"Доступ обмежено"} />
+
+          </div>
+          </div>}
+        </div>
+    )
   }
 }
 

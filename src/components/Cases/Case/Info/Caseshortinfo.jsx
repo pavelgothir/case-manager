@@ -10,7 +10,7 @@ function ShowCategories({cats}){
     console.log(cats)
     let cat = ""
     for(let i = 0; i < cats.length; i++){
-        cat += cats[i].text;
+        cat += " " + cats[i].text;
     }
     return cat;
 }

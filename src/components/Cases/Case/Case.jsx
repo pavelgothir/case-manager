@@ -92,7 +92,7 @@ const Case = ()=>{
             {console.log(post.contact)}
         <div className="case__contact__info">
             <div>
-                <CasePhoto url={`${post.contact.imgUrl}`}/>
+                <CasePhoto url={`${post.contact.imgUrl}`} level = {checkRight(post.level, "editOwnCase")} />
             </div>
             <div><h1 className="case__title">{post.contact.surname} {post.contact.firstName} {post.contact.secondName} <span>№ {post.id}</span></h1>
                 <CaseShortInfo info = {post.contact} />
@@ -112,26 +112,21 @@ const Case = ()=>{
                 <h2>Зв'язки кейса з іншими кейсами</h2>
                 <Connections level = {checkRight(post.level, "connectionsCase")}/>
             </div>
-            <div className="pdf__inner">
+            {checkRight(post.level,"apiPdfCase")? <div className="pdf__inner">
                 <h2>Експорт у форматі PDF</h2>
-                {post.level?.apiPdfCase == true || post.level?.root == "true" ? <ExportPDF /> 
-                :   <div className="block__loading">
-                        <LoadingPage message={"У вас немає прав доступу"} effload = {page.effload}/>
-                    </div>
-                }
-                
-            </div>
+                <ExportPDF />  
+            </div>:""}
            
             {false ? <JournalActive info={post.activity} /> : ""}
             { post.contact.dateDogovir.length > 1 ? <PlanActive info = {post.plan == "" ? null : post.plan} level = {checkRight(post.level, "createIndividualPlan")}/> : 
             <div className="plan__active">
                 <h2>Індивідуальний план</h2>
                 <p>Неможливо встановити Індивідуальний, необхідно заключити договір з клієнтом</p>
-                <div className="grod">
+                {checkRight(post.level, "editOwnCase") ? <div className="grod">
                     <label htmlFor="dogovirDate">Дата<input type="date" id="dogovirDate"/></label>
                     <label htmlFor="dogovirNumber">Номер<input type="text" id="dogovirNumber"/></label>
-                    {checkRight(post.level, "createIndividualPlan") ? <button onClick={saveInfoDogovir}>Зберегти інформацію</button>:"" } 
-                </div>
+                    <button className="primary__btn padding20px" onClick={saveInfoDogovir}>Зберегти інформацію</button>
+                </div>:"" } 
             </div>}
             <Notes notes = {post.notes} level={checkRight(post.level, "notesCase")}/>
             <CaseGiveHelp level={checkRight(post.level, "helpesCase")}/>

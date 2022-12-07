@@ -13,12 +13,12 @@ const Nav = ()=>{
             <NavLink to="/add-case">Додати кейс</NavLink>
         </div>
         <div>
-            <NavLink to="/contacts">Контакти</NavLink>
+            <NavLink to="/contacts">Телефонна книга</NavLink>
         </div>
-        <div>
+        {false ? <div>
             <NavLink to="/search">Розширений пошук</NavLink>
             
-        </div>
+        </div>:""}
         <div>
         <NavLink to="/settings">Налаштування</NavLink>
         </div>

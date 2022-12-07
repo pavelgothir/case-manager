@@ -27,7 +27,23 @@ export const fetchUser = () => {
     method: "POST",
     header: { "Content-Type": "application/json;charset=utf-8" },
     data: JSON.stringify(obj),
-  }).then((response) => response.data);
+  }).then((response) => {
+    console.log(response.data)
+    console.log(obj)
+    if(response.data?.message){
+      if(response.data.fail == "001"){
+        return response.data;
+      }else if(response.data.fail == "002"){
+        return false;
+      }
+    }else{
+      if(obj.userId == obj.id){
+        response.data.changePass = true;
+      }
+      return response.data
+    }
+    
+  });
 };
 
 export const addReport = (obj) => {

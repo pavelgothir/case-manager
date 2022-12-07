@@ -88,6 +88,7 @@
     .form__inp__wr__grid {
         grid-template-columns: 1fr;
         row-gap: 10px;
+        width: 87%;
     }
     .plan__active > h2{
         padding-bottom: 15px;

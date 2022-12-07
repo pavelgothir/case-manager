@@ -19,7 +19,7 @@ const Active = ({elem})=>{
 
             <p><b>Надавав допомогу</b> {elem.whoHelp}.</p>
             <p><b>Дата надання</b> {elem.dateHelp}</p>
-             <p><b>Деталі наданої допомоги</b>{elem.mess}</p>
+             <p><b>Деталі наданої допомоги</b>{elem.mess.replaceAll("<br />", "\n")}</p>
          </div>
      </div>
     )

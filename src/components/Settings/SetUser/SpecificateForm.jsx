@@ -47,7 +47,9 @@ const SpecificateForm = ({props, active,close}) =>{
             createContact:document.querySelector("#createContact").checked,
             connectionsCase:document.querySelector("#connectionsCase").checked,
             notesCase:document.querySelector("#notesCase").checked,
-            helpesCase:document.querySelector("#helpesCase").checked
+            helpesCase:document.querySelector("#helpesCase").checked,
+            lookUserAll:document.querySelector("#lookUserAll").checked,
+            lookUserContact:document.querySelector("#lookUserContact").checked,
         }
         for(let i = 0; i < masCategories.length; i++){
             specificationObj[document.querySelector(`#cat${i}`).value] = document.querySelector(`#cat${i}`).checked;
@@ -154,6 +156,13 @@ const SpecificateForm = ({props, active,close}) =>{
                 <label htmlFor="connectionsCase"><input defaultChecked={"connectionsCase" in level ? level.connectionsCase : false} type="checkbox" name="connectionsCase" id="connectionsCase" className="set__modal__content__common__className" /> Створення зв'язків між кейсами</label>
                 <label htmlFor="notesCase"><input defaultChecked={"notesCase" in level ? level.notesCase : false} type="checkbox" name="notesCase" id="notesCase" className="set__modal__content__common__className" /> Додавати нотатки</label>
                 <label htmlFor="helpesCase"><input defaultChecked={"helpesCase" in level ? level.helpesCase : false} type="checkbox" name="helpesCase" id="helpesCase" className="set__modal__content__common__className" /> Додавати надану допомогу</label>
+            </div>
+        </div>
+        <div className="set__modal__content__case  set__cont">  
+            <div className="set__modal__content__labels">
+                <h3>Користувач</h3>
+                <label htmlFor="lookUserAll"><input defaultChecked={"lookUserAll" in level ? level.lookUserAll : false} type="checkbox" name="lookUserAll" id="lookUserAll" className="set__modal__content__common__className" />Перегляд профілів користувачів (повний доступ)</label>
+                <label htmlFor="lookUserContact"><input defaultChecked={"lookUserContact" in level ? level.lookUserContact : false} type="checkbox" name="lookUserContact" id="lookUserContact" className="set__modal__content__common__className" />Перегляд профілів користувачів (тільки контактна інформація)</label>
             </div>
         </div>
         <div className="set__modal__api__case  set__cont">  

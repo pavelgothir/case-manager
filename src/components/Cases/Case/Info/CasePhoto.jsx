@@ -61,15 +61,14 @@ const CasePhoto = (props)=>{
         
     }
     return(
-        <div className="case__contact__info__img">
+        <div className="case__contact__info__img__wr">
                 <div className="case__contact__info__img__inner">
                     <img src={`${imgCase}`} alt="" />
                     <Loadpic show = {loading}/>
-                        <form id="caseImgEdit">
-                            
+                        {props.level ? <form id="caseImgEdit">
                              {imgSave ? <span className="case__edit__img__ok" onClick={()=>{saveImg()}}>OK</span> : <label htmlFor="uploadbtn" className="case__edit__img">Edit</label> }
                             <input onChangeCapture={()=>{changePic("caseImgEdit")}} multiple id="uploadbtn" type="file" name="uploadbtn"/>
-                        </form>
+                        </form>:""}
                 </div>
                 
                 

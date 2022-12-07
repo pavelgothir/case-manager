@@ -7,18 +7,20 @@ import { serverAddres } from "../../Functions/serverAddres";
 import { ReactComponent as Phone } from "../../../img/icons/iphone.svg";
 import { ReactComponent as Email } from "../../../img/icons/email.svg";
 import { ReactComponent as User } from "../../../img/icons/user.svg";
-
-const ProfilePhoto = ({ url, userName, email }) => {
+import { removeUser } from "../../../store/Slices/userSlice";
+import { useDispatch } from "react-redux";
+const ProfilePhoto = ({ url, userName, email,changePass,phone }) => {
   const [loading, setLoading] = useState("");
-
-  const [recoveryPass, setRecoveryPass] = useState("");
-  const [recoveryPassto, setRecoveryPassto] = useState("");
-  const [recoveryError, setRecoveryError] = useState("");
-
+  const [olderPass, setOlderPass] = useState("");
+  const [newPass, setNewPass] = useState("");
+  const [newPassTo, setNewPassTo] = useState("");
+  const [changeError, setChangeError] = useState("");
+  const dispatch = useDispatch();
   let passObj = {
     id: localStorage.getItem("id"),
     token: localStorage.getItem("token"),
-    pass: recoveryPass,
+    pass: newPass,
+    olderPass: olderPass
   };
 
   const changePic = (data) => {
@@ -52,7 +54,7 @@ const ProfilePhoto = ({ url, userName, email }) => {
       <div className="case__contact__info__img__inner">
         <img src={`${url}`} alt="" />
         <Loadpic show={loading} />
-        <form id="caseImgEdit">
+        {changePass ? <form id="caseImgEdit">
           <label htmlFor="uploadbtn" className="case__edit__img">
             Edit
           </label>
@@ -65,7 +67,7 @@ const ProfilePhoto = ({ url, userName, email }) => {
             type="file"
             name="uploadbtn"
           />
-        </form>
+        </form>:""}
       </div>
       <div className="user_info">
         <h4 className="user_info_name">
@@ -86,7 +88,7 @@ const ProfilePhoto = ({ url, userName, email }) => {
               marginRight: 15,
             }}
           />
-          telephone
+          {phone}
         </h4>
         <h4 className="user_info_mail">
           <Email
@@ -99,41 +101,51 @@ const ProfilePhoto = ({ url, userName, email }) => {
           {email}
         </h4>
       </div>
-      <div className="change_password">
+      {changePass ? <div className="change_password">
         <h4>Змінити пароль</h4>
-        <div className="wrap__rec__form">
-          <label htmlFor="rec__pass">Введіть пароль</label>
+        <div className="wrap__change__form">
+        <label htmlFor="change__pass__older">Введіть старий пароль</label>
           <input
             type="password"
-            name="rec__pass"
-            id="rec__pass"
-            value={recoveryPass}
+            name="change__pass__older"
+            id="change__pass__older"
+            value={olderPass}
             onChange={(e) => {
-              setRecoveryPass(e.target.value);
+              setOlderPass(e.target.value);
             }}
           />
-          <label htmlFor="rec__passto">Повторіть пароль</label>
+          <label htmlFor="change__pass">Введіть новий пароль</label>
           <input
             type="password"
-            name="rec__passto"
-            id="rec__passto"
-            value={recoveryPassto}
+            name="change__pass"
+            id="change__pass"
+            value={newPass}
             onChange={(e) => {
-              setRecoveryPassto(e.target.value);
+              setNewPass(e.target.value);
             }}
           />
-          <div className="error__recovery">
-            <p>{recoveryError}</p>
+          <label htmlFor="change__passto">Повторіть пароль</label>
+          <input
+            type="password"
+            name="change__passto"
+            id="change__passto"
+            value={newPassTo}
+            onChange={(e) => {
+              setNewPassTo(e.target.value);
+            }}
+          />
+          <div className="error__changeovery">
+            <p>{changeError}</p>
           </div>
           <div>
             <button
               className="primary__btn"
               onClick={() => {
-                if (recoveryPass !== recoveryPassto) {
-                  setRecoveryError("Паролі не збігаються");
+                if (newPass !== newPassTo) {
+                  setChangeError("Паролі не збігаються");
                   return;
-                } else if (recoveryPass.length < 6) {
-                  setRecoveryError(
+                } else if (newPass.length < 6) {
+                  setChangeError(
                     "Довжина паролю повинна бути більше 6 символів"
                   );
                   return;
@@ -145,12 +157,9 @@ const ProfilePhoto = ({ url, userName, email }) => {
                   data: JSON.stringify(passObj),
                 })
                   .then((data) => {
-                    console.log(data);
-                    if (data.data.good) {
-                      console.log("ok");
-                    } else {
-                      console.log("not ok");
-                    }
+                    alert(data.data.message);
+                    dispatch(removeUser())
+                    
                   })
                   .catch((error) => console.log(error));
               }}
@@ -159,7 +168,7 @@ const ProfilePhoto = ({ url, userName, email }) => {
             </button>
           </div>
         </div>
-      </div>
+      </div>:""}
     </div>
   );
 };

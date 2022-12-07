@@ -75,6 +75,7 @@ const Connections = ({level})=>{
     const conFrom= actConFrom.map((elem,index)=>{
         return <Active key={index} elem={elem}/>
     }) 
+    console.log(conFor)
     return(
         <div className="connections__case">
             <div className="connections__to">
@@ -92,17 +93,20 @@ const Connections = ({level})=>{
                         }}>З'єднати</button>
                     </div>
                 </div>:""}
+                {conFor.length > 0 ?
+                <div>
                 <h3>Зв'язок створено</h3>
                 <div className="connections__items">      
                     {conFor}
                 </div>
+                </div>:""}
             </div>
-            <div className="connections__from">
+            {conFrom.length > 0 ?<div className="connections__from">
             <h3>Зв'язок від</h3>
                 <div className="connections__items">
                     {conFrom}
                 </div>
-            </div>
+            </div>:""}
         </div>
     )
 }

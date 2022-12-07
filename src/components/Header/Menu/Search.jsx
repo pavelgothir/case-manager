@@ -22,7 +22,7 @@ const SearchRes = ({elem})=>{
     return elem.surname.length > 1 ?(
          <div className="search__viewer__line">
          <div className="search__viewer__data">
-            <NavLink to={`/case?${elem.id}`} >{elem.surname} {elem.firstName} {elem.secondName}</NavLink>  
+            <a href={`/case?${elem.id}`} >{elem.surname} {elem.firstName} {elem.secondName}</a>  
          </div>
          <div className="search__viewer__phons">
             <span>{elem.phone1}</span>  

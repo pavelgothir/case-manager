@@ -24,7 +24,9 @@ a{
   border-radius: 15px;
   font-weight: 700;
 }
-
+.wrap__content{
+  min-height: 100vh;
+}
 .primary__btn:hover {
   box-shadow: 0 0 10px #b399cb;
   border-radius: 10px;
@@ -172,4 +174,11 @@ input[type=color]::-moz-color-swatch {
   background-size: 10%;
   padding: 15px;
   height: 100%;
+}
+@media (max-width:700px){
+  .wrap__content{
+    width: 90%;
+    margin: auto;
+    margin-top: 50px;
+  }
 }

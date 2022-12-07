@@ -27,18 +27,17 @@ const ShowLogin = ({ togleProfileMeny }) => {
     <div className="menu__profile__inner">
       <div className="prof__access__header">
         <div>
-          <NavLink className={"prof__access__header__link"} to={`/user?${id}`}>
-            {" "}
-            {userName}{" "}
-          </NavLink>
+          <a className={"prof__access__header__link"} href={`/user?${id}`}>
+            {userName}
+          </a>
         </div>
 
-        <button type="button" data-id="report" onClick={toggleModal}>
+         {false ? <button type="button" data-id="report" onClick={toggleModal}>
           Подати звіт
-        </button>
-        <button type="button" data-id="hictory" onClick={toggleModal}>
+        </button> : ""}
+        {false ? <button type="button" data-id="hictory" onClick={toggleModal}>
           Подати історію
-        </button>
+        </button> :""}
 
         <div>
           <button onClick={() => dispatch(removeUser())}>Вийти</button>
