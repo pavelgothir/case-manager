@@ -40,6 +40,7 @@ function checkAddCase(){
         commentar: document.querySelector("#commentar").value.replace("'", "’").replace(/\n/g, "<br />"),
         dateDogovir: document.querySelector("#dateDogovir").value.replace("'", "’"),
         numberDogovir: document.querySelector("#numberDogovir").value.replace("'", "’"),
+        happybd: document.querySelector("#happybd").value.replace("'", "’"),
         categories:[]
     }
     let checkboxCategory = document.querySelectorAll(".checkbox__category");
@@ -172,6 +173,16 @@ const AddCase = ()=>{
                         <div className="add__case__item__inner__input">
                             <label htmlFor="email">Email</label>
                             <input type="text" id="email" name="email"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="add__case__line">
+                <div className="add__case__line__one">
+                    <div className="add__case__item">
+                        <div className="add__case__item__inner__input">
+                            <label htmlFor="happybd">Дата народження</label>
+                            <input type="date" id="happybd" name="happybd"/>
                         </div>
                     </div>
                 </div>
