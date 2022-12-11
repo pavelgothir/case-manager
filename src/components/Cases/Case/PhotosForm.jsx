@@ -4,12 +4,15 @@ import axios from "axios";
 import Loading from "../../Loading/Loading";
 import { useState } from "react";
 import { serverAddres } from "../../Functions/serverAddres";
+import LoadingPage from "../../Loading/LoadingPage";
+
 
 
 
 const PhotosForm = ({show})=>{
     const {register, handleSubmit,formState: { errors }} = useForm();
     const [loading, setLoading] = useState({timer:"",message:"",active:""});
+    const [loadImg, setLoadImg] = useState(false)
     const onSubmit = (data) =>{
         const formData = new FormData();
         for(let i=0; i<data.pic.length; i++){
@@ -17,6 +20,8 @@ const PhotosForm = ({show})=>{
         }
         formData.append("id",window.location.search.slice(1))
         formData.append("title",data.title)
+        formData.append("userId",localStorage.getItem("id"))
+        formData.append("token",localStorage.getItem("token"))
         axios({
             url: serverAddres("upload-img.php"),
             method: "POST",
@@ -33,7 +38,9 @@ const PhotosForm = ({show})=>{
         })
         .then((data)=>{
             setLoading({active:""})
-            window.location.reload()
+            if(data.data?.message)
+          //  window.location.reload()
+          console.log(data)
         })
         .catch((error)=>console.log(error))     
     } 
@@ -43,6 +50,9 @@ const PhotosForm = ({show})=>{
            
             <form className="form__add__media" onSubmit={handleSubmit(onSubmit)}>
                 <h3>Додати медіа файли</h3>
+                {loadImg ? <div className="block__loading">
+                <LoadingPage effload={false} message = "kdkdd" />
+            </div>:""}
                 <div className="form__inp__wr">
                     <div className="form__inp__wr__upl">
                         <input multiple type="file" {...register("pic", { required: true })}/>
@@ -60,6 +70,7 @@ const PhotosForm = ({show})=>{
                 
             </form>
             <Loading timer={loading.timer} message={loading.message} active={loading.active}/>
+            
         </>
     ):(
         <></>

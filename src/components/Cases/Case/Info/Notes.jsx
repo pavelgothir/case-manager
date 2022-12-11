@@ -27,7 +27,7 @@ const Active = ({elem})=>{
 
 const Notes = ({notes,level})=>{
     function addNote(){
-        let mess = document.querySelector("#mess__note").value.replaceAll("'", "’").replace(/\n/g, "<br />");
+        let mess = document.querySelector("#mess__note").value.replaceAll("'", "’").replaceAll(/\n/g, "<br />");
         if(mess == "") return alert("Ви не ввели повідомлення")
         let obj = {
             caseId:window.location.search.slice(1),

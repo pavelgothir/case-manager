@@ -19,7 +19,7 @@ const ContactListItem = ({
   editContact,
 }) => {
   const [deleteContact, handleDeleteContact] = useState(false);
-
+  console.log(phones)
   const handleEditContact = (e) => {
     toggleEditContact(id);
   };
@@ -67,7 +67,7 @@ const ContactListItem = ({
             </a>
           </div>
         ))}
-
+        {console.log(category)}
         {category.map(({ text }) => (
           <div className={`${style.contact_list_item} `} key={text}>
             {text}

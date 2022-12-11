@@ -56,7 +56,7 @@ const ProfilePhoto = ({ url, userName, email,changePass,phone }) => {
         <Loadpic show={loading} />
         {changePass ? <form id="caseImgEdit">
           <label htmlFor="uploadbtn" className="case__edit__img">
-            Edit
+            Змінити
           </label>
           <input
             onChangeCapture={() => {

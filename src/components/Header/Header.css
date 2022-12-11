@@ -4,6 +4,12 @@
     box-shadow: 2px 0 10px -3px #000;
     padding-bottom: 5px;
 }
+.menu__profile__wrap{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+}
 .top__menu a{
     color: #000;
     font-size: 18px;
@@ -45,7 +51,8 @@
 }
 .menu__profile__wrap img{
     width: 100%;
-    border-radius: 50%;
+    min-width: 100%;
+    min-height: 50px;
 }
 .top__menu__bottom > div{
     height: 60px;
@@ -182,7 +189,7 @@
 }
 @media (max-width: 600px){
     .menu__search__input__inner{
-        width: 90%;
+        width: 70%;
     }
     .menu__profile__inner{
         right: 0;
@@ -196,6 +203,17 @@
             column-gap: 0px;
             padding-top: 5px;
     }
+    .search__result {
+        width: calc(85% - 20px);
+    }
+    .menu__btn{
+        margin-left: -70px;
+        position: relative;
+        z-index: 99;
+    }
+.menu__profile{
+    margin-left: -20px;
+}
   .add__case__line__three {
     display: grid;
     grid-template-columns: 1fr;

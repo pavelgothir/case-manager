@@ -106,7 +106,7 @@ const Plan = ({plan,index,level})=>{
                                     checked: document.querySelector(`#goodPlan${index}`).checked,
                                     index: 0+ind,
                                     nameOfPlan: plan.nameOfPlan,
-                                    desc: document.querySelector(`#desc__planID${index}`).value.replaceAll("'", "’").replace(/\n/g, "<br />"),
+                                    desc: document.querySelector(`#desc__planID${index}`).value.replaceAll("'", "’").replaceAll(/\n/g, "<br />"),
                                     start: document.querySelector(`#start__planID${index}`).value,
                                     end: document.querySelector(`#end__planID${index}`).value
                                  }

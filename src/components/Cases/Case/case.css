@@ -8,6 +8,9 @@
 .media__content img, .media__content video{
     width: 100%;
 }
+.case__contact__info__img__inner img{
+    max-width: 100%;
+}
 .media__content>div{
     width: 100%;
     height: auto;

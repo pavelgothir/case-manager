@@ -38,6 +38,7 @@ export const fetchUser = () => {
       }
     }else{
       if(obj.userId == obj.id){
+        console.log(response)
         response.data.changePass = true;
       }
       return response.data

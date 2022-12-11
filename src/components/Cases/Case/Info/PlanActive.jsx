@@ -60,7 +60,7 @@ function saveNewPlan(){
             document.querySelectorAll(".modal__plan__line")[i].classList.add("good");
             obj.start = dateStart;
             obj.end = dateEnd;
-            obj.desc = planDesc.replaceAll("'", "’").replace(/\n/g, "<br />");
+            obj.desc = planDesc.replaceAll("'", "’").replaceAll(/\n/g, "<br />");
             obj.done = false;
             obj.show = true;
         }
@@ -68,7 +68,7 @@ function saveNewPlan(){
     }
     let date = new Date();
     objNewPlan = {
-        nameOfPlan: nameNewPlan.value.replace("'", "’"),
+        nameOfPlan: nameNewPlan.value.replaceAll("'", "’"),
         dateCreated: date.toISOString().split('T')[0],
         plans: mas,
         donePlan:{

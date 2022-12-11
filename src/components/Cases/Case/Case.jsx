@@ -36,9 +36,10 @@ const Case = ()=>{
             data : JSON.stringify(obj),
         })
         .then((data)=>{ 
+
             let res = data.data;
-            console.log(res)
-            if("message" in res){
+            console.log(data.data)
+            if(res?.message){
                 setPage({...page,message:res.message})
                 return console.log(res.message)
                 }
@@ -59,6 +60,7 @@ const Case = ()=>{
                  res.notes = [];
                 }
                 setPost(res)
+                console.log("AAAAA")
                 console.log(res)
         })
         .catch((error)=>console.log(error)) 

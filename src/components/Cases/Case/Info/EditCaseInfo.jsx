@@ -27,22 +27,22 @@ const send = async(data)=>{
 function checkAddCase(){
     let errors = 0;
     let objAddCase = {
-        surname: document.querySelector("#surname").value.replace("'", "’"),
-        firstName: document.querySelector("#firstName").value.replace("'", "’"),
-        secondName: document.querySelector("#secondName").value.replace("'", "’"),
-        phone1: document.querySelector("#phone1").value.replace("'", "’"),
-        phone2: document.querySelector("#phone2").value.replace("'", "’"),
-        email: document.querySelector("#email").value.replace("'", "’"),
-        addressPropiska: document.querySelector("#addressPropiska").value.replace("'", "’").replace(/\n/g, "<br />"),
-        addressLive: document.querySelector("#addressLive").value.replace("'", "’").replace(/\n/g, "<br />"),
-        chanelComunity: document.querySelector("#chanelComunity").value.replace("'", "’"),
-        firstContact: document.querySelector("#firstContact").value.replace("'", "’"),
-        familyStan: document.querySelector("#familyStan").value.replace("'", "’"),
-        potreba: document.querySelector("#potreba").value.replace("'", "’").replace(/\n/g, "<br />"),
-        commentar: document.querySelector("#commentar").value.replace("'", "’").replace(/\n/g, "<br />"),
-        dateDogovir: document.querySelector("#dateDogovir").value.replace("'", "’"),
-        numberDogovir: document.querySelector("#numberDogovir").value.replace("'", "’"),
-        happybd: document.querySelector("#happybd").value.replace("'", "’"),
+        surname: document.querySelector("#surname").value.replaceAll("'", "’"),
+        firstName: document.querySelector("#firstName").value.replaceAll("'", "’"),
+        secondName: document.querySelector("#secondName").value.replaceAll("'", "’"),
+        phone1: document.querySelector("#phone1").value.replaceAll("'", "’"),
+        phone2: document.querySelector("#phone2").value.replaceAll("'", "’"),
+        email: document.querySelector("#email").value.replaceAll("'", "’"),
+        addressPropiska: document.querySelector("#addressPropiska").value.replaceAll("'", "’").replaceAll(/\n/g, "<br />"),
+        addressLive: document.querySelector("#addressLive").value.replaceAll("'", "’").replaceAll(/\n/g, "<br />"),
+        chanelComunity: document.querySelector("#chanelComunity").value.replaceAll("'", "’"),
+        firstContact: document.querySelector("#firstContact").value.replaceAll("'", "’"),
+        familyStan: document.querySelector("#familyStan").value.replaceAll("'", "’"),
+        potreba: document.querySelector("#potreba").value.replaceAll("'", "’").replaceAll(/\n/g, "<br />"),
+        commentar: document.querySelector("#commentar").value.replaceAll("'", "’").replaceAll(/\n/g, "<br />"),
+        dateDogovir: document.querySelector("#dateDogovir").value.replaceAll("'", "’"),
+        numberDogovir: document.querySelector("#numberDogovir").value.replaceAll("'", "’"),
+        happybd: document.querySelector("#happybd").value.replaceAll("'", "’"),
         categories:[]
     }
     let checkboxCategory = document.querySelectorAll(".checkbox__category");

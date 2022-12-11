@@ -14,6 +14,7 @@ import {
   editContact,
 } from "../../services/contacts-api";
 import Loadpic from "../Loading/Interactive/Loadpic";
+import LoadingPage from "../Loading/LoadingPage";
 
 export class Contacts extends Component {
   state = {
@@ -173,7 +174,7 @@ export class Contacts extends Component {
   render() {
     const { contacts, showModal, isEditContact, isLoading } = this.state;
 
-    return (
+    return false ? (
       <>
         {isLoading && <Loadpic show={"active"} />}
         <section className={`${style.section_contact} ${style.responsive}`}>
@@ -208,6 +209,10 @@ export class Contacts extends Component {
           )}
         </section>
       </>
+    ):(
+      <div className="page__loading">
+        <LoadingPage effload={false} message = {"Даний розділ ТЕЛЕФОННА КНИГА у процесі розробки (найближчим часом буде зроблено)"} />
+      </div>
     );
   }
 }

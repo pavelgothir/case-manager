@@ -266,4 +266,21 @@ input[type="color"]{
     .settings__page{
         grid-template-columns: 1fr;
     }
+    .set__modal__content__wraper{
+        grid-template-columns: 1fr;
+    }
+    .set__categories__case__list{
+        grid-template-columns: 1fr;
+    }
+    .set__users__data__line{
+        grid-template-columns: 1fr;
+        gap:5px;
+    }
+    .set__users__data__title{
+        grid-template-columns: 1fr;
+        font-size: 15px;
+    }
+    .set__users__data{
+        margin-top: 15px;
+    }
 }

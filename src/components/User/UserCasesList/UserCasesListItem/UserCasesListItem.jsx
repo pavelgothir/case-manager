@@ -1,13 +1,14 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const UserCasesListItem = ({ id, surname, firstName }) => {
   return (
     <>
       <h5>№ {id}</h5>
-      <p>
+    
+        <NavLink to = {"/case?" + id}>
         {surname} {firstName}
-      </p>
-      <p>Ще щось{}</p>
+      </NavLink>
     </>
   );
 };

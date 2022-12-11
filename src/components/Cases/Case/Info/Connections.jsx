@@ -12,7 +12,7 @@ const Active = ({elem})=>{
          <div className="connect__viewer__line">
          <div className="connect__viewer__data">
              <div>
-                <p><a href={`/case?${elem.connectId}`} ><b>Зв'язок </b> {elem.connectFor} {elem.connectId}</a></p>
+                <p><a href={`/case?${elem.connectId}`} ><b>Зв'язок </b> {elem.connectFor} --- кейс №{elem.connectId}</a></p>
                  <p><span><b>Дата створення зв'язку</b> {elem.date}</span></p>
                  <p><span><b> Створив зв'язок</b> <NavLink to={`/user?${elem.userId}`}>{elem.userName}</NavLink> </span>  </p>
              </div>        
@@ -41,6 +41,8 @@ function connectFor(conFor, conId){
         data : JSON.stringify(obj),
     })
     .then((data)=>{ 
+        alert("Зв'язок успішно створено")
+        window.location.reload()
         console.log(data) 
     })
     .catch((error)=>console.log(error))  
