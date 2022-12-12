@@ -153,7 +153,7 @@ const Plan = ({plan,index,level})=>{
             </div>
             {ElemsPlan()}
             {part}
-            { plan.donePlan.done ? <div className="plan__comment"><p><b>Коментар до виконаного плану: </b></p><p>{plan.donePlan.commentar}</p></div>:""}
+            { plan.donePlan.done ? <div className="plan__comment"><p><b>Коментар до виконаного плану: </b></p><p><span dangerouslySetInnerHTML= {{__html:plan.donePlan.commentar}} /></p></div>:""}
             {level ? <div className="part__plan__btn">
                 <button className="primary__btn"
                 onClick={()=>{setActiveModalPlan(true)}}>Завершити план</button>

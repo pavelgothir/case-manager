@@ -51,7 +51,7 @@ const Card = (props)=>{
                         <a href={`"mailto:"${props.info.email}`}>{props.info.email}</a>
                     </div>
                     <div className="card__description__potreba">
-                        <p>{props.info.potreba}</p>
+                        <p dangerouslySetInnerHTML= {{__html:props.info.potreba}} />
                     </div>
                 </div>
                 <div className="card__info__status">

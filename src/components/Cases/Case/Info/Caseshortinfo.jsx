@@ -58,7 +58,7 @@ const CaseShortInfo = ({info})=>{
                         <img src={addressImg} alt="" />
                     </div>
                     <div className="case__info__card__text">
-                        <span><p title="Адреса по прописці">{info.addressPropiska}</p></span>
+                        <span><p title="Адреса по прописці" dangerouslySetInnerHTML= {{__html:info.addressPropiska}} /></span>
                     </div>
                 </div>
                 {info.addressLive.length > 1 ? <div className="case__info__card">
@@ -66,7 +66,7 @@ const CaseShortInfo = ({info})=>{
                         <img src={addressImg} alt="" />
                     </div>
                     <div className="case__info__card__text">
-                        <span><p title="Фактична адреса проживання">{info.addressLive}</p></span>
+                        <span><p title="Фактична адреса проживання" dangerouslySetInnerHTML= {{__html:info.addressLive}} /></span>
                     </div>
                 </div>:""}
                 {info.familyStan.length > 1 ? <div className="case__info__card">
@@ -82,7 +82,7 @@ const CaseShortInfo = ({info})=>{
                         <img src={addressImg} alt="" />
                     </div>
                     <div className="case__info__card__text">
-                        <span><p title="Коментар">{info.commentar}</p></span>
+                        <span><p title="Коментар" dangerouslySetInnerHTML= {{__html:info.commentar}} /></span>
                     </div>
                 </div>:""}
                 {info.potreba.length > 1 ?
@@ -91,7 +91,7 @@ const CaseShortInfo = ({info})=>{
                         <img src={givingImg} alt="" />
                     </div>
                     <div className="case__info__card__text">
-                        <span><p title="Потреба">{info.potreba}</p></span>
+                        <span><p title="Потреба" dangerouslySetInnerHTML= {{__html:info.potreba}} /></span>
                     </div>
                 </div>:""}
             </div>           

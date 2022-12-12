@@ -19,7 +19,7 @@ const Active = ({elem})=>{
              
          </div>
          <div className="notes__viewer__mess">
-             <span>{elem.mess.replaceAll("<br />", " ")}</span>
+            <span dangerouslySetInnerHTML= {{__html:elem.mess}} />
          </div>
      </div>
     )
