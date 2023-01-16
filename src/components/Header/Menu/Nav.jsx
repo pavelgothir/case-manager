@@ -1,10 +1,11 @@
 import React from "react";
+import { createPortal } from "react-dom";
 import {NavLink} from "react-router-dom";
 
 const Nav = ()=>{
+    const modaMenu = document.querySelector('#modal-menu');
 
-
-    return(
+    return createPortal(
         <nav className={`top__menu__nav`}>  
         <div>
             <NavLink to="/cases">Кейси</NavLink>
@@ -25,7 +26,7 @@ const Nav = ()=>{
         <div>
         <NavLink to="/resources">Ресурси</NavLink>
         </div>
-    </nav>
+    </nav>,modaMenu
     )
 }
 
