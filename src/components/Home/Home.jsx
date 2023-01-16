@@ -8,7 +8,6 @@ import Statistic from "./Statistic/Statistic";
 const Home = ()=>{
     const dispatch = useDispatch();
     const {isAuth, email, data} = useAuth();
-    
     return isAuth ? (
         <div>
             <h1 className={s.text__center}>СТАТИСТИКА</h1>

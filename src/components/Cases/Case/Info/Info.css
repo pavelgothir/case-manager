@@ -58,6 +58,8 @@
     grid-template-columns: 30px 1fr;
     column-gap: 5px;
     align-items: center;
+    width: 90%;
+    margin: auto;
 }
 .case__info__card__img{
     display: flex;
@@ -78,14 +80,13 @@ margin-left: 10%;
     display: grid;
     grid-template-columns: 1fr;
     row-gap: 10px;
+    border: solid 3px #b399cb;
+    border-radius: 10px;
 }
 .case__info__card__text{
     align-items: center;
 }
-.case__info__text__center{
-    border: solid 3px #b399cb;
-    border-radius: 10px;
-}
+
 .case__info__card__text > p{
     font-weight: 600;  
 }
@@ -586,6 +587,60 @@ margin-left: 10%;
 .part__plan__date input{
     width: max-content;
 }
+/*_______________Copy text_______________*/
+.tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 140px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 70%;
+    left: 50%;
+    margin-left: -75px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+  .tooltip{
+    cursor: pointer;
+  }
+  .modal__wrap__add{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-top: 50px;
+    padding-bottom: 100px;
+    overflow-y: scroll;
+    background-color: #fff;
+  }
+/*_______________END Copy text_______________*/
+
 @media (max-width:600px){
     .connections__form {
         grid-template-columns: 1fr;

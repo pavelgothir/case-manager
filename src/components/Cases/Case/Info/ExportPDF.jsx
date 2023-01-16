@@ -6,7 +6,20 @@ const ShowPdf = ({link,pass}) =>{
     return(
         <div className="show__pdf__link">
             <p><a href={link} target="_blank">Переглянути ПДФ</a></p>
-            <p>Пароль до файлу: <b>{pass}</b></p>
+            <div className="tooltip" 
+            onClick={()=>{
+                navigator.clipboard.writeText(pass)
+                var tooltip = document.getElementById("myTooltip");
+                tooltip.innerHTML = "Скопійовано";
+            }}>
+                <p>Пароль до файлу: <b id="myPass" onMouseOut={()=>{
+                      var tooltip = document.getElementById("myTooltip");
+                      tooltip.innerHTML = "Копіювати";
+                }}>{pass}
+                </b>
+                </p>
+                <span className="tooltiptext" id="myTooltip">Копіювати</span>
+                </div>
         </div>
     )
 }
@@ -19,7 +32,7 @@ let objData = {
 const ExportPDF = ()=>{
 
     const [havePdf, setHavePdf] = useState({active:false,link:"",pass:""});
-
+    const [disabled, setDisabled] = useState(false)
     function getPdf(){
         let obj = {
             id: localStorage.getItem("id"),
@@ -30,6 +43,7 @@ const ExportPDF = ()=>{
             media:objData.media,
             help:objData.help
         }
+        //return console.log(obj)
         axios({
             url: serverAddres("mpdf/print.php"),
             method: "POST",
@@ -77,8 +91,9 @@ const ExportPDF = ()=>{
             objData.media = !objData.media
         }}/><label htmlFor="pdf__media">Фотографії</label></div>
         <div className="pdf__btn">
-            <button className="primary__btn"
+            <button className="primary__btn" disabled = {disabled}
         onClick={()=>{
+            setDisabled("disabled")
             getPdf()
         }}>Експорт у ПДФ</button>
         </div>

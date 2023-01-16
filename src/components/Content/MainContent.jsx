@@ -10,6 +10,7 @@ import User from "../User/User";
 import Settings from "../Settings/Settings";
 import Recovery from "../Recovery/Recovery";
 import Contacts from "../Contacts/Contacts";
+import Resources from "../Resources/Resources";
 
 const localToken = localStorage.getItem("token");
 
@@ -25,6 +26,7 @@ const MainContent = ()=>{
             <Route path='/user' element={<User />} />
             <Route path='/settings' element={<Settings />} />
             <Route path='/contacts' element={<Contacts />} />
+            <Route path="/resources" element = {<Resources />} />
             <Route index element={<Home />} />
           </Routes>
         </div>

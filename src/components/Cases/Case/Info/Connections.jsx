@@ -47,7 +47,8 @@ function connectFor(conFor, conId){
     })
     .catch((error)=>console.log(error))  
 }
-const Connections = ({level})=>{
+const Connections = ({level,info,id})=>{
+    console.log(info,id)
     useEffect(()=>{
         let obj = {
             caseId:window.location.search.slice(1),

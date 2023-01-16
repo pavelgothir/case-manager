@@ -13,7 +13,28 @@ export const AmountCases = () => {
       header: { "Content-Type": "application/json;charset=utf-8" },
       data: JSON.stringify(fetchObj),
     }).then((response) => {
-        console.log(response.data.amountCases)
-        return response.data.amountCases
+        return response.data
     });
   };
+  export const getSize = () => {
+    return axios({
+      url: serverAddres("statistics/get-size.php"),
+      method: "POST",
+      header: { "Content-Type": "application/json;charset=utf-8" },
+      data: JSON.stringify(fetchObj),
+    }).then((response) => {
+        return response.data
+    });
+  };
+  export const getCategoriesStat = () => {
+    return axios({
+      url: serverAddres("manage/get-categories-case.php"),
+      method: "POST",
+      header: { "Content-Type": "application/json;charset=utf-8" },
+      data: JSON.stringify(fetchObj),
+    }).then((response) => {
+        console.log(response.data)
+        return response.data
+    });
+  };
+

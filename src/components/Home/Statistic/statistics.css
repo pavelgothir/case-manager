@@ -1,0 +1,13 @@
+.stats__grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    width: 90%;
+    margin: auto;
+    color: #f99c9c;
+}
+@media screen and (max-width:600px) {
+    .stats__grid{
+        grid-template-columns: 1fr;
+    }
+}

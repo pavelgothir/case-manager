@@ -6,8 +6,10 @@ import { NavLink } from "react-router-dom";
 import { Check } from "../Auth/Check";
 import Modal from "../Contacts/Modal/Modal";
 import AddReportHistory from "./AddReportHistory/AddReportHistory";
-
+import { useRef } from "react";
+import { useEffect } from "react";
 const ShowLogin = ({ togleProfileMeny }) => {
+
   const [showModal, changeModal] = useState(false);
   const [typeBtn, changeTypeBtn] = useState("");
 

@@ -1,110 +1,89 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
 import {serverAddres} from "../../../Functions/serverAddres"
-
+import RouteNavLink from "../../../Modals/RouteNavLink";
+import ModalError from "../../Add-case/ModalErrors";
+import s from "./edit.module.css"
 let categoriesStr = "";
 let masCategories = [];
-const send = async(data)=>{
-    data.userId = localStorage.getItem("id");
-    data.caseId = window.location.search.slice(1);
-    data.id = localStorage.getItem("id");
-    data.token = localStorage.getItem("token");
-    console.log(data);
-    await fetch(serverAddres("case/save-infoCase.php"),{
-        method:"POST",
-        header : {'Content-Type': 'application/json;charset=utf-8'},
-        body:  JSON.stringify(data)
-    })
-        .then(res => res.text())
-        .then(data => {
-            console.log(data)
-            alert("ОНОВЛЕНО")
+
+
+const EditCaseInfo = ({caseInfo,close})=>{
+
+    const send = async(data)=>{
+        data.userId = localStorage.getItem("id");
+        data.caseId = window.location.search.slice(1);
+        data.id = localStorage.getItem("id");
+        data.token = localStorage.getItem("token");
+        
+        for (var key in data) {
+            if(typeof data[key] == 'string' && data[key] !== "") data[key] = data[key].replaceAll("'", "’").replaceAll(/\n/g, "<br />");
+          }
+       //return console.log(data);
+        await fetch(serverAddres("case/save-infoCase.php"),{
+            method:"POST",
+            header : {'Content-Type': 'application/json;charset=utf-8'},
+            body:  JSON.stringify(data)
         })
-        .catch(rejected => {
-            console.log(rejected);
-        });
-}
-function checkAddCase(){
-    let errors = 0;
-    let objAddCase = {
-        surname: document.querySelector("#surname").value.replaceAll("'", "’"),
-        firstName: document.querySelector("#firstName").value.replaceAll("'", "’"),
-        secondName: document.querySelector("#secondName").value.replaceAll("'", "’"),
-        phone1: document.querySelector("#phone1").value.replaceAll("'", "’"),
-        phone2: document.querySelector("#phone2").value.replaceAll("'", "’"),
-        email: document.querySelector("#email").value.replaceAll("'", "’"),
-        addressPropiska: document.querySelector("#addressPropiska").value.replaceAll("'", "’").replaceAll(/\n/g, "<br />"),
-        addressLive: document.querySelector("#addressLive").value.replaceAll("'", "’").replaceAll(/\n/g, "<br />"),
-        chanelComunity: document.querySelector("#chanelComunity").value.replaceAll("'", "’"),
-        firstContact: document.querySelector("#firstContact").value.replaceAll("'", "’"),
-        familyStan: document.querySelector("#familyStan").value.replaceAll("'", "’"),
-        potreba: document.querySelector("#potreba").value.replaceAll("'", "’").replaceAll(/\n/g, "<br />"),
-        commentar: document.querySelector("#commentar").value.replaceAll("'", "’").replaceAll(/\n/g, "<br />"),
-        dateDogovir: document.querySelector("#dateDogovir").value.replaceAll("'", "’"),
-        numberDogovir: document.querySelector("#numberDogovir").value.replaceAll("'", "’"),
-        happybd: document.querySelector("#happybd").value.replaceAll("'", "’"),
-        categories:[]
+            .then(res => res.text())
+            .then(data => {
+                console.log(data)
+                alert("ОНОВЛЕНО")
+            })
+            .catch(rejected => {
+                console.log(rejected);
+            });
     }
-    let checkboxCategory = document.querySelectorAll(".checkbox__category");
-    let checkboxCategoryLabel = document.querySelectorAll(".checkbox__category__label");
-    let checkboxCategoryHidden = document.querySelectorAll(".checkbox__category__hidden");
-    for(let i = 0; i < checkboxCategory.length; i++){
-        if(checkboxCategory[i].checked){
-            let obj = {
-                value: checkboxCategory[i].value,
-                text: checkboxCategoryLabel[i].innerText,
-                color:checkboxCategoryHidden[i].value
-            }
-           objAddCase.categories.push(obj);
+   console.log(caseInfo.categories)
+
+    const [addObj, setAddObj] = useState({
+        surname: caseInfo.surname.replaceAll("<br />", '\n'),
+        firstName: caseInfo.firstName.replaceAll("<br />", '\n'),
+        secondName: caseInfo.secondName.replaceAll("<br />", '\n'),
+        phone1: caseInfo.phone1.replaceAll("<br />", '\n'),
+        phone2: caseInfo.phone2.replaceAll("<br />", '\n'),
+        email: caseInfo.email.replaceAll("<br />", '\n'),
+        addressPropiska: caseInfo.addressPropiska.replaceAll("<br />", '\n'),
+        addressLive: caseInfo.addressLive.replaceAll("<br />", '\n'),
+        chanelComunity: caseInfo.chanelComunity.replaceAll("<br />", '\n'),
+        firstContact: caseInfo.firstContact,
+        familyStan: caseInfo.familyStan.replaceAll("<br />", '\n'),
+        potreba: caseInfo.potreba.replaceAll("<br />", '\n'),
+        commentar: caseInfo.commentar.replaceAll("<br />", '\n'),
+        dateDogovir: caseInfo.dateDogovir,
+        numberDogovir: caseInfo.numberDogovir.replaceAll("<br />", '\n'),
+        happybd: caseInfo.happybd,
+        categories:[],
+        familyHistory:caseInfo.familyHistory.replaceAll("<br />", '\n')
+    })
+    const Check = ()=>{
+        let ers = []
+        let cat = 0;
+        let cats = [];
+        if(addObj.surname == "") ers.push("Введіть прізвище кейсу");
+        if(addObj.firstName == "") ers.push("Введіть ім'я кейсу");
+        if(addObj.phone1 == "") ers.push("Введіть номер телефону 1");
+        if(addObj.firstContact == "") ers.push("Введіть дату першого контакту");
+        for(let i=0;i<addObj.categories.length;i++){
+            if(addObj.categories[i].active){
+                cat++
+                cats.push(addObj.categories[i]);
+            };
         }
+        if(cat == 0) ers.push("Оберіть категорію кейса")
+        if(ers.length > 0) return setErrors(ers)
+
+        addObj.categories = cats;
+       // return console.log(addObj)
+        send(addObj)
     }
-    
-    if(objAddCase.surname.length < 1){
-        document.getElementById("surname").parentElement.style.background = "red";
-        errors += "<p>Заповніть поле <b>Прізвище</b></p>"
-    }else {
-        document.getElementById("surname").parentElement.style.background = "white"
-    }
-    if(objAddCase.firstName.length < 1){
-        document.getElementById("firstName").parentElement.style.background = "red"
-        errors += "<p>Заповніть поле <b>Ім'я</b></p>"
-    }else {
-        document.getElementById("firstName").parentElement.style.background = "white"
-    }
-    if(objAddCase.phone1.length < 1){
-        document.getElementById("phone1").parentElement.style.background = "red"
-        errors += "<p>Заповніть поле <b>Телефон 1</b></p>"
-    }else {
-        document.getElementById("phone1").parentElement.style.background = "white"
-    }
-    if(objAddCase.firstContact.length < 1){
-        document.getElementById("firstContact").parentElement.style.background = "red"
-        errors += "<p>Заповніть поле <b>Дата першого контакту</b></p>"
-    }else {
-        document.getElementById("firstContact").parentElement.style.background = "white"
-    }
-    if(objAddCase.categories.length == 0){
-        document.getElementsByClassName("add__case__name__of__block")[0].style.background = "red"
-        errors += "<p>Оберіть <b>категорію кейсу</b></p>"
-    }else {
-        document.getElementsByClassName("add__case__name__of__block")[0].style.background = "white"
-    }
-    if(errors.length > 1){
-        document.getElementById("addCaseErrors").innerHTML = errors;
-        return document.getElementById("add__case__modal").classList.add("active")
-    }
-   //objAddCase.categories = JSON.stringify(objAddCase.categories)
-   //return console.log(objAddCase)
-    send(objAddCase);
-}
-const EditCaseInfo = ({caseInfo, active, categoriesMas, close})=>{
     const [categoriesCase, setCategoriesCase] = useState(false)
-    console.log(categoriesMas)
     useEffect(()=>{
         let obj = {
             id: localStorage.getItem("id"),
             token: localStorage.getItem("token")
         }
+        
         axios({
             url: serverAddres("manage/get-categories-case.php"),
             method: "POST",
@@ -113,23 +92,40 @@ const EditCaseInfo = ({caseInfo, active, categoriesMas, close})=>{
         })
         .then((data)=>{ 
            console.log(data.data)
-           setCategoriesCase(data.data.mas);
-           //masCategories = data.data;
-          // window.location.reload()        
+           setCategoriesCase(data.data.mas);       
         })
         .catch((error)=>console.log(error)) 
     },[])
-    const CategoriesData = ({category, index})=>{
-        let checkCat = false;
-        console.log(categoriesMas)
-        for(let i = 0; i < categoriesMas.length; i++){
-            if(categoriesMas[i].value == category.value){
-                checkCat = true;
+    function checkedCat(arg){
+        let cat = false;
+        caseInfo.categories.map((elem)=>{
+            if(elem.value == arg){
+                cat = true;
             }
+        })
+        return cat;
+    }
+    const CategoriesData = ({category, index})=>{
+        addObj.categories[index] = {
+            value: category.value,
+            text: category.text,
+            color:category.color,
+            active:checkedCat(category.value)
         }
         return (
             <div className="add__case__item__inner__category__item">
-                <input defaultChecked = {checkCat} className="checkbox__category" type="checkbox" value={category.value} id={`cat${index}`} />
+                <input className="checkbox__category" type="checkbox"
+                    onChange={(e)=>{
+                        console.log(addObj)
+                        addObj.categories[index] = {
+                            value: category.value,
+                            text: category.text,
+                            color:category.color,
+                            active:e.target.checked
+                        }
+                    }}
+                    defaultChecked={checkedCat(category.value)}
+                    value={category.value} id={`cat${index}`} />
                 <label className="checkbox__category__label" htmlFor={`cat${index}`}>{category.text}</label>
                 <input type="hidden" className="checkbox__category__hidden" value={category.color}/>
             </div>
@@ -137,17 +133,22 @@ const EditCaseInfo = ({caseInfo, active, categoriesMas, close})=>{
         )
     }
     const CategoriesMas = (pos, lf)=>{
-        
         if(pos.length < 1 || pos == false) return;
                 categoriesStr =  pos.map((post,index)=>{
-                return <CategoriesData lf={lf} key={index} category={post} index={index} />
+                return <CategoriesData lf={lf} key={index} category={post} index={index}/>
         })  
     }  
-    return active ? (
-        <div className="case__edit__info__wrap">
-            <div className="case__edit__info__inner">
-            
-       
+    const [errors,setErrors] = useState(null)
+    const [goToCase, setToCase] = useState(null)
+    return(
+        <div className="modal__wrap__add">
+        <div className={s.close}
+            onClick={()=>{
+                close()
+            }}>
+            <span></span>
+            <span></span>
+        </div>
         <div className="wrap__add__case">
         <div className="add__case__inner">
             <div className="add__case__line">
@@ -155,19 +156,31 @@ const EditCaseInfo = ({caseInfo, active, categoriesMas, close})=>{
                     <div className="add__case__item">
                         <div className="add__case__item__inner__input">
                             <label htmlFor="surname">Прізвище <span className="color__red">*</span></label>
-                            <input type="text" id="surname" name="surname" defaultValue={caseInfo.surname}/>
+                            <input type="text" id="surname" name="surname" defaultValue={addObj.surname}
+                            onChange={(e)=>{
+                                setAddObj({...addObj,surname:e.target.value})
+                                console.log(e.target.value)
+                            }} />
                         </div>
                     </div>
                     <div className="add__case__item">
                         <div className="add__case__item__inner__input">
                             <label htmlFor="firstName">Ім'я <span className="color__red">*</span></label>
-                            <input type="text" id="firstName" name="firstName" defaultValue={caseInfo.firstName}/>
+                            <input type="text" id="firstName" name="firstName" defaultValue={addObj.firstName}
+                            onChange={(e)=>{
+                                setAddObj({...addObj,firstName:e.target.value})
+                                console.log(e.target.value)
+                            }}/>
                         </div>
                     </div>
                     <div className="add__case__item">
                         <div className="add__case__item__inner__input">
                             <label htmlFor="secondName">По батькові</label>
-                            <input type="text" id="secondName" name="secondName" defaultValue={caseInfo.secondName}/>
+                            <input type="text" id="secondName" name="secondName" defaultValue={addObj.secondName}
+                            onChange={(e)=>{
+                                setAddObj({...addObj,secondName:e.target.value})
+                                console.log(e.target.value)
+                            }}/>
                         </div>
                     </div>
                 </div>
@@ -177,19 +190,31 @@ const EditCaseInfo = ({caseInfo, active, categoriesMas, close})=>{
                     <div className="add__case__item">
                         <div className="add__case__item__inner__input">
                             <label htmlFor="phone1">Номер телефону 1 <span className="color__red">*</span></label>
-                            <input type="text" id="phone1" name="phone1" defaultValue={caseInfo.phone1}/>
+                            <input type="text" id="phone1" name="phone1" defaultValue={addObj.phone1}
+                            onChange={(e)=>{
+                                setAddObj({...addObj,phone1:e.target.value})
+                                console.log(e.target.value)
+                            }}/>
                         </div>
                     </div>
                     <div className="add__case__item">
                         <div className="add__case__item__inner__input">
                             <label htmlFor="phone2">Номер телефону 2</label>
-                            <input type="text" id="phone2" name="phone2" defaultValue={caseInfo.phone2}/>
+                            <input type="text" id="phone2" name="phone2" defaultValue={addObj.phone2}
+                            onChange={(e)=>{
+                                setAddObj({...addObj,phone2:e.target.value})
+                                console.log(e.target.value)
+                            }}/>
                         </div>
                     </div>
                     <div className="add__case__item">
                         <div className="add__case__item__inner__input">
                             <label htmlFor="email">Email</label>
-                            <input type="text" id="email" name="email"  defaultValue={caseInfo.email}/>
+                            <input type="text" id="email" name="email" defaultValue={addObj.email}
+                            onChange={(e)=>{
+                                setAddObj({...addObj,email:e.target.value})
+                                console.log(e.target.value)
+                            }}/>
                         </div>
                     </div>
                 </div>
@@ -199,7 +224,11 @@ const EditCaseInfo = ({caseInfo, active, categoriesMas, close})=>{
                     <div className="add__case__item">
                         <div className="add__case__item__inner__input">
                             <label htmlFor="happybd">Дата народження</label>
-                            <input type="date" id="happybd" name="happybd"/>
+                            <input type="date" id="happybd" name="happybd" defaultValue={addObj.happybd}
+                            onChange={(e)=>{
+                                setAddObj({...addObj,happybd:e.target.value})
+                                console.log(e.target.value)
+                            }}/>
                         </div>
                     </div>
                 </div>
@@ -209,13 +238,21 @@ const EditCaseInfo = ({caseInfo, active, categoriesMas, close})=>{
                     <div className="add__case__item">
                         <div className="add__case__item__inner__input">
                             <label htmlFor="addressPropiska">Адреса по прописці</label>
-                            <textarea name="addressPropiska" id="addressPropiska" cols="30" rows="10"  defaultValue={caseInfo.addressPropiska}></textarea>
+                            <textarea name="addressPropiska" id="addressPropiska" cols="30" rows="10" defaultValue={addObj.addressPropiska}
+                            onChange={(e)=>{
+                                setAddObj({...addObj,addressPropiska:e.target.value})
+                                console.log(e.target.value)
+                            }}></textarea>
                         </div>
                     </div>
                     <div className="add__case__item">
                         <div className="add__case__item__inner__input">
                             <label htmlFor="addressLive">Адреса фактичного проживання</label>
-                            <textarea name="addressLive" id="addressLive" cols="30" rows="10" defaultValue={caseInfo.addressLive}></textarea>
+                            <textarea name="addressLive" id="addressLive" cols="30" rows="10" defaultValue={addObj.addressLive}
+                            onChange={(e)=>{
+                                setAddObj({...addObj,addressLive:e.target.value})
+                                console.log(e.target.value)
+                            }}></textarea>
                         </div>
                     </div>
                 </div>
@@ -225,21 +262,24 @@ const EditCaseInfo = ({caseInfo, active, categoriesMas, close})=>{
                     <div className="add__case__item">
                         <div className="add__case__item__inner__input">
                             <label htmlFor="chanelComunity">Канал комунікації</label>
-                            <input type="text" id="chanelComunity" name="chanelComunity" defaultValue={caseInfo.chanelComunity} />
+                            <input type="text" id="chanelComunity" name="chanelComunity" defaultValue={addObj.chanelComunity}
+                            onChange={(e)=>{
+                                setAddObj({...addObj,chanelComunity:e.target.value})
+                                console.log(e.target.value)
+                            }}/> 
                         </div>
                     </div>
                     <div className="add__case__item">
                         <div className="add__case__item__inner__input">
                             <label htmlFor="firstContact">Дата першого контакту <span className="color__red">*</span></label>
-                            <input type="date" id="firstContact" name="firstContact"  defaultValue={caseInfo.firstContact}/>
+                            <input type="date" id="firstContact" name="firstContact" defaultValue={addObj.firstContact}
+                            onChange={(e)=>{
+                                setAddObj({...addObj,firstContact:e.target.value})
+                                console.log(e.target.value)
+                            }}/>
                         </div>
                     </div>
-                    <div className="add__case__item">
-                        <div className="add__case__item__inner__input">
-                            <label htmlFor="familyStan">Сімейний стан</label>
-                            <input type="text" id="familyStan" name="familyStan" defaultValue={caseInfo.familyStan}/>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
             <div className="add__case__line">
@@ -247,7 +287,40 @@ const EditCaseInfo = ({caseInfo, active, categoriesMas, close})=>{
                     <div className="add__case__item">
                         <div className="add__case__item__inner__input">
                             <label htmlFor="potreba">Потреба, запит</label>
-                            <textarea name="potreba" id="potreba" cols="30" rows="10" defaultValue={caseInfo.potreba}></textarea>
+                            <textarea name="potreba" id="potreba" cols="30" rows="10" defaultValue={addObj.potreba}
+                            onChange={(e)=>{
+                                setAddObj({...addObj,familyStan:e.target.value})
+                                console.log(e.target.value)
+                            }}></textarea>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div className="add__case__line">
+                <div className="add__case__line__one">
+                <div className="add__case__item">
+                        <div className="add__case__item__inner__input">
+                            <label htmlFor="familyStan">Сімейний стан, деталі про сім'ю, її слад</label>
+                            <textarea id="familyStan" name="familyStan" cols="30" rows="10" defaultValue={addObj.familyStan}
+                            onChange={(e)=>{
+                                setAddObj({...addObj,familyStan:e.target.value})
+                                console.log(e.target.value)
+                            }} ></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="add__case__line">
+                <div className="add__case__line__one">
+                <div className="add__case__item">
+                        <div className="add__case__item__inner__input">
+                            <label htmlFor="familyHistory">Історія сім'ї / особи</label>
+                            <textarea id="familyHistory" name="familyHistory" cols="30" rows="10" defaultValue={addObj.familyHistory}
+                            onChange={(e)=>{
+                                setAddObj({...addObj,familyHistory:e.target.value})
+                                console.log(e.target.value)
+                            }} ></textarea>
                         </div>
                     </div>
                 </div>
@@ -268,11 +341,19 @@ const EditCaseInfo = ({caseInfo, active, categoriesMas, close})=>{
                             <label htmlFor="" className="add__case__name__of__block">Договір</label>
                             <div className="add__case__item__inner__input__item">
                                 <label htmlFor="dateDogovir">Дата підписання договору</label>
-                                <input type="date" name="dateDogovir" id="dateDogovir"  defaultValue={caseInfo.dateDogovir}/>
+                                <input type="date" name="dateDogovir" id="dateDogovir" defaultValue={addObj.dateDogovir}
+                                onChange={(e)=>{
+                                    setAddObj({...addObj,dateDogovir:e.target.value})
+                                    console.log(e.target.value)
+                                }}/>
                             </div>
                             <div className="add__case__item__inner__input__item">
                                 <label htmlFor="numberDogovir">Номер договору</label>
-                                <input type="text" name="numberDogovir" id="numberDogovir"  defaultValue={caseInfo.numberDogovir}/>
+                                <input type="text" name="numberDogovir" id="numberDogovir" defaultValue={addObj.numberDogovir}
+                                onChange={(e)=>{
+                                    setAddObj({...addObj,numberDogovir:e.target.value})
+                                    console.log(e.target.value)
+                                }}/>
                             </div>
                         </div>
                     </div>
@@ -283,27 +364,26 @@ const EditCaseInfo = ({caseInfo, active, categoriesMas, close})=>{
                     <div className="add__case__item">
                         <div className="add__case__item__inner__input">
                             <label htmlFor="commentar">Коментар до кейсу</label>
-                            <textarea name="commentar" id="commentar" cols="30" rows="10"  defaultValue={caseInfo.commentar}></textarea>
+                            <textarea name="commentar" id="commentar" cols="30" rows="10" defaultValue={addObj.commentar}
+                            onChange={(e)=>{
+                                setAddObj({...addObj,commentar:e.target.value})
+                                console.log(e.target.value)
+                            }}></textarea>
                         </div>
                     </div>
                 </div>
             </div>
             <div className="add__case__line">
-                <button onClick={checkAddCase} className="add__case__btn good">Оновити інформацію</button>
-                <button onClick={close} className="add__case__btn close">Відмінити</button>
+                <button onClick={Check} className="primary__btn">Зберегти</button>
             </div>
+            
         </div>
-        <div className="add__case__modal" id="add__case__modal">
-            <div className="add__case__modal__inner">
-                <div id="addCaseErrors"></div>
-                <button onClick={()=>{document.getElementById("add__case__modal").classList.remove("active")}}>OK</button>
-            </div>
-        </div>
+        {goToCase ? <RouteNavLink link={goToCase.link} message={goToCase.message} text={goToCase.text} func={()=>{setToCase(null)}}/> : null}
+        {errors ? <ModalError errors={errors} func = {()=>{
+            setErrors(null)
+        }}/> : null}
     </div>
     </div>
-        </div>
-    ):(
-        <></>
     )
 }
 

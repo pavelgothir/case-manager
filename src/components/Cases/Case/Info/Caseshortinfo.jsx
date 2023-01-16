@@ -36,9 +36,9 @@ const CaseShortInfo = ({info})=>{
                     <div className="case__info__card__text">
                         <span><p><a href={`tel:${info.phone2}`}>{info.phone2}</a></p></span>
                     </div>
-                </div>:""
+                </div>:null
                 }
-                <div className="case__info__card">
+                {info.email.length > 1 ? <div className="case__info__card">
                     <div className="case__info__card__img">
                         <img src={emailImg} alt="" />
                     </div>
@@ -48,19 +48,30 @@ const CaseShortInfo = ({info})=>{
                         </span>
                         
                     </div>
-                </div>
+                </div>:null}
+                {info.happybd.length > 1 ? <div className="case__info__card">
+                    <div className="case__info__card__img">
+                        <img src={dateImg} alt="" />
+                    </div>
+                    <div className="case__info__card__text">
+                        <span>
+                            <p>{info.happybd}</p>
+                        </span>
+                        
+                    </div>
+                </div>:null}
                 
             
           
             
-            <div className="case__info__card">
-                <div className="case__info__card__img">
+                {info.addressPropiska.length > 1 ?<div className="case__info__card">
+                    <div className="case__info__card__img">
                         <img src={addressImg} alt="" />
                     </div>
                     <div className="case__info__card__text">
                         <span><p title="Адреса по прописці" dangerouslySetInnerHTML= {{__html:info.addressPropiska}} /></span>
                     </div>
-                </div>
+                </div>:null}
                 {info.addressLive.length > 1 ? <div className="case__info__card">
                 <div className="case__info__card__img">
                         <img src={addressImg} alt="" />
@@ -68,15 +79,15 @@ const CaseShortInfo = ({info})=>{
                     <div className="case__info__card__text">
                         <span><p title="Фактична адреса проживання" dangerouslySetInnerHTML= {{__html:info.addressLive}} /></span>
                     </div>
-                </div>:""}
+                </div>:null}
                 {info.familyStan.length > 1 ? <div className="case__info__card">
                 <div className="case__info__card__img">
                         <img src={addressImg} alt="" />
                     </div>
                     <div className="case__info__card__text">
-                        <span><p title="Сімейний стан">{info.familyStan}</p></span>
+                        <span><p title="Сімейний стан" dangerouslySetInnerHTML= {{__html:info.familyStan}}></p></span>
                     </div>
-                </div>:""}
+                </div>:null}
                 {info.commentar.length > 1 ? <div className="case__info__card">
                 <div className="case__info__card__img">
                         <img src={addressImg} alt="" />
@@ -93,11 +104,10 @@ const CaseShortInfo = ({info})=>{
                     <div className="case__info__card__text">
                         <span><p title="Потреба" dangerouslySetInnerHTML= {{__html:info.potreba}} /></span>
                     </div>
-                </div>:""}
+                </div>:null}
             </div>           
             <div className="case__info__inner">
                 <div className="case__info__text__center">
-                    
                     <div className="case__info__card">
                         <div className="case__info__card__img">
                             <img src={dateImg} alt="" />
@@ -127,7 +137,7 @@ const CaseShortInfo = ({info})=>{
                 </div>
                 <div className="case__info__text__center">                             
                 
-                    <div className="case__info__card">
+                    {info.chanelComunity.length > 1 ? <div className="case__info__card">
                         <div className="case__info__card__img">
                             <img src={socialImg} alt="" />
                         </div>
@@ -135,7 +145,7 @@ const CaseShortInfo = ({info})=>{
                             <p>Канал комунікації</p>   
                             <span><p>{info.chanelComunity}</p></span>
                         </div>
-                    </div>
+                    </div>:null}
                 </div>
                 <div className="case__info__text__center">                             
                 
@@ -145,22 +155,18 @@ const CaseShortInfo = ({info})=>{
                         </div>
                         <div className="case__info__card__text"> 
                             <p>Категорія</p>    
-                            <span><p><ShowCategories cats = {info.categories}/></p></span>
+                            <span>{info.categories.map((elem,ind)=>{
+                                return(
+                                    <p key={ind}
+                                        style={{
+                                            color:elem.color
+                                        }}
+                                    >{elem.text}</p>
+                                )
+                            })}</span>
                         </div>
                     </div>
                 </div>
-                <div className="case__info__text__center">                             
-                
-                <div className="case__info__card">
-                <div className="case__info__card__img">
-                        <img src={givingImg} alt="" />
-                    </div>
-                    <div className="case__info__card__text">
-                        <p>Статус</p>
-                        <span><p>{info.status}</p></span>
-                    </div>
-                </div>
-            </div>
             </div>
         </div>
     )

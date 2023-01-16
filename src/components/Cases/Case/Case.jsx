@@ -17,7 +17,7 @@ import LoadingPage from "./../../Loading/LoadingPage";
 import { checkRight } from "../../Functions/checkRight";
 const Case = ()=>{
     const [post, setPost] = useState({id:"",contact:{caseName:""},photos:[],notes:[]});
-    const [editActive, setEditActive] = useState(false)
+    const [editActive, setEditActive] = useState(null)
     const [page, setPage] = useState({
         loading:true,
         cases:false,
@@ -112,7 +112,7 @@ const Case = ()=>{
         <div className="container__grid__two">   
             <div className="connections__inner">
                 <h2>Зв'язки кейса з іншими кейсами</h2>
-                <Connections level = {checkRight(post.level, "connectionsCase")}/>
+                <Connections id={post.id} info = {post.contact} level = {checkRight(post.level, "connectionsCase")}/>
             </div>
             {checkRight(post.level,"apiPdfCase")? <div className="pdf__inner">
                 <h2>Експорт у форматі PDF</h2>
@@ -137,9 +137,9 @@ const Case = ()=>{
             <Photo photos = {post.photos}/>
         </div>    
             <PhotosForm photos = {post.photos} show = {post.level?.loadCaseFiles == true || post.level?.root == "true" ? true : false}/>
-            <EditCaseInfo caseInfo = {post.contact} active = {editActive} categoriesMas = {post.contact.categories} close = {()=>{
-                setEditActive(false)
-            }}/>
+            {editActive ? <EditCaseInfo caseInfo = {post.contact} close = {()=>{
+                setEditActive(null)
+            }}/>:null}
         </div>
         
     ):(
