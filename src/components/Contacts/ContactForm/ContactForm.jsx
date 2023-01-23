@@ -146,6 +146,7 @@ export class ContactForm extends Component {
           <div>Прізвище Ім'я По батькові</div>
           <input
             className={style.input_contact}
+            placeholder="ПІБ"
             type="text"
             value={pib}
             onChange={this.handleChangePib}
@@ -188,17 +189,19 @@ export class ContactForm extends Component {
             <div className={style.wraper_phone} key={phone.i}>
               <input
                 className={style.input_contact}
-                name="title"
+                name="number"
+                placeholder="Номер телефону"
                 data-index={i}
-                value={phone.title}
+                value={phone.number}
                 onChange={this.handleChangeTel}
                 required
               />
               <input
                 className={style.input_contact}
-                name="number"
+                name="title"
+                placeholder="Мобільний, робочий..."
                 data-index={i}
-                value={phone.number}
+                value={phone.title}
                 onChange={this.handleChangeTel}
                 required
               />
@@ -215,6 +218,7 @@ export class ContactForm extends Component {
           <div>Пошта</div>
           <input
             className={style.input_contact}
+            placeholder="Email"
             type="text"
             name="email"
             value={email}
@@ -227,6 +231,7 @@ export class ContactForm extends Component {
           <input
             className={style.input_contact}
             type="text"
+            placeholder="Місце роботи"
             name="work"
             value={work}
             onChange={this.handleChangeInfo}
@@ -237,6 +242,7 @@ export class ContactForm extends Component {
           <div>Хто це?</div>
           <input
             className={style.input_contact}
+            placeholder="Президент, працівник ССД..."
             type="text"
             name="whoisit"
             value={whoisit}
@@ -249,6 +255,7 @@ export class ContactForm extends Component {
           <div>Сайт</div>
           <input
             className={style.input_contact}
+            placeholder="Сайт"
             type="text"
             name="site"
             value={site}
@@ -260,6 +267,7 @@ export class ContactForm extends Component {
           <label>
             <div>Додаткова інформація</div>
             <textarea
+                placeholder="Важлива інфо про контакт..."
               className={style.textarea_contact}
               value={info}
               onChange={this.handleChangeText}

@@ -3,6 +3,7 @@
     height: 25px;
     position: relative;
     cursor: pointer;
+    z-index: 99;
 }
 .btn__wrap{
     height: 60px;
@@ -56,4 +57,19 @@
 }
 .btn.active:hover span{
     width: 100%;
+}
+.container{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+.control{
+    display: flex;
+    gap: 15px;
+}
+.control img{
+    width: 30px;
+}
+.control a{
+    display: block;
 }

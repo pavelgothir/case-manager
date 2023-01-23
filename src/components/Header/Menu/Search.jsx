@@ -68,6 +68,7 @@ const Search = ()=>{
     }) 
 
     return(
+        
         <div className="menu__search">
                 <div className="menu__search__input">
                     <div className="menu__search__input__inner">

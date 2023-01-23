@@ -32,6 +32,7 @@ a{
 
 .wrap__content{
   min-height: 100vh;
+  margin-top: 50px;
 }
 .primary__btn:hover {
   box-shadow: 0 0 10px #b399cb;
@@ -183,6 +184,14 @@ input[type=color]::-moz-color-swatch {
   background-size: 10%;
   padding: 15px;
   height: 100%;
+}
+.modal__menu{
+  position: fixed;
+  top: 60px;
+  right: 0px;
+}
+.active{
+  color: #fbb911!important;
 }
 @media (max-width:700px){
   .wrap__content{

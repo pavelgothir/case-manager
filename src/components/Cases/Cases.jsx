@@ -1,24 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import Card from "../Cards/Card";
 import { serverAddres } from "../Functions/serverAddres";
 import LoadingPage from "../Loading/LoadingPage";
+import GetCases from "./GetCases";
 
-const PostsData = ({post})=>{
-    console.log(post)
-    return (
-            <Card info={post} />
-    )
-}
-let casePost = "";
-const Posts = (pos)=>{
-    if(pos.length < 1) return;
-            casePost =  pos.map((post,index)=>{
-            post = JSON.parse(post);
-            return <PostsData key={index} post={post}/>
-    })  
-}
 const Cases = ()=>{
     const [posts, setPosts] = useState("");
     const [page, setPage] = useState(
@@ -59,7 +45,9 @@ const Cases = ()=>{
                     }
                 ) 
             }else{
-                setPosts(data.data)  
+                let pos = data.data.map(elem=>JSON.parse(elem))
+                setPosts(pos)  
+                console.log(pos)
                 setPage({
                     loading:false
                 })
@@ -68,17 +56,20 @@ const Cases = ()=>{
         .catch((error)=>console.log(error)) 
  
     },[])
+
     return page.loading ? (    
         <div className="page__loading">
             <LoadingPage message={page.message} effload = {page.effload}/>
         </div>
     ):(
-            <div className="wrap__cards">
-            <div className="inner__cards" id="inner__cards">  
-                {Posts(posts)}
-                {casePost}
-            </div>
-            </div>
+                <>
+                <h2 style={{
+                    textAlign:"center"
+                }}>Кейси</h2>
+                {posts ? <GetCases key={"oop"+Math.random()} posts={posts} postsChange= {(p)=>{console.log(p);setPosts(null);setPosts(p)}} />: null}
+                </>
+                
+
     )
 }
 

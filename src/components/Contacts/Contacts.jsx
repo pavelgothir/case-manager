@@ -174,7 +174,7 @@ export class Contacts extends Component {
   render() {
     const { contacts, showModal, isEditContact, isLoading } = this.state;
 
-    return false ? (
+    return true ? (
       <>
         {isLoading && <Loadpic show={"active"} />}
         <section className={`${style.section_contact} ${style.responsive}`}>

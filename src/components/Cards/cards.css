@@ -1,6 +1,5 @@
 .wrap__cards{
     width: 100%;
-    margin-top: 100px;
 }
 .inner__cards{
     width: 80%;
@@ -101,6 +100,11 @@ border-radius: 10px;
 }
 .card__info a{
     color: #000;
+}
+.card__id{
+    text-align: center;
+    font-weight: bold;
+    font-size: 22px;
 }
 @media (max-width:600px){
     .inner__cards {

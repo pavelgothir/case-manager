@@ -1,7 +1,7 @@
 .modal__wrap{
     width: 100%;
     position: absolute;
-    top: 70px;
+    top: 60px;
     background-color: rgb(217, 130, 130);
 }
 .modal__inner{

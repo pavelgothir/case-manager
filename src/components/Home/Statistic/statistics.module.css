@@ -11,3 +11,6 @@
         grid-template-columns: 1fr;
     }
 }
+.amount__cases__wr > h2{
+    text-align: center;
+}

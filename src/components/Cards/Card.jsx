@@ -34,6 +34,7 @@ const Card = (props)=>{
                 </div>
                 <div className="card__categories">
                     <div className="card__categories__inner">
+                        <span className="card__id">{props.info.id}</span>
                         <CategoriesMas pos = {props.info.categories == undefined ? false : props.info.categories}/> 
                     </div>   
                 </div>

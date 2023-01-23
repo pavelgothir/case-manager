@@ -6,7 +6,7 @@ import LoadingPage from "../../Loading/LoadingPage";
 import LineG from "./Graphics/LineG";
 import Circle from "./Graphics/Circle";
 
-import "./statistics.css"
+import s from "./statistics.module.css"
 import DoughnutB from "./Graphics/DoughnutB";
 const bib =  {
   labels: [],
@@ -81,11 +81,11 @@ const Statistic = () =>{
     },[])
    
     return (
-        <div className="home__statistic">
-            <div className="amount__cases__wr">
-                <h2>Кількість унікальних кейсів у програмі <span className="amount">{amountCases}</span></h2>
+        <div className={s.home__statistic}>
+            <div className={s.amount__cases__wr}>
+                <h2>Кількість унікальних кейсів у програмі <span className={s.amount}>{amountCases}</span></h2>
                 <h2>Графік категорій</h2>
-                <div className="stats__grid">
+                <div className={s.stats__grid}>
                    {size == null ? "":<DoughnutB data={size} options={options}/>}
                     {amountCases == null ? "":<LineG data={bib} options = {options}/>}
                     {amountCases == null ? "":<Circle data={bib} options = {options}/>}
