@@ -10,6 +10,16 @@
 }
 .logo__img{
     width: 50px;
+    transition: .7s;
+}
+.logo__img:hover{
+    transform: rotate(1080deg);
+}
+.logout{
+    transition: all .3s;
+}
+.logout:hover{
+    transform: skew(-20deg);
 }
 .container{
     width: 90%;
@@ -30,4 +40,5 @@
 .control{
     display: flex;
     align-items: center;
+    height: 60px;
 }

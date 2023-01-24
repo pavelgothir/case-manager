@@ -11,11 +11,16 @@ import Settings from "../Settings/Settings";
 import Recovery from "../Recovery/Recovery";
 import Contacts from "../Contacts/Contacts";
 import Resources from "../Resources/Resources";
+import { useDispatch } from "react-redux";
+import { useAuth } from "../../hooks/use-auth";
 
 const localToken = localStorage.getItem("token");
 
 const MainContent = ()=>{
-    return !!localToken ?(
+  const dispatch = useDispatch();
+  const {isAuth} = useAuth();
+  console.log(isAuth)
+    return isAuth ?(
         <div className='wrap__content'>
           <Routes>
             <Route path='/add-case' element={<AddCase />} />

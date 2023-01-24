@@ -125,7 +125,7 @@ const GetResources = ()=>{
                     })
                 }}>
                     <img src={imgUrl} alt="" />
-                    <h2>{elem.title}</h2>
+                    <h2 className={s.titleH2}>{elem.title}</h2>
                 </div>
             )
         })

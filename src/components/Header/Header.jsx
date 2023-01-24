@@ -45,30 +45,6 @@ const Header = () => {
       }
   },[])
   
-    /*
-      fetch(serverAddres("check-auth.php"), {
-        method: "POST",
-        header: { "Content-Type": "application/json;charset=utf-8" },
-        body: JSON.stringify({ token: localToken }),
-      })
-        .then((res) => {
-          return res.text();
-        })
-        .then((data) => {
-          // console.log(data)
-          data = JSON.parse(data);
-          if ("message" in data) {
-            dispatch(removeUser());
-          }
-          if (data == "null") {
-            console.log(data);
-            dispatch(removeUser());
-          } else {
-            // console.log(data)
-          }
-        }).catch((error)=>{
-          console.log(error)
-        })*/
   
 
   return isAuth ? (
@@ -86,7 +62,7 @@ const Header = () => {
             <a className={s.a} href={`/user?${localStorage.getItem("id")}`}><img src={profileImg} alt="" /></a>
         </div>
         <div className={s.control}>
-        <NavLink className={s.a} onClick={()=>{dispatch(removeUser())}} to="/login"><img src={logoutImg} alt="" /></NavLink>
+        <NavLink className={s.a} onClick={()=>{dispatch(removeUser())}} to="/login"><img className={s.logout} src={logoutImg} alt="" /></NavLink>
         </div>
         
         
@@ -96,7 +72,17 @@ const Header = () => {
     </header>
     {active ? <Nav  close={()=>{setActive(!active)}}/> : null}
     </div>
-  ) : null
+  ) : (
+    <div className={s.wrap__header}>
+  <header className={s.header}>
+    <div className={s.container}>
+      <div className={s.control}>
+      <NavLink className={s.a} to="/login"> Увійти до програми</NavLink>
+      </div>
+    </div>
+  </header>
+  </div>
+  )
 };
 
 export default Header;

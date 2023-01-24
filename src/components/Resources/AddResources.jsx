@@ -33,6 +33,7 @@ function sendResources(){
             window.alert(data.data.message)
         }else{
             window.alert("Ресурс успішно завантажено");
+            window.location.reload();
         }
         setMeta({
             title:"",

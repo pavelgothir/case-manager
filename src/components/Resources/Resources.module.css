@@ -74,14 +74,11 @@
     cursor: pointer;
 }
 .wrap__cards{
-    width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    gap: 30px 60px;
+    grid-template-columns: repeat(5,20%);
+    gap: 15px;
     text-align: center;
-    margin-top: 50px;
-    flex-direction: column;
-    flex-wrap: wrap;
+    margin-top: 30px;
 }
 .wrap__cards img{
     width: 100%;
@@ -139,6 +136,9 @@
     height: 4px;
     background-color: aquamarine;
     width: 10%;
+}
+.titleH2{
+    font-size: 14px;
 }
 @media screen and (max-width:500px){
     .wrap__cards{

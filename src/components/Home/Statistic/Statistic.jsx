@@ -66,12 +66,12 @@ const Statistic = () =>{
             });
         getSize().then((res) =>{
           setSize( {
-            labels: ['Зайнято','Вільно'],
+            labels: ['Вільно','Зайнято'],
             datasets: [{
                 label: 'MB',
                 data: [res.maxSize - res.size,res.size],
                 borderWidth: 1,
-                backgroundColor: ["#f99c9c","#9ccef9"],
+                backgroundColor: ["#9ccef9","#f99c9c"],
               }]
           })
         })
