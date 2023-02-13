@@ -20,7 +20,19 @@ let obj = {
   id: localStorage.getItem("id"),
   token: localStorage.getItem("token"),
 };
-
+export const doneBells = (idBell)=>{
+  axios({
+    url: serverAddres("user/done-notification.php"),
+    method: "POST",
+    header: { 'Content-Type': 'application/json;charset=utf-8' },
+    data: JSON.stringify({...obj,idBell:idBell}),
+  })
+    .then((data) => {
+        console.log(data)
+        return data.data;
+    })
+    .catch((error) => console.log(error))
+}
 export const fetchUser = () => {
   return axios({
     url: serverAddres("user/get-user.php"),
@@ -82,3 +94,36 @@ export const fetchHistory = () => {
     data: JSON.stringify(obj),
   }).then((response) => response.data);
 };
+
+export const authorizate = () => {
+  return axios({
+    url: serverAddres(""),
+    method: "POST",
+    header: { "Content-Type": "application/json;charset=utf-8" },
+    data: JSON.stringify(obj),
+  }).then((response) => response.data);
+};
+
+export const getNotifications = () => {
+  return axios({
+    url: serverAddres("/user/get-notification.php"),
+    method: "POST",
+    header: { "Content-Type": "application/json;charset=utf-8" },
+    data: JSON.stringify(obj),
+  }).then((response) => response.data);
+};
+
+export const getUsers = ()=>{
+  axios({
+    url: serverAddres("user/get-users.php") ,
+    method: "POST",
+    header : {'Content-Type': 'application/json;charset=utf-8'},
+    data : JSON.stringify(obj),
+  })
+  .then((data)=>{ 
+      console.log(data.data)
+        return data.data;
+  })
+  .catch((error)=>console.log(error)) 
+}
+

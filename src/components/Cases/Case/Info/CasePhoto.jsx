@@ -4,6 +4,8 @@ import "./Info.css";
 import { useState } from "react";
 import Loadpic from "../../../Loading/Interactive/Loadpic";
 import { serverAddres } from "../../../Functions/serverAddres";
+import editImg from "../../../../img/icons/edit-48-black.png";
+import okImg from "../../../../img/icons/ok-50-black.png";
 
 const CasePhoto = (props)=>{
 
@@ -66,7 +68,7 @@ const CasePhoto = (props)=>{
                     <img src={`${imgCase}`} alt="" />
                     <Loadpic show = {loading}/>
                         {props.level ? <form id="caseImgEdit">
-                             {imgSave ? <span className="case__edit__img__ok" onClick={()=>{saveImg()}}>OK</span> : <label htmlFor="uploadbtn" className="case__edit__img">Edit</label> }
+                             {imgSave ? <span className="case__edit__img__ok" onClick={()=>{saveImg()}}><img src={okImg} alt="" /></span> : <label htmlFor="uploadbtn" className="case__edit__img"><img src={editImg} alt="" /></label> }
                             <input onChangeCapture={()=>{changePic("caseImgEdit")}} multiple id="uploadbtn" type="file" name="uploadbtn"/>
                         </form>:""}
                 </div>

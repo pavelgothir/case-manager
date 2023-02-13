@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { AmountCases, getCategoriesStat, getSize } from "../../../services/statistic-api";
+import { AmountCases, getCasesHappy, getCategoriesStat, getSize } from "../../../services/statistic-api";
 import LoadingPage from "../../Loading/LoadingPage";
 import LineG from "./Graphics/LineG";
 import Circle from "./Graphics/Circle";
@@ -48,7 +48,7 @@ const Statistic = () =>{
     const [size, setSize] = useState(null);
     useEffect(()=>{
         AmountCases().then((res) => {
-            console.log(res)
+            if(res?.message) return console.log(res)
             var arr = res.mas;
             var result = {};
             var texts = {}
@@ -65,6 +65,7 @@ const Statistic = () =>{
             setAmountCases(res.count);
             });
         getSize().then((res) =>{
+          if(res?.message) return console.log(res)
           setSize( {
             labels: ['Вільно','Зайнято'],
             datasets: [{
@@ -76,6 +77,9 @@ const Statistic = () =>{
           })
         })
         getCategoriesStat().then((data) => {
+          console.log(data)
+        });
+        getCasesHappy().then((data) => {
           console.log(data)
         });
     },[])

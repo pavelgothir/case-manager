@@ -200,3 +200,6 @@ input[type=color]::-moz-color-swatch {
     margin-top: 50px;
   }
 }
+.wrap__content{
+  min-height: 100vh;
+}

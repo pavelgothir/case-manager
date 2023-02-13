@@ -19,7 +19,7 @@ const localToken = localStorage.getItem("token");
 const MainContent = ()=>{
   const dispatch = useDispatch();
   const {isAuth} = useAuth();
-  console.log(isAuth)
+  console.log(localToken)
     return isAuth ?(
         <div className='wrap__content'>
           <Routes>

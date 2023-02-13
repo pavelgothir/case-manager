@@ -35,14 +35,15 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-color: #fff;
     padding: 2px 5px;
     cursor: pointer;
     transition: all .3s;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
 }
 .case__edit__img:hover{
     transform: scale(1.1);
-    background-color: aliceblue;
 }
 #uploadbtn{
     visibility: hidden;
@@ -65,6 +66,7 @@
     display: flex;
     align-items: center;
 }
+
 .case__info__card__img img{
     width: 100%;
 }
@@ -115,7 +117,7 @@ margin-left: 10%;
     position: absolute;
     top: 0;
     left: 0;
-    background-color: green;
+    background-color: rgb(43, 163, 184);
     padding: 2px 5px;
     cursor: pointer;
     transition: all .3s;
@@ -123,10 +125,11 @@ margin-left: 10%;
     font-weight: 900;
     font-size: 22px;
     border-radius: 5px;
+    width: 30px;
+    height: 30px;
 }
 .case__edit__img__ok:hover{
     transform: scale(1.1);
-    background-color: rgb(35, 133, 15);
 }
 .plan__modal{
     width: 100%;

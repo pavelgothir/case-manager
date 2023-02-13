@@ -12,6 +12,7 @@
     position: fixed;
     right: 0;
     top: 60px;
+    height: 100%;
 }
 .ul{
     list-style: none;
@@ -31,6 +32,22 @@ nav a.active{
 .a.active{
     color: #f4f;
 }
-.control img{
+.control__nav img{
     width: 30px;
+}
+.control__nav{
+    display: flex;
+    justify-content: space-around;
+}
+.profile:hover{
+    background-color: #000;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
+.logout:hover{
+    background-color: #f00;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
 }

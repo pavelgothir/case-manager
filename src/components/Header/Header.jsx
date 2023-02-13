@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 
 import logo from "../../img/logo.png";
-import arrow from "../../img/arrow.png";
+import phoneImg from "./../../img/icons/phonebook-48.png";
+import addCaseImg from "./../../img/icons/add-user-64.png";
+
 import "./Header.css";
 import Nav from "./Menu/Nav";
 import { NavLink } from "react-router-dom";
@@ -13,9 +15,9 @@ import axios from "axios";
 import s from "./header.module.css";
 import Menu from "./Menu/Menu";
 import SearchMenu from "./Menu/SearchMenu";
-import profileImg from "./../../img/icons/cat-profile-50.png"
-import logoutImg from "./../../img/icons/logout-50.png"
+
 import ModalErrorConnection from "../Modals/ModalErrorConnection";
+import Bell from "./Menu/Bell";
 const Header = () => {
   const [errorNet, setErrorNet] = useState(null);
   const localToken = localStorage.getItem("token");
@@ -31,11 +33,13 @@ const Header = () => {
         data: JSON.stringify({ token: localToken }),
       })
         .then((data) => {
+          data = data.data;
           if ("message" in data) {
             dispatch(removeUser());
+            console.log(data,125);
           }
           if (data == "null") {
-            console.log(data);
+            console.log(data,125);
             dispatch(removeUser());
           } else {
             // console.log(data)
@@ -59,15 +63,20 @@ const Header = () => {
         </div>
         <SearchMenu />
         <div className={s.control} >
-            <a className={s.a} href={`/user?${localStorage.getItem("id")}`}><img src={profileImg} alt="" /></a>
+                <div className={s.logout}>
+                    <NavLink className={s.a} to="/add-case"><img className={s.logout} src={addCaseImg} alt="" /></NavLink>
+                </div>
+                <div className={s.profile}> 
+                  <NavLink className={s.a} to="/contacts"><img className={s.logout} src={phoneImg} alt="" /></NavLink>
+                </div>
+                
         </div>
+        
         <div className={s.control}>
-        <NavLink className={s.a} onClick={()=>{dispatch(removeUser())}} to="/login"><img className={s.logout} src={logoutImg} alt="" /></NavLink>
-        </div>
-        
-        
         <Menu active={active} close={()=>{setActive(!active) 
           return !active}} />
+          <Bell />
+          </div>
       </div>
     </header>
     {active ? <Nav  close={()=>{setActive(!active)}}/> : null}

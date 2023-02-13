@@ -15,9 +15,14 @@ import {serverAddres } from "../../Functions/serverAddres";
 import ExportPDF from "./Info/ExportPDF";
 import LoadingPage from "./../../Loading/LoadingPage";
 import { checkRight } from "../../Functions/checkRight";
+import setImg from "../../../img/icons/settings-50-black.png";
+import editImg from "../../../img/icons/edit-48-black.png";
+import cameraImg from "../../../img/icons/camera-48-black.png";
+import SetCase from "./Info/SetCase";
 const Case = ()=>{
     const [post, setPost] = useState({id:"",contact:{caseName:""},photos:[],notes:[]});
     const [editActive, setEditActive] = useState(null)
+    const [openSetting, setOpenSetting] = useState(false)
     const [page, setPage] = useState({
         loading:true,
         cases:false,
@@ -91,33 +96,34 @@ const Case = ()=>{
     }
     return !!post.id ?(
         <div className="case__wrap">
-            {console.log(post.contact)}
+            <div className="set__case__ico">
+                <img className="setImg" src={setImg} alt=""
+                onClick={()=>{setOpenSetting(!openSetting)}} />
+                {
+                    checkRight(post.level, "editOwnCase") || checkRight(post.level, "editSomeonesCase") && post.contact.userId !== localStorage.getItem("id")
+                ?<div>
+                <img className="editImg" src={editImg} alt=""
+                onClick={()=>{
+                    setEditActive(true)
+                }} />
+            </div> : null}   
+
+            <img src={cameraImg} alt="" />
+            </div>
         <div className="case__contact__info">
             <div>
                 <CasePhoto url={`${post.contact.imgUrl}`} level = {checkRight(post.level, "editOwnCase")} />
             </div>
             <div><h1 className="case__title">{post.contact.surname} {post.contact.firstName} {post.contact.secondName} <span>№ {post.id}</span></h1>
-                <CaseShortInfo info = {post.contact} />
-                
-            </div>
-            {
-            checkRight(post.level, "editOwnCase") || checkRight(post.level, "editSomeonesCase") && post.contact.userId !== localStorage.getItem("id")
-            ?<div>
-                <button className="primary__btn"
-                onClick={()=>{
-                    setEditActive(true)
-                }}>Редагувати</button>
-            </div> :""}    
+                <CaseShortInfo info = {post.contact} />   
+            </div>     
         </div> 
         <div className="container__grid__two">   
             <div className="connections__inner">
                 <h2>Зв'язки кейса з іншими кейсами</h2>
                 <Connections id={post.id} info = {post.contact} level = {checkRight(post.level, "connectionsCase")}/>
             </div>
-            {checkRight(post.level,"apiPdfCase")? <div className="pdf__inner">
-                <h2>Експорт у форматі PDF</h2>
-                <ExportPDF />  
-            </div>:""}
+            
            
             {false ? <JournalActive info={post.activity} /> : ""}
             { post.contact.dateDogovir.length > 1 ? <PlanActive info = {post.plan == "" ? null : post.plan} level = {checkRight(post.level, "createIndividualPlan")}/> : 
@@ -140,6 +146,7 @@ const Case = ()=>{
             {editActive ? <EditCaseInfo caseInfo = {post.contact} close = {()=>{
                 setEditActive(null)
             }}/>:null}
+            {openSetting ? <SetCase id={post.id} caseInfo = {post.contact} level = {post.level} close = {()=>{setOpenSetting(!openSetting)}}/> : null}
         </div>
         
     ):(
