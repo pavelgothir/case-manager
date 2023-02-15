@@ -1,5 +1,6 @@
 import React from "react";
 import { checkRight } from "../../../Functions/checkRight";
+import Connections from "./Connections";
 import ExportPDF from "./ExportPDF";
 import ChangeUser from "./Settings/ChangeUser";
 import s from "./Settings/set.module.css"
@@ -22,6 +23,12 @@ const SetCase = ({caseInfo,close,level,id})=>{
                 <div className={s.user__wrap}>
                     <p>Експортувати кейс у ПДФ</p>
                     {checkRight(level,"apiPdfCase") ? <ExportPDF />  : <p><i>У вас немає прав</i></p>}
+                </div>
+                <div className={s.user__wrap}>
+                <div className="connections__inner">
+                    <p>Зв'язки кейса з іншими кейсами</p>
+                        {checkRight(level,"connectionsCase") ? <Connections id={id} caseInfo = {caseInfo}/>  : <p><i>У вас немає прав</i></p>}     
+                    </div>
                 </div>
             </div>
         </div>

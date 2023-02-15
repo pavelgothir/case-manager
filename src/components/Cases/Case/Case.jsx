@@ -19,6 +19,7 @@ import setImg from "../../../img/icons/settings-50-black.png";
 import editImg from "../../../img/icons/edit-48-black.png";
 import cameraImg from "../../../img/icons/camera-48-black.png";
 import SetCase from "./Info/SetCase";
+import GetConnections from "./Info/GetConnections";
 const Case = ()=>{
     const [post, setPost] = useState({id:"",contact:{caseName:""},photos:[],notes:[]});
     const [editActive, setEditActive] = useState(null)
@@ -115,16 +116,12 @@ const Case = ()=>{
                 <CasePhoto url={`${post.contact.imgUrl}`} level = {checkRight(post.level, "editOwnCase")} />
             </div>
             <div><h1 className="case__title">{post.contact.surname} {post.contact.firstName} {post.contact.secondName} <span>№ {post.id}</span></h1>
-                <CaseShortInfo info = {post.contact} />   
+                <CaseShortInfo info = {post.contact} />  
+                <GetConnections id={post.id}/> 
             </div>     
+  
         </div> 
         <div className="container__grid__two">   
-            <div className="connections__inner">
-                <h2>Зв'язки кейса з іншими кейсами</h2>
-                <Connections id={post.id} info = {post.contact} level = {checkRight(post.level, "connectionsCase")}/>
-            </div>
-            
-           
             {false ? <JournalActive info={post.activity} /> : ""}
             { post.contact.dateDogovir.length > 1 ? <PlanActive info = {post.plan == "" ? null : post.plan} level = {checkRight(post.level, "createIndividualPlan")}/> : 
             <div className="plan__active">

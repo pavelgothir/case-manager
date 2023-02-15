@@ -6,11 +6,13 @@ import s from "./bell.module.css";
 import bellImg from "./../../../img/icons/bell-50.png";
 import axios from "axios";
 import { serverAddres } from "../../Functions/serverAddres";
+import { NavLink } from "react-router-dom";
 const Bell = ()=>{
  
     const [bells, setBells] = useState([])
-    const [bellsCount, setBellsCount] = useState(0)
+    const [bellsCount, setBellsCount] = useState(bells.length)
     const [active,setActive] = useState(false)
+    const [read,setRead] = useState([])
     function getBells(){
         let obj = {
             id: localStorage.getItem("id"),
@@ -23,18 +25,31 @@ const Bell = ()=>{
             data: JSON.stringify(obj),
           })
             .then((data) => {
-                console.log(data.data)
-        
-                        setBellsCount(data.data.length)
-                        setBells(data.data)
-                   
+                setBellsCount(data.data.length)
+                setBells(data.data)       
+            })
+            .catch((error) => console.log(error))
+    }
+    function getAllBells(){
+        let obj = {
+            id: localStorage.getItem("id"),
+            token: localStorage.getItem("token"),
+        }
+        axios({
+            url: serverAddres("user/get-all-notification.php"),
+            method: "POST",
+            header: { 'Content-Type': 'application/json;charset=utf-8' },
+            data: JSON.stringify(obj),
+          })
+            .then((data) => {
+                setRead(data.data)       
             })
             .catch((error) => console.log(error))
     }
     useEffect(()=>{
         
         getBells()
-       
+        getAllBells()
       },[])
     return(
         <div className={s.bell__wrap}>
@@ -45,18 +60,34 @@ const Bell = ()=>{
                 <div className={`${s.black} ${s.active}`}onClick={()=>{
                 setActive(!active)
             }}></div>
-                <div>
-                    <div className={`${s.items} ${s.active}`}>
+                <div className={`${s.items} ${s.active}`}>
+                    <div>
                         {bells.map((item,index)=>{
                             return(
-                                <div className={s.item} key={index + Math.floor(Math.random() * 5000)} onClick={()=>{
+                                <div className={s.item} key={item.id * index} onClick={()=>{
                                     doneBells(item.id);
+                                    /*let bul = bells;
+                                    setBells(bul.splice(index,1))
+                                    setBellsCount(bells.length)*/
+                                    getBells()
                                 }}>
-                                    {item.value.message}
+                                    <div className={s.date__bell}>{item.date}</div>
+                                    <div className={s.link__item}>{item.value.message}</div>   
                                 </div>
                             )
                         })}
+                        <div className={s.read__wrap}>
+                            {read.map((item,index)=>{
+                                return(
+                                    <div className={s.item__read} key={index + Math.floor(Math.random() * 5000)}>
+                                        <div className={s.date__bell}>{item.date}</div>
+                                        <div className={s.link__item}>{item.value.message}</div>   
+                                    </div>
+                                )
+                            })}  
+                        </div>
                     </div>
+
                 </div>
             </div>:null}
         </div>

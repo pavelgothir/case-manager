@@ -131,6 +131,24 @@ margin-left: 10%;
 .case__edit__img__ok:hover{
     transform: scale(1.1);
 }
+.er__con__wrap{
+    border: solid 3px var(--main-color);
+    margin-top: 15px;
+    border-radius: 10px;
+}
+.er__con__inner{
+    margin: auto;
+}
+.er__con__from{
+    padding: 5px;
+    background-color: #b399cb;
+}
+.er__con__inner p{
+    margin: 3px;
+}
+.er__con__inner a{
+    color: #000;
+}
 .plan__modal{
     width: 100%;
     height: 100vh;

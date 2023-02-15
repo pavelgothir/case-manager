@@ -84,3 +84,9 @@
         height: 0;
     }
 }
+@media screen and (max-width:600px) {
+    .results{
+        width: 165%;
+        font-size: 14px;
+    }
+}

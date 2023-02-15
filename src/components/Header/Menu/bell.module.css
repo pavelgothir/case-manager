@@ -8,12 +8,11 @@
     grid-template-columns: 70% 30%;
 }
 .black{
-    background-color: rgba(0, 0, 0, 0.201);
     transition: all .3s;
     width: 0;
 }
 .items{
-    background-color: var(--main-color);
+    background-color: #fff;
     height: 100%;
     float: right;
     display: flex;
@@ -21,7 +20,8 @@
     align-items: center;
     overflow-y: scroll;
     grid-template-columns: 1fr;
-    gap: 15px;
+    border-left: solid 3px var(--main-color);
+    position: relative;
 }
 .item{
     width: 80%;
@@ -31,6 +31,8 @@
     padding-bottom: 15px;
     cursor: pointer;
     transition: all .5s;
+    background-color: var(--second-color);
+    border-bottom: solid 3px var(--main-color);
 }
 .item:hover{
     background-color: aquamarine;
@@ -76,6 +78,26 @@
     justify-content: center;
 
 }
+.date__bell{
+    font-size: 12px;
+    font-weight: 600;
+    float: right;
+}
+.link__item{
+    color: #000;
+    font-weight: 400;
+}
+.item__read{
+    width: 80%;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    cursor: pointer;
+    transition: all .5s;
+    background-color: #eeecf1;
+    border-bottom: solid 3px var(--main-color);
+}
 @keyframes active {
     from{
         width: 0;
@@ -91,5 +113,10 @@
     }
     to{
         transform: rotate(-10deg);
+    }
+}
+@media screen and (max-width:600px) {
+    .wrap__bells{
+        grid-template-columns: 20% 80%;
     }
 }
