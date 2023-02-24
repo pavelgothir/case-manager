@@ -4,10 +4,12 @@ import s from "./events.module.css";
 import delImg from "./../../img/icons/delete-48.png"
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import AddEvent from "./AddEvent";
+import settingImg from "./../../img/icons/settings-50-black.png"
 const Events = ()=>{
-
-    const [events, setEvents] = useState([])
-    useEffect(()=>{
+    const [control, setControl] = useState(false)
+    const [events, setEvents] = useState([]);
+    function getEvents(){
         let obj = {
             id: localStorage.getItem("id"),
             token: localStorage.getItem("token"),
@@ -23,8 +25,21 @@ const Events = ()=>{
             setEvents(data.data)   
         })
         .catch((error)=>console.log(error)) 
+    }
+    useEffect(()=>{
+        getEvents()
     },[])
-    return(<div className={s.wrap}>
+    return(
+    <div className={s.wrap}>
+        <div className={s.control}>
+                <div className={s.panel}>
+                    <div className={s.panel__item}>
+                        <img src={settingImg} className={s.panel__img} alt="" onClick={()=>{
+                            setControl(!control)
+                        }} />
+                    </div>
+                </div>
+            </div>
         <h1>Івенти</h1>
         <div className={s.inner}>
                 {events.map((item,index)=>{
@@ -44,7 +59,11 @@ const Events = ()=>{
                 </div>)
                 })}
         </div>
-    </div>)
+        {control ? <AddEvent getEvents = {()=>{getEvents()}} close = {()=>{
+            setControl(false)
+        }}/> : null}
+    </div>
+    )
 }
 
 export default Events;

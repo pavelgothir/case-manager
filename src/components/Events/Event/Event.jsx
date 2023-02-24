@@ -148,7 +148,7 @@ const Event = ()=>{
                     </div>
                     <div>
                         <p>Учасники</p>
-                        <GetUsers users={usersMemC} id={event.id}/>
+                        <GetUsers type = "case" users={usersMemC} id={event.id}/>
                     </div>
                     </div>
                 </div>

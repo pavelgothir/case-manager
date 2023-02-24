@@ -39,17 +39,40 @@ const SpecificateForm = ({props, active,close}) =>{
             editSomeonesCase: document.querySelector("#edit__someones__case").checked,
             editOwnCase: document.querySelector("#edit__own__case").checked,
             loadCaseFiles: document.querySelector("#loadCaseFiles").checked,
-            changeResponsibleCase: document.querySelector("#change__responsible__for__case").checked,
+            switchCase: document.querySelector("#switchCase").checked,
             createIndividualPlan: document.querySelector("#create__individual__plan").checked,
             apiPdfCase: document.querySelector("#api__pdf__case").checked,
-            apiUpdateProgram: document.querySelector("#api__update__program").checked,
             yourCases: document.querySelector("#yourCases").checked,
-            createContact:document.querySelector("#createContact").checked,
-            connectionsCase:document.querySelector("#connectionsCase").checked,
+            addConnectionCase:document.querySelector("#addConnectionCase").checked,
             notesCase:document.querySelector("#notesCase").checked,
             helpesCase:document.querySelector("#helpesCase").checked,
             lookUserAll:document.querySelector("#lookUserAll").checked,
             lookUserContact:document.querySelector("#lookUserContact").checked,
+
+            loadEventDocs:document.querySelector("#loadEventDocs").checked,
+            accessEvent:document.querySelector("#accessEvent").checked,
+            addEventPlan:document.querySelector("#addEventPlan").checked,
+            createEvent:document.querySelector("#createEvent").checked,
+            addEventFeed:document.querySelector("#addEventFeed").checked,
+            addEventMember:document.querySelector("#addEventMember").checked,
+            addEventMemberCase:document.querySelector("#addEventMemberCase").checked,
+            events:document.querySelector("#events").checked,
+            getEventFile:document.querySelector("#getEventFile").checked,
+            getEventPlan:document.querySelector("#getEventPlan").checked,
+            apiUpdateProgram:document.querySelector("#apiUpdateProgram").checked,
+            addCategoriesCase:document.querySelector("#addCategoriesCase").checked,
+            addCategoriesContacts:document.querySelector("#addCategoriesContacts").checked,
+            createContact:document.querySelector("#createContact").checked,
+            deleteCategoriesCase:document.querySelector("#deleteCategoriesCase").checked,
+            deleteCategoriesContact:document.querySelector("#deleteCategoriesContact").checked,
+            editContact:document.querySelector("#editContact").checked,
+            deleteContact:document.querySelector("#deleteContact").checked,
+            loadResources:document.querySelector("#loadResources").checked,
+            getResources:document.querySelector("#getResources").checked,
+            statisticSize:document.querySelector("#statisticSize").checked,
+            statisticAmountCases:document.querySelector("#statisticAmountCases").checked,
+            getEventMembers:document.querySelector("#getEventMembers").checked,
+
         }
         for(let i = 0; i < masCategories.length; i++){
             specificationObj[document.querySelector(`#cat${i}`).value] = document.querySelector(`#cat${i}`).checked;
@@ -119,9 +142,12 @@ const SpecificateForm = ({props, active,close}) =>{
         </div>
         <div className="set__modal__content__categories__of__cases  set__cont">
             <div className="set__modal__content__labels">
-            <h3>Категорії контактів, які можна створювати</h3>
+            <h3>Контакти</h3>
                         {CategoriesMasContact(categoriesContact, level)}
                         {categoriesStrContact}
+                
+                <label htmlFor="deleteContact"><input defaultChecked={"deleteContact" in level ? level.deleteContact : false} type="checkbox" name="deleteContact" id="deleteContact" className="set__modal__content__common__className" /> Видалити контакт</label>
+                <label htmlFor="editContact"><input defaultChecked={"editContact" in level ? level.editContact : false} type="checkbox" name="editContact" id="editContact" className="set__modal__content__common__className" /> Редагувати контакт</label>
             </div>
         </div>
         <div className="set__modal__content__categories__of__cases  set__cont">
@@ -141,7 +167,12 @@ const SpecificateForm = ({props, active,close}) =>{
                 <label htmlFor="distribution__of__users__rights"><input defaultChecked={"specificationUsers" in level ? level.specificationUsers : false} type="checkbox" name="distribution__of__users__rights" id="distribution__of__users__rights" className="set__modal__content__common__className" /> Розподіл прав доступу</label>
                 <label htmlFor="add__and__edit__categories__of__cases"><input defaultChecked={"addEditCategoriesCase" in level ? level.addEditCategoriesCase : false} type="checkbox" name="add__and__edit__categories__of__cases" id="add__and__edit__categories__of__cases" className="set__modal__content__common__className" /> Додавати і редагувати категорії кейсів</label>
                 <label htmlFor="add__and__edit__categories__of__users"><input defaultChecked={"addEditCategoriesUser" in level ? level.addEditCategoriesUser : false} type="checkbox" name="add__and__edit__categories__of__users" id="add__and__edit__categories__of__users" className="set__modal__content__common__className" /> Додавати і редагувати категорії користувачів</label>
+                <label htmlFor="addCategoriesCase"><input defaultChecked={"addCategoriesCase" in level ? level.addCategoriesCase : false} type="checkbox" name="addCategoriesCase" id="addCategoriesCase" className="set__modal__content__common__className" /> Додавати категорії кейсів</label>
                 <label htmlFor="createContact"><input defaultChecked={"createContact" in level ? level.createContact : false} type="checkbox" name="createContact" id="createContact" className="set__modal__content__common__className" /> Додавати і редагувати категорії контактів</label>
+                <label htmlFor="addCategoriesContacts"><input defaultChecked={"addCategoriesContacts" in level ? level.addCategoriesContacts : false} type="checkbox" name="addCategoriesContacts" id="addCategoriesContacts" className="set__modal__content__common__className" /> Додавати категорії контактів</label>
+                <label htmlFor="deleteCategoriesCase"><input defaultChecked={"deleteCategoriesCase" in level ? level.deleteCategoriesCase : false} type="checkbox" name="deleteCategoriesCase" id="deleteCategoriesCase" className="set__modal__content__common__className" /> Видалити  категорії кейсів</label>
+                <label htmlFor="deleteCategoriesContact"><input defaultChecked={"deleteCategoriesContact" in level ? level.deleteCategoriesContact : false} type="checkbox" name="deleteCategoriesContact" id="deleteCategoriesContact" className="set__modal__content__common__className" /> Видалити категорії контактів</label>
+                
             </div>
         </div>
         <div className="set__modal__content__case  set__cont">  
@@ -151,25 +182,55 @@ const SpecificateForm = ({props, active,close}) =>{
                 <label htmlFor="createCase"><input defaultChecked={"createCase" in level ? level.createCase : false} type="checkbox" name="createCase" id="createCase" className="set__modal__content__common__className" /> Створення кейсу</label>
                 <label htmlFor="edit__own__case"><input defaultChecked={"editOwnCase" in level ? level.editOwnCase : false} type="checkbox" name="edit__own__case" id="edit__own__case" className="set__modal__content__common__className" /> Редагувати свій кейс</label>
                 <label htmlFor="loadCaseFiles"><input defaultChecked={"loadCaseFiles" in level ? level.loadCaseFiles : false} type="checkbox" name="loadCaseFiles" id="loadCaseFiles" className="set__modal__content__common__className" /> Завантаження файлів</label>
-                <label htmlFor="change__responsible__for__case"><input defaultChecked={"changeResponsibleCase" in level ? level.changeResponsibleCase : false} type="checkbox" name="change__responsible__for__case" id="change__responsible__for__case" className="set__modal__content__common__className" /> Змінити відповідального за кейс/передати свій кейс</label>
+                <label htmlFor="switchCase"><input defaultChecked={"switchCase" in level ? level.switchCase : false} type="checkbox" name="switchCase" id="switchCase" className="set__modal__content__common__className" /> Змінити відповідального за кейс/передати свій кейс</label>
                 <label htmlFor="create__individual__plan"><input defaultChecked={"createIndividualPlan" in level ? level.createIndividualPlan : false} type="checkbox" name="create__individual__plan" id="create__individual__plan" className="set__modal__content__common__className" /> Створення індивідуального плану</label>
-                <label htmlFor="connectionsCase"><input defaultChecked={"connectionsCase" in level ? level.connectionsCase : false} type="checkbox" name="connectionsCase" id="connectionsCase" className="set__modal__content__common__className" /> Створення зв'язків між кейсами</label>
+                <label htmlFor="addConnectionCase"><input defaultChecked={"addConnectionCase" in level ? level.addConnectionCase : false} type="checkbox" name="addConnectionCase" id="addConnectionCase" className="set__modal__content__common__className" /> Створення зв'язків між кейсами</label>
                 <label htmlFor="notesCase"><input defaultChecked={"notesCase" in level ? level.notesCase : false} type="checkbox" name="notesCase" id="notesCase" className="set__modal__content__common__className" /> Додавати нотатки</label>
                 <label htmlFor="helpesCase"><input defaultChecked={"helpesCase" in level ? level.helpesCase : false} type="checkbox" name="helpesCase" id="helpesCase" className="set__modal__content__common__className" /> Додавати надану допомогу</label>
             </div>
         </div>
         <div className="set__modal__content__case  set__cont">  
             <div className="set__modal__content__labels">
-                <h3>Користувач</h3>
-                <label htmlFor="lookUserAll"><input defaultChecked={"lookUserAll" in level ? level.lookUserAll : false} type="checkbox" name="lookUserAll" id="lookUserAll" className="set__modal__content__common__className" />Перегляд профілів користувачів (повний доступ)</label>
-                <label htmlFor="lookUserContact"><input defaultChecked={"lookUserContact" in level ? level.lookUserContact : false} type="checkbox" name="lookUserContact" id="lookUserContact" className="set__modal__content__common__className" />Перегляд профілів користувачів (тільки контактна інформація)</label>
+            <h3>Івенти</h3>
+                <label htmlFor="loadEventDocs"><input defaultChecked={"loadEventDocs" in level ? level.loadEventDocs : false} type="checkbox" name="loadEventDocs" id="loadEventDocs" className="set__modal__content__common__className" /> Завантаження медіа файлів та документів</label>
+                <label htmlFor="accessEvent"><input defaultChecked={"accessEvent" in level ? level.accessEvent : false} type="checkbox" name="accessEvent" id="accessEvent" className="set__modal__content__common__className" /> Доступ до івенту</label>
+                <label htmlFor="createEvent"><input defaultChecked={"createEvent" in level ? level.createEvent : false} type="checkbox" name="createEvent" id="createEvent" className="set__modal__content__common__className" />Створити івент</label>
+                <label htmlFor="addEventPlan"><input defaultChecked={"addEventPlan" in level ? level.addEventPlan : false} type="checkbox" name="addEventPlan" id="addEventPlan" className="set__modal__content__common__className" /> Додати план до івенту</label>
+                <label htmlFor="addEventFeed"><input defaultChecked={"addEventFeed" in level ? level.addEventFeed : false} type="checkbox" name="addEventFeed" id="addEventFeed" className="set__modal__content__common__className" /> Додати відгук до плану</label>
+                <label htmlFor="addEventMember"><input defaultChecked={"addEventMember" in level ? level.addEventMember : false} type="checkbox" name="addEventMember" id="addEventMember" className="set__modal__content__common__className" /> Додати учасника івенту (адміністратора)</label>
+                <label htmlFor="addEventMemberCase"><input defaultChecked={"addEventMemberCase" in level ? level.addEventMemberCase : false} type="checkbox" name="addEventMemberCase" id="addEventMemberCase" className="set__modal__content__common__className" /> Додати учасника івенту </label>
+                <label htmlFor="events"><input defaultChecked={"events" in level ? level.events : false} type="checkbox" name="events" id="events" className="set__modal__content__common__className" /> Доступ до списку івентів</label>
+                <label htmlFor="getEventFile"><input defaultChecked={"getEventFile" in level ? level.getEventFile : false} type="checkbox" name="getEventFile" id="getEventFile" className="set__modal__content__common__className" /> Доступ до завантажених файлів</label>
+                <label htmlFor="getEventPlan"><input defaultChecked={"getEventPlan" in level ? level.getEventPlan : false} type="checkbox" name="getEventPlan" id="getEventPlan" className="set__modal__content__common__className" /> Доступ до плану івента</label>
+                <label htmlFor="getEventMembers"><input defaultChecked={"getEventMembers" in level ? level.getEventMembers : false} type="checkbox" name="getEventMembers" id="getEventMembers" className="set__modal__content__common__className" /> Доступ до учасників івенту</label>
+            </div>
+        </div>
+        <div className="set__modal__api__case  set__cont">  
+            <div className="set__modal__content__labels">
+            <h3>Користувачі</h3>
+               <label htmlFor="lookUserAll"><input defaultChecked={"lookUserAll" in level ? level.lookUserAll : false} type="checkbox" name="lookUserAll" id="lookUserAll" className="set__modal__content__common__className" /> Дступ до всіх профілів користувачів (повний доступ) </label>
+               <label htmlFor="lookUserContact"><input defaultChecked={"lookUserContact" in level ? level.lookUserContact : false} type="checkbox" name="lookUserContact" id="lookUserContact" className="set__modal__content__common__className" />  Дступ до всіх профілів користувачів (контактні дані) </label>
+            </div>
+        </div>
+        <div className="set__modal__content__case  set__cont">  
+            <div className="set__modal__content__labels">
+                <h3>Ресурси</h3>
+                <label htmlFor="loadResources"><input defaultChecked={"loadResources" in level ? level.loadResources : false} type="checkbox" name="loadResources" id="loadResources" className="set__modal__content__common__className" />Завантаження ресурсів</label>
+                <label htmlFor="getResources"><input defaultChecked={"getResources" in level ? level.getResources : false} type="checkbox" name="getResources" id="getResources" className="set__modal__content__common__className" /> Доступ до ресурсів</label>
+            </div>
+        </div>
+        <div className="set__modal__content__case  set__cont">  
+            <div className="set__modal__content__labels">
+                <h3>Статистика</h3>
+                <label htmlFor="statisticSize"><input defaultChecked={"statisticSize" in level ? level.statisticSize : false} type="checkbox" name="statisticSize" id="statisticSize" className="set__modal__content__common__className" />Зайнято місця у хмарі</label>
+                <label htmlFor="statisticAmountCases"><input defaultChecked={"statisticAmountCases" in level ? level.statisticAmountCases : false} type="checkbox" name="statisticAmountCases" id="statisticAmountCases" className="set__modal__content__common__className" /> Кількість кейсів у програмі</label>
             </div>
         </div>
         <div className="set__modal__api__case  set__cont">  
             <div className="set__modal__content__labels">
             <h3>API</h3>
                <label htmlFor="api__pdf__case"><input defaultChecked={"apiPdfCase" in level ? level.apiPdfCase : false} type="checkbox" name="api__pdf__case" id="api__pdf__case" className="set__modal__content__common__className" /> Експорт кейса у ПДФ </label>
-               <label htmlFor="api__update__program"><input defaultChecked={"apiUpdateProgram" in level ? level.apiUpdateProgram : false} type="checkbox" name="api__update__program" id="api__update__program" className="set__modal__content__common__className" /> Оновлення програми </label>
+               <label htmlFor="apiUpdateProgram"><input defaultChecked={"apiUpdateProgram" in level ? level.apiUpdateProgram : false} type="checkbox" name="apiUpdateProgram" id="apiUpdateProgram" className="set__modal__content__common__className" /> Оновлення програми </label>
             </div>
         </div>
     </div>
