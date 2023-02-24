@@ -12,7 +12,6 @@ const SearchMenu = ()=>{
     const [active, setActive] = useState(false);
     const [load,setLoad] = useState(false);
     const [results,setResults] = useState(null)
-    const [focus,setFocus] = useState(false)
     return(
         <div className={active ? `${s.search__wrap} ${s.active}` : s.search__wrap}>
             <div className={active ? `${s.search__inner} ${s.active}` : s.search__inner}>

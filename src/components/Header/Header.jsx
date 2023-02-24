@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import logo from "../../img/logo.png";
 import phoneImg from "./../../img/icons/phonebook-48.png";
 import addCaseImg from "./../../img/icons/add-user-64.png";
-
+import eventImg from "./../../img/icons/calendar-64-white.png"
 import "./Header.css";
 import Nav from "./Menu/Nav";
 import { NavLink } from "react-router-dom";
@@ -68,6 +68,9 @@ const Header = () => {
                 </div>
                 <div className={s.profile}> 
                   <NavLink className={s.a} to="/contacts"><img className={s.logout} src={phoneImg} alt="" /></NavLink>
+                </div>
+                <div className={s.event}> 
+                  <NavLink className={s.a} to="/events"><img className={s.logout} src={eventImg} alt="" /></NavLink>
                 </div>
                 
         </div>

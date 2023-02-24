@@ -8,8 +8,12 @@ import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import { serverAddres } from "../Functions/serverAddres";
+import SetEvent from "./SetEvent/SetEvent";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const Settings = ()=>{
+const Settings = (props)=>{
+   
     const [page, setPage] = useState({loading:true,effload:false,message:""})
     useEffect(()=>{
         let obj = {
@@ -49,6 +53,7 @@ const Settings = ()=>{
             <SetUser />
             <SetCategories />
             <SetContactCategory />
+            <SetEvent />
         </div>
         
         </div>

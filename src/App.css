@@ -11,7 +11,7 @@ h1,h2,h3{
 }
 a{
   text-decoration: none;
-  color: #fbb911;
+  color: #000;
   font-weight: 600;
 }
 .primary__btn {
@@ -85,7 +85,7 @@ select{
   width: calc(100% - 21px);
   padding: 5px 5px 5px 10px;
 }
-input[type=date]{
+input[type=date],input[type=time]{
   border: solid 3px #b399cb;
   border-radius: 7px;
   width: calc(100% - 21px);
@@ -192,6 +192,10 @@ input[type=color]::-moz-color-swatch {
 }
 .active{
   color: #fbb911!important;
+}
+.video-js{
+  width: 100%;
+  height: auto;
 }
 @media (max-width:700px){
   .wrap__content{

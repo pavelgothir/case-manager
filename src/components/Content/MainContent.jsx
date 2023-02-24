@@ -13,6 +13,8 @@ import Contacts from "../Contacts/Contacts";
 import Resources from "../Resources/Resources";
 import { useDispatch } from "react-redux";
 import { useAuth } from "../../hooks/use-auth";
+import Events from "../Events/Events";
+import Event from "../Events/Event/Event";
 
 const localToken = localStorage.getItem("token");
 
@@ -22,16 +24,18 @@ const MainContent = ()=>{
   console.log(localToken)
     return isAuth ?(
         <div className='wrap__content'>
-          <Routes>
+          <Routes >
             <Route path='/add-case' element={<AddCase />} />
             <Route path='/cases' element={<Cases />} />
             <Route path='/case' element={<Case />} />
             <Route path='/registration' element={<Registration />} />
             <Route path='/login' element={<Login />} />
             <Route path='/user' element={<User />} />
-            <Route path='/settings' element={<Settings />} />
-            <Route path='/contacts' element={<Contacts />} />
+            <Route path='settings' element={<Settings />} />
+            <Route path='/contacts' element={<Contacts/>} />
             <Route path="/resources" element = {<Resources />} />
+            <Route path='events' element={<Events />} />
+            <Route path='events/:link' element={<Event />} />
             <Route index element={<Home />} />
           </Routes>
         </div>

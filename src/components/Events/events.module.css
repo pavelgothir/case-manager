@@ -1,0 +1,38 @@
+.inner{
+    width: 80%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    text-align: center;
+    margin-top: 50px;
+}
+.wrap > h1{
+    text-align: center;
+}
+.res__color{
+    width: 50%;
+    border-radius: 10px;
+    height: 10px;
+    margin: auto;
+}
+.result{
+    border-radius: 15px;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+.res__control{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.link{
+    color: #000;
+}
+@media screen and (max-width:600px) {
+    .inner{
+        grid-template-columns: 1fr;
+    }
+}
