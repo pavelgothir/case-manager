@@ -5,6 +5,7 @@ import Loading from "../../Loading/Loading";
 import { useState } from "react";
 import { serverAddres } from "../../Functions/serverAddres";
 import LoadingPage from "../../Loading/LoadingPage";
+import { changeAps } from "../../Functions/translateString";
 
 
 
@@ -18,8 +19,9 @@ const PhotosForm = ({show})=>{
         for(let i=0; i<data.pic.length; i++){
             formData.append(`images[${i}]`, data.pic[i])
         }
+        
         formData.append("id",window.location.search.slice(1))
-        formData.append("title",data.title)
+        formData.append("title",changeAps(data.title))
         formData.append("userId",localStorage.getItem("id"))
         formData.append("token",localStorage.getItem("token"))
         axios({

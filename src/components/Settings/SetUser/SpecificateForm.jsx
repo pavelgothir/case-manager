@@ -72,6 +72,7 @@ const SpecificateForm = ({props, active,close}) =>{
             statisticSize:document.querySelector("#statisticSize").checked,
             statisticAmountCases:document.querySelector("#statisticAmountCases").checked,
             getEventMembers:document.querySelector("#getEventMembers").checked,
+            getEvent:document.querySelector("#getEvent").checked,
 
         }
         for(let i = 0; i < masCategories.length; i++){

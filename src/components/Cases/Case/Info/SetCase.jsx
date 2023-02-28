@@ -27,7 +27,7 @@ const SetCase = ({caseInfo,close,level,id})=>{
                 <div className={s.user__wrap}>
                 <div className="connections__inner">
                     <p>Зв'язки кейса з іншими кейсами</p>
-                        {checkRight(level,"connectionsCase") ? <Connections id={id} caseInfo = {caseInfo}/>  : <p><i>У вас немає прав</i></p>}     
+                        {checkRight(level,"addConnectionCase") ? <Connections id={id} caseInfo = {caseInfo}/>  : <p><i>У вас немає прав</i></p>}     
                     </div>
                 </div>
             </div>
