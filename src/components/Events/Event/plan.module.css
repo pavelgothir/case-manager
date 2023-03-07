@@ -126,4 +126,10 @@
     .plan{
         grid-template-columns: 1fr;   
     }
+    .time__line{
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+    }
 }

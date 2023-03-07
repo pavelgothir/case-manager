@@ -8,13 +8,15 @@ import EventModal from "./EventModal";
 import GetUsers from "./GetUsers";
 import GetPlans from "./GetPlans";
 import GetDocs from "./GetDocs";
-import GetMedia from "./GetMedia";
+import BigPhoto from "./BigPhoto";
+import Galery from "../../Galery/Galery";
 
 const Event = ()=>{
     const [usersMemC, setUsersMemC] = useState([])
     const [plans,setPlans] = useState([])
     const [docs,setDocs] = useState([])
     const [mediaFile,setMediaFile] = useState([])
+    const [lookPhoto,setLookPhoto] = useState({look:false,link:""})
     function getFiles(id,key){
         let obj = {
             id: localStorage.getItem("id"),
@@ -159,16 +161,19 @@ const Event = ()=>{
                         <GetDocs id={event.id} docs = {docs}/>
                 </div>
                 <div className={s.media}>
-                        <GetMedia id={event.id} media = {mediaFile}/>
+                        <Galery id={event.id} media = {mediaFile} title = "Завантажені медіа файли"/>
+                        
                 </div>
                
             </div>
+            {lookPhoto.look?<BigPhoto link = {lookPhoto.link} close = {()=>{setLookPhoto({...lookPhoto,look:false})}}/>:null}
             {control ? <EventModal getPlans = {(id,key)=>{
                 getPlans(id,key)
             }} getUsers = {(id,key)=>{
                 getUsers(id,key)
             }} info={event} close={()=>{setControl(!control)}}/>:null}
         </div>
+        
         ):(
         <h1>{event.message}</h1>
         )

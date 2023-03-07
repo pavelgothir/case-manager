@@ -30,3 +30,13 @@
     grid-template-columns: 1fr;
     gap: 5px;
 }
+@media screen and (max-width:500px) {
+    .result{
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+    }
+    .inner{
+        gap: 0;
+    }
+}

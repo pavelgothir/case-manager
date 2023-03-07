@@ -7,11 +7,12 @@
     right: 0;
     bottom: 0;
     overflow-y: scroll;
+    z-index: 2;
 }
 .inner{
     width: 100%;
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr 1fr;
     min-height: 100vh;
 }
 .info{
@@ -29,6 +30,7 @@
 }
 .info{
     padding-top: 80px;
+    padding-bottom: 200px;
 }
 .info__inner{
     width: 90%;

@@ -15,8 +15,9 @@ const GetDocs = ({id,docs})=>{
                     docs.map((item,index)=>{
                      return(
                         <div key={item.link} className={s.item}>
-                            <div className={s.list}>
+                            <div className={`${s.list} ${s.list__img}`}>
                                 <a target="_blank" href={item.link} className={s.link__img} download={true}><img src={downloadImg} alt="" /></a>
+                                <ImgFormat img={item.format}/>
                             </div>
                             <div className={s.list}>
                                 <p>{item.title}</p>
@@ -24,9 +25,7 @@ const GetDocs = ({id,docs})=>{
                             <div className={s.list}>
                                 <p>{item.description}</p>
                             </div>
-                            <div className={s.list}>
-                                <ImgFormat img={item.format}/>
-                            </div>
+                            
                         </div>
                      )       
                     })
