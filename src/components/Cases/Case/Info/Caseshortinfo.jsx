@@ -6,17 +6,8 @@ import emailImg from "../../../../img/icons/email-100.png"
 import addressImg from "../../../../img/icons/address-100.png"
 import dateImg from "../../../../img/icons/date-100.png"
 
-function ShowCategories({cats}){
-    console.log(cats)
-    let cat = ""
-    for(let i = 0; i < cats.length; i++){
-        cat += " " + cats[i].text;
-    }
-    return cat;
-}
-
 const CaseShortInfo = ({info})=>{
-    console.log(info)
+
     return(
         <div className="case__info">
             <div className="case__info__inner">

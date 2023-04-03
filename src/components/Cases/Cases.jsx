@@ -66,7 +66,7 @@ const Cases = ()=>{
                 <h2 style={{
                     textAlign:"center"
                 }}>Кейси</h2>
-                {posts ? <GetCases key={"oop"+Math.random()} posts={posts} postsChange= {(p)=>{console.log(p);setPosts(null);setPosts(p)}} />: null}
+                {posts ? <GetCases key={"oop"+Math.random()} posts={posts} postsChange= {(p)=>{setPosts(null);setPosts(p)}} />: null}
                 </>
                 
 

@@ -12,7 +12,3 @@ export function useAuth(){
         userName
     }
 }
-export function test(){
-    //Check();
-    return {mes:"hello"};
-}

@@ -34,8 +34,13 @@ const Nav = ({close}) => {
 
                     </li>
                     <li>
+                        <NavLink className={s.a} onClick={close} to="/calendar">Календар</NavLink>
+                    </li>
+                    <li>
+                        <NavLink className={s.a} onClick={close} to="/events">Події</NavLink>
+                    </li>
+                    <li>
                         <NavLink className={s.a} onClick={close} to="/search">Розширений пошук</NavLink>
-
                     </li>
                     <li>
                         <NavLink className={s.a} onClick={close} to="/settings">Налаштування</NavLink>

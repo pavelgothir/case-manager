@@ -20,6 +20,8 @@ import editImg from "../../../img/icons/edit-48-black.png";
 import cameraImg from "../../../img/icons/camera-48-black.png";
 import SetCase from "./Info/SetCase";
 import GetConnections from "./Info/GetConnections";
+import { giveGoodPhotosCase } from "../../Functions/giveGoodPhotos";
+import Galery from "../../Galery/Galery";
 const Case = ()=>{
     const [post, setPost] = useState({id:"",contact:{caseName:""},photos:[],notes:[]});
     const [editActive, setEditActive] = useState(null)
@@ -52,13 +54,16 @@ const Case = ()=>{
                 res.contact = JSON.parse(res.contact);
                 res.activity = JSON.parse(res.activity);
                 if(res.plan.length !== 0){
-                 res.plan = JSON.parse(res.plan)
+                 res.plan = JSON.parse(res.plan);
                 }
-                
+               // return console.log(res.photos)
                 if(res.photos !== null && res.photos !== ""){
                  res.photos = JSON.parse(res.photos);
+                // return console.log(res.photos)
+                 res.newPhotos = giveGoodPhotosCase(res.photos);
                 }else{
                  res.photos = [];
+                 res.newPhotos = [];
                 }
                 if(res.notes !== null && res.notes !== ""){
                  res.notes = JSON.parse(res.notes);
@@ -66,8 +71,6 @@ const Case = ()=>{
                  res.notes = [];
                 }
                 setPost(res)
-                console.log("AAAAA")
-                console.log(res)
         })
         .catch((error)=>console.log(error)) 
        
@@ -136,8 +139,10 @@ const Case = ()=>{
             <Notes notes = {post.notes} level={checkRight(post.level, "notesCase")}/>
             <CaseGiveHelp level={checkRight(post.level, "helpesCase")}/>
         </div>
-        <div className="media__content">
-            <Photo photos = {post.photos}/>
+        
+        <div className="media__content__">
+        <Galery media = {post.newPhotos} title="Медіа фото"/>
+            
         </div>    
             <PhotosForm photos = {post.photos} show = {post.level?.loadCaseFiles == true || post.level?.root == "true" ? true : false}/>
             {editActive ? <EditCaseInfo caseInfo = {post.contact} close = {()=>{

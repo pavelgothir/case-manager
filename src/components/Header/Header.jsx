@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import logo from "../../img/logo.png";
 import phoneImg from "./../../img/icons/phonebook-48.png";
 import addCaseImg from "./../../img/icons/add-user-64.png";
+import calendarImg from "./../../img/icons/calendar-day-white-64.png";
 import eventImg from "./../../img/icons/calendar-64-white.png"
 import "./Header.css";
 import Nav from "./Menu/Nav";
@@ -18,12 +19,14 @@ import SearchMenu from "./Menu/SearchMenu";
 
 import ModalErrorConnection from "../Modals/ModalErrorConnection";
 import Bell from "./Menu/Bell";
+import moment from "moment";
 const Header = () => {
   const [errorNet, setErrorNet] = useState(null);
   const localToken = localStorage.getItem("token");
   const dispatch = useDispatch();
   const { isAuth } = useAuth();
   const [active, setActive] = useState(false);
+  const today = moment().format('D');
   useEffect(()=>{
     if (window.location.pathname !== "/login") {
       axios({
@@ -63,14 +66,14 @@ const Header = () => {
         </div>
         <SearchMenu />
         <div className={s.control} >
-                <div className={s.logout}>
+                <div>
                     <NavLink className={s.a} to="/add-case"><img className={s.logout} src={addCaseImg} alt="" /></NavLink>
-                </div>
-                <div className={s.profile}> 
-                  <NavLink className={s.a} to="/contacts"><img className={s.logout} src={phoneImg} alt="" /></NavLink>
                 </div>
                 <div className={s.event}> 
                   <NavLink className={s.a} to="/events"><img className={s.logout} src={eventImg} alt="" /></NavLink>
+                </div>
+                <div className={s.calendar}> 
+                  <NavLink className={s.calendar__link} to="/calendar"><img className={`${s.calendar__img} ${s.logout}`} src={calendarImg} alt="" /><span className={s.day__number}>{today}</span></NavLink>
                 </div>
                 
         </div>

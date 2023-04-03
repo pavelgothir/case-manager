@@ -1,4 +1,6 @@
 import React from "react";
+import s from './style.module.css';
+
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -25,6 +27,7 @@ import {
   const Circle = ({data,options})=>{
     return(
         <div>
+          <h2 className={s.title__graph}>Категорії кейсів</h2>
             <Pie
                 data={data}
                 options={options}

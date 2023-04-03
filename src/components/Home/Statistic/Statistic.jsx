@@ -8,6 +8,7 @@ import Circle from "./Graphics/Circle";
 
 import s from "./statistics.module.css"
 import DoughnutB from "./Graphics/DoughnutB";
+import HappyG from "./Graphics/HappyG";
 const bib =  {
   labels: [],
   datasets: [{
@@ -45,6 +46,7 @@ function dadaFunction(texts){
       const a = [];
 const Statistic = () =>{
     const [amountCases, setAmountCases] = useState(null);
+    const [amountHappy, setAmountHappy] = useState(null);
     const [size, setSize] = useState(null);
     useEffect(()=>{
         AmountCases().then((res) => {
@@ -81,6 +83,7 @@ const Statistic = () =>{
         });
         getCasesHappy().then((data) => {
           console.log(data)
+          setAmountHappy(data)
         });
     },[])
    
@@ -88,16 +91,13 @@ const Statistic = () =>{
         <div className={s.home__statistic}>
             <div className={s.amount__cases__wr}>
                 <h2>Кількість унікальних кейсів у програмі <span className={s.amount}>{amountCases}</span></h2>
-                <h2>Графік категорій</h2>
                 <div className={s.stats__grid}>
                    {size == null ? "":<DoughnutB data={size} options={options}/>}
                     {amountCases == null ? "":<LineG data={bib} options = {options}/>}
                     {amountCases == null ? "":<Circle data={bib} options = {options}/>}
-                </div>
-                
-                <div className="page__loading">
-                    <LoadingPage effload={false} message = "Тут буде відображатися Статистика загальна та по всій Україна. Розділ СТАТИСТИКА у процесі розробки" /> 
-                </div>                
+                    {amountHappy == null ? "":<HappyG data={amountHappy} options = {options}/>}
+                    
+                </div>          
             </div>
         </div>
     )

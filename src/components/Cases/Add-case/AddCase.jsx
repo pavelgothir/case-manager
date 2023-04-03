@@ -201,8 +201,12 @@ const AddCase = ()=>{
                             <label htmlFor="happybd">Дата народження</label>
                             <input type="date" id="happybd" name="happybd"
                             onChange={(e)=>{
-                                setAddObj({...addObj,happybd:e.target.value})
-                                console.log(e.target.value)
+                                setAddObj({...addObj,
+                                    happybd:e.target.value,
+                                    year: +e.target.value.slice(0,4),
+                                    month:e.target.value.slice(5,7) - 1,
+                                    day: +e.target.value.slice(8),
+                                })
                             }}/>
                         </div>
                     </div>

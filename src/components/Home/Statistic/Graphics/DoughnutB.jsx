@@ -1,4 +1,6 @@
 import React from "react";
+import s from './style.module.css';
+
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -25,6 +27,7 @@ import {
   const DoughnutB = ({data,options})=>{
     return(
         <div className="test">
+             <h2 className={s.title__graph}>Доступне місце на сервері</h2>
             <Doughnut
                 data={data}
                 options={options}

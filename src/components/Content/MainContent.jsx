@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { useAuth } from "../../hooks/use-auth";
 import Events from "../Events/Events";
 import Event from "../Events/Event/Event";
+import Calendar from "../Calendar/Calendar";
 
 const localToken = localStorage.getItem("token");
 
@@ -36,6 +37,7 @@ const MainContent = ()=>{
             <Route path="/resources" element = {<Resources />} />
             <Route path='events' element={<Events />} />
             <Route path='events/:link' element={<Event />} />
+            <Route path='calendar' element={<Calendar />} />
             <Route index element={<Home />} />
           </Routes>
         </div>

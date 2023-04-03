@@ -27,7 +27,7 @@ const [slider, setSlider] = useState({
                                 <VideoPlayer className={s.video} src={item.link} />
                             </div> 
                         )
-                    }     
+                    }    
                 })}
             </div>
             {slider.show ? <SliderBigger close = {()=>{setSlider({...slider,show:false})}} media={media} ind = {slider.ind}/>:null}

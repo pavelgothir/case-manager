@@ -89,4 +89,11 @@
         width: 165%;
         font-size: 14px;
     }
+    .search__img{
+        width: 30px;
+    }
+    .search__wrap .search__inp{
+        height: 30px;
+        font-size: 15px;
+    }
 }

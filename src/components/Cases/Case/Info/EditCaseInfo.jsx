@@ -19,7 +19,7 @@ const EditCaseInfo = ({caseInfo,close})=>{
         for (var key in data) {
             if(typeof data[key] == 'string' && data[key] !== "") data[key] = data[key].replaceAll("'", "’").replaceAll(/\n/g, "<br />");
           }
-       //return console.log(data);
+     //  return console.log(data);
         await fetch(serverAddres("case/save-infoCase.php"),{
             method:"POST",
             header : {'Content-Type': 'application/json;charset=utf-8'},
@@ -53,6 +53,9 @@ const EditCaseInfo = ({caseInfo,close})=>{
         dateDogovir: caseInfo.dateDogovir,
         numberDogovir: caseInfo.numberDogovir.replaceAll("<br />", '\n'),
         happybd: caseInfo.happybd,
+        year: caseInfo?.month ? caseInfo.year : +caseInfo.happybd.slice(0,4),
+        month: caseInfo?.month ? caseInfo.month : caseInfo.happybd.slice(5,7) - 1,
+        day: caseInfo?.day ? caseInfo.day : +caseInfo.happybd.slice(8),
         categories:[],
         familyHistory:caseInfo.familyHistory.replaceAll("<br />", '\n')
     })
@@ -226,8 +229,16 @@ const EditCaseInfo = ({caseInfo,close})=>{
                             <label htmlFor="happybd">Дата народження</label>
                             <input type="date" id="happybd" name="happybd" defaultValue={addObj.happybd}
                             onChange={(e)=>{
-                                setAddObj({...addObj,happybd:e.target.value})
-                                console.log(e.target.value)
+                                let year = e.target.value.slice(0,4)
+                                let month = e.target.value.slice(5,7)
+                                let day = e.target.value.slice(8)
+                                setAddObj({...addObj,happybd:e.target.value,
+                                    day:+day,
+                                    month:month - 1,
+                                    year:+year
+                                })
+                                
+                            
                             }}/>
                         </div>
                     </div>

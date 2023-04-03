@@ -7,7 +7,7 @@ let categoriesStr = "";
 const Card = (props)=>{
 
     const CategoriesData = ({category, index})=>{
-        console.log(category)
+        
         return (
         <div className="category__circle" title={category.text} style={{backgroundColor: category.color}}>
 
@@ -22,9 +22,6 @@ const Card = (props)=>{
         })  
         return categoriesStr;
     } 
-
-
-    console.log(props)
 
     return(
         <div className="card">
