@@ -27,7 +27,7 @@ const GetResources = ()=>{
                 setInfo({...info,open:false})
             }
         })
-        console.log(info)
+
         return(
             <div className={s.modal__file}>
             <div className={s.modal__file__black} id="modal__file__black" onClick={(e)=>{
@@ -53,9 +53,7 @@ const GetResources = ()=>{
         </div>
         )
     }
-    function File(elems){
-        console.log(elems)
-             
+    function File(elems){             
         return elems.map((elem,ind)=> {
             let imgUrl = "";   
             switch (elem.format){
@@ -135,7 +133,6 @@ const GetResources = ()=>{
     const [info, setInfo] = useState(false)
     useEffect(()=>{
         getResourcesBD().then((res) => {
-            console.log(res)
             setFiles(res)
             setShow(true)
             });

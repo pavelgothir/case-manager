@@ -15,7 +15,6 @@ export function search(addres,val, progres, result){
         },
     })
     .then((data)=>{ 
-        console.log(data.data)
         if(data.data == []) result(null)
         else result(data.data)
         progres(false)

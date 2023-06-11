@@ -91,4 +91,7 @@
     .inner{
         grid-template-columns: 1fr;
     }
+    .inner__modal{
+        grid-template-columns: 1fr 2fr;
+    }
 }

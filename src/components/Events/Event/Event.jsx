@@ -77,7 +77,6 @@ const Event = ()=>{
             data : JSON.stringify(obj),
         })
         .then((data)=>{ 
-            console.log(data.data)
             setPlans(data.data)
         })
         .catch((error)=>console.log(error)) 
@@ -97,17 +96,12 @@ const Event = ()=>{
         })
         .then((data)=>{ 
             setEvent(data.data) 
-            console.log(data.data)
             if(data.data?.id)  {
-                //console.log(getUsers(data.data.id,"eventMemberUser"))
                 getUsers(data.data.id,"eventMemberUser")
                 getUsers(data.data.id,"eventMemberCase")
                 getPlans(data.data.id,"eventPlan")
                 getFiles(data.data.id,"docs")
                 getFiles(data.data.id,"media")
-
-                //
-                //setUsersMemC(getUsers(data.data.id,"eventMemberCase"))
             }
 
         })
@@ -119,7 +113,6 @@ const Event = ()=>{
     useEffect(()=>{
         getEvent();
     },[])
-    console.log(usersMem)
     return !!event.id ? 
         (
         <div className={s.wrap}>

@@ -2,7 +2,6 @@ import React from "react";
 import s from "./error-connection.module.css"
 const ModalErrorConnection = ({error,func})=>{
     let message = ""
-    console.log(error)
     switch (error.code){
         case "ERR_NETWORK" :{
             message = "Помилка з'єднання з сервером. Перевірте з'єднання з інтернетом";

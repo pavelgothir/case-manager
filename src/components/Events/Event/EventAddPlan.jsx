@@ -35,7 +35,6 @@ const EventAddPlan = ({eventID,getPlans})=>{
            data : JSON.stringify(obj),
        })
        .then((data)=>{ 
-           console.log(data.data)
            if(data.data == true){
             getPlans(eventID,"eventPlan")
            }

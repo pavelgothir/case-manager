@@ -24,7 +24,6 @@ const Recovery = ()=>{
             data : JSON.stringify({hash:window.location.search.slice(1)}),
         })
         .then((data)=>{ 
-            console.log(data.data)
             setShowForm(data.data.active)       
         })
         .catch((error)=>console.log(error))  

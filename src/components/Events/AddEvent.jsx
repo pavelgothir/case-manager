@@ -37,8 +37,9 @@ const AddEvent = ({close,getEvents})=>{
             data : JSON.stringify(obj),
         })
         .then((data)=>{ 
-            console.log(data)
+            alert('Подію успішно створено')
             getEvents();
+            close()
         })
         .catch((error)=>console.log(error)) 
     }

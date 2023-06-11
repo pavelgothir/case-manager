@@ -16,13 +16,13 @@ import { useAuth } from "../../hooks/use-auth";
 import Events from "../Events/Events";
 import Event from "../Events/Event/Event";
 import Calendar from "../Calendar/Calendar";
+import Cooperation from "../Cooperation/Cooperation";
 
 const localToken = localStorage.getItem("token");
 
 const MainContent = ()=>{
   const dispatch = useDispatch();
   const {isAuth} = useAuth();
-  console.log(localToken)
     return isAuth ?(
         <div className='wrap__content'>
           <Routes >
@@ -38,6 +38,7 @@ const MainContent = ()=>{
             <Route path='events' element={<Events />} />
             <Route path='events/:link' element={<Event />} />
             <Route path='calendar' element={<Calendar />} />
+            <Route path='cooperation' element={<Cooperation />} />
             <Route index element={<Home />} />
           </Routes>
         </div>

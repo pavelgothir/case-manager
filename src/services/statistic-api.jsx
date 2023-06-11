@@ -33,7 +33,6 @@ export const AmountCases = () => {
       header: { "Content-Type": "application/json;charset=utf-8" },
       data: JSON.stringify(fetchObj),
     }).then((response) => {
-        console.log(response.data)
         return response.data
     });
   };
@@ -46,7 +45,6 @@ export const AmountCases = () => {
       header: { "Content-Type": "application/json;charset=utf-8" },
       data: JSON.stringify(fetchObj),
     }).then((response) => {
-        console.log(response.data)
         return response.data
     });
   };

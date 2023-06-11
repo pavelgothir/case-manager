@@ -22,11 +22,9 @@ function sendResources(){
       data: formData,
       onUploadProgress: (event) => {
         setLoaderProgress(Math.round((event.loaded * 100) / event.total))
-        console.log(Math.round((event.loaded * 100) / event.total));
       },
     })
       .then((data) => {
-        console.log(data.data)
         setBload(false)
         setLoaderProgress(0)
         if(data.data?.message){
@@ -82,7 +80,6 @@ function sendResources(){
                                 multiple
                                 onChange={(e)=>{
                                     setMeta({...meta,file:e.target})
-                                    console.log(e.target.files[0].name)
                                     setHiddenText(e.target.files[0].name)
                                 }}/>
                                 

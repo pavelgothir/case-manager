@@ -1,5 +1,4 @@
 export function checkRight(arg,right){
-    console.log(arg,right)
     if(arg?.root){
         if(arg.root == "true"){
             return true;

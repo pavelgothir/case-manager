@@ -9,12 +9,11 @@ import { useEffect } from "react";
 import axios from "axios";
 import { serverAddres } from "../Functions/serverAddres";
 import SetEvent from "./SetEvent/SetEvent";
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-
-const Settings = (props)=>{
+const Settings = ()=>{
    
     const [page, setPage] = useState({loading:true,effload:false,message:""})
+    const [categories,setCategories] = useState([]);
+    const [categoriesCont,setCategoriesCont] = useState([]);
     useEffect(()=>{
         let obj = {
             id: localStorage.getItem("id"),
@@ -27,7 +26,6 @@ const Settings = (props)=>{
             data : JSON.stringify(obj),
         })
         .then((data)=>{ 
-            console.log(data.data)
             if(data.data?.message){
                 setPage({
                         effload:false,
@@ -50,9 +48,13 @@ const Settings = (props)=>{
                 <h1>Налаштування</h1>
             </div>
             <div className="settings__page">
-            <SetUser />
-            <SetCategories />
-            <SetContactCategory />
+            <SetUser categories = {categories} categoriesCont = {categoriesCont}/>
+            <SetCategories cats = {(arg)=>{
+                setCategories(arg)
+            }}/>
+            <SetContactCategory cats = {(arg)=>{
+                setCategoriesCont(arg)
+            }} />
             <SetEvent />
         </div>
         

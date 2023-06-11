@@ -50,9 +50,7 @@ const Home = ()=>{
         </div>
     ) : (
         <div className={s.home}>
-           <p>
-            <button onClick={()=> console.log(localStorage.getItem("username"))}>erfkrk</button>
-           </p>
+           
         </div>
     )
 }

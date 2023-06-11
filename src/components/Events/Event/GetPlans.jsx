@@ -15,7 +15,6 @@ const GetPlans = ({id,plans})=>{
             <h2>Планування</h2>
                 <div className={s.plan}>
                     {plans.map((item,index)=>{
-                        console.log(item)
                         return(
                             <div key={index} className={s.result}>
                                 <h3 className={s.title}>{item.title}</h3>

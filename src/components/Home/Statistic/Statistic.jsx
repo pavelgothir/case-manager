@@ -22,18 +22,15 @@ function dadaFunction(texts){
   let babels = [];
   let datas = [];
   let colors = [];
-  console.log(texts.length)
   for(let i = 0; i < Object.keys(texts).length; i++){
     babels[i] = texts[Object.keys(texts)[i]].text;
     datas[i] = texts[Object.keys(texts)[i]].count;
     colors[i] = texts[Object.keys(texts)[i]].color;
   }
-  console.log(babels)
   bib.labels = babels;
   bib.datasets[0].data = datas;
   bib.datasets[0].backgroundColor = colors;
 
-  console.log(bib)
   return true;
 
 }
@@ -50,7 +47,7 @@ const Statistic = () =>{
     const [size, setSize] = useState(null);
     useEffect(()=>{
         AmountCases().then((res) => {
-            if(res?.message) return console.log(res)
+            if(res?.message) return
             var arr = res.mas;
             var result = {};
             var texts = {}
@@ -67,7 +64,7 @@ const Statistic = () =>{
             setAmountCases(res.count);
             });
         getSize().then((res) =>{
-          if(res?.message) return console.log(res)
+          if(res?.message) return 
           setSize( {
             labels: ['Вільно','Зайнято'],
             datasets: [{
@@ -79,10 +76,9 @@ const Statistic = () =>{
           })
         })
         getCategoriesStat().then((data) => {
-          console.log(data)
+         // console.log(data)
         });
         getCasesHappy().then((data) => {
-          console.log(data)
           setAmountHappy(data)
         });
     },[])

@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 import { serverAddres } from "../../Functions/serverAddres";
 import s from "./get-user.module.css";
 const GetUsers = ({type,id,users})=>{
-    console.log(users)
     return type !== "case" ? (
         <div className={s.users__wrap}>
             <div className={s.users__inner}>

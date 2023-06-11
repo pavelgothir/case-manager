@@ -1,7 +1,6 @@
 import React from "react";
 import "./modal.css"
 const ModalInfo = ({info,func})=>{
-    console.log(info)
     return info.showModal ?(
         <div className={`modal__window`}>
             <div className="modal__window__inner">

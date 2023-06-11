@@ -6,7 +6,6 @@ import SearchUsers from "./SearchUsers";
 import UploadEventDocs from "./UploadEventDocs";
 import UploadEventMedia from "./UploadEventMedia";
 const EventModal = ({close,info,getUsers,getPlans})=>{
-    console.log(info)
     return(
         <div className={s.modal}>
             <div className={s.inner}>

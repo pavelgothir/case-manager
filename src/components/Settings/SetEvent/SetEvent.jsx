@@ -41,7 +41,6 @@ const SetEvent = ()=>{
     function createEvent(){
         let link = transliterate(event.title.replace(/ +/g, ' ').trim());
 
-    // return console.log(link,event.description,event.title)
         let obj = {
             id: localStorage.getItem("id"),
             token: localStorage.getItem("token"),

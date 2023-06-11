@@ -19,7 +19,6 @@ const SearchUsers = ({eventID,getUsers})=>{
             data : JSON.stringify(obj),
           })
           .then((data)=>{ 
-            console.log(data.data)
                 setSearchRes(data.data)
           })
           .catch((error)=>console.log(error)) 
@@ -42,7 +41,6 @@ const SearchUsers = ({eventID,getUsers})=>{
             data : JSON.stringify(obj),
         })
         .then((data)=>{ 
-            console.log(data.data)
             getUsers(eventID,"eventMemberUser");
         })
         .catch((error)=>console.log(error))  

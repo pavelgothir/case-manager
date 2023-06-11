@@ -20,7 +20,6 @@ const SearchCase = ({eventID,getUsers})=>{
             data : JSON.stringify(obj),
         })
         .then((data)=>{ 
-            console.log(data.data)
             setSearchRes(data.data)
             
         })
@@ -43,14 +42,12 @@ const SearchCase = ({eventID,getUsers})=>{
             data : JSON.stringify(obj),
         })
         .then((data)=>{ 
-            console.log(data.data)
             if(data.data == true){
                  getUsers(eventID,"eventMemberCase");
             }
            
         })
         .catch((error)=>console.log(error))  
-        console.log(sCase)
     }
     return (
         <div className={s.add__user__wrap}>

@@ -18,7 +18,6 @@ const LoadSearch = ({active})=>{
 }
 
 const SearchRes = ({elem})=>{
-    console.log(elem)
     return elem.surname.length > 1 ?(
          <div className="search__viewer__line">
          <div className="search__viewer__data">
@@ -45,7 +44,6 @@ const Search = ()=>{
             val:val
         }
         setLoadSearch(true)
-       console.log(obj)
         axios({
             url: serverAddres("case/search.php"),
             method: "POST",
@@ -56,7 +54,6 @@ const Search = ()=>{
             },
         })
         .then((data)=>{ 
-            console.log(data)
             setLoadSearch(false)
             setSearch(data.data)  
         })

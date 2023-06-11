@@ -25,9 +25,6 @@ export class AddReportHistory extends Component {
     const { title, dopInfo } = this.state;
     const file = this.fileInput.current.files[0];
     const sendData = { title, dopInfo, file };
-
-    console.log(sendData);
-
     if (this.typeBtn === "report") {
       // addReport(sendData);
       this.reset();

@@ -5,13 +5,13 @@ import deleteImg from "./../../../img/icons/delete-48.png";
 import bookImg from "./../../../img/icons/book-50.png";
 import showImg from "./../../../img/icons/show-50.png";
 import hideImg from "./../../../img/icons/hide-50.png";
-import SpecificateForm from "./SpecificateForm";
 import {serverAddres} from "./../../Functions/serverAddres";
 import ModalSimple from "../../Modals/ModalSimple";
+import Specification from "./Specification";
 let usersStr = "";
 
 
-const SetUser = ()=>{
+const SetUser = ({categories,categoriesCont})=>{
     const [users, setUsers] = useState(null);
     const [specificate, setSpecificate] = useState(null);
     const [activeSpecificate, setActiveSpecificate] = useState(false);
@@ -34,7 +34,6 @@ const SetUser = ()=>{
             data : JSON.stringify(obj),
         })
         .then((data)=>{ 
-            console.log(data.data)
             if(data.data?.message){
                 setModal(true);
                 return setModalInfo({message:data.data.message});
@@ -55,14 +54,12 @@ const SetUser = ()=>{
             data : JSON.stringify(obj),
         })
         .then((data)=>{ 
-            console.log(data)
             setUsers(data.data);      
         })
         .catch((error)=>console.log(error)) 
     },[])
 
     const UsersData = ({user, index})=>{
-        console.log(user)
         return (
                 <div className={`set__users__data__line ${index%2 == 0 ? "arc" : ""}`}>
                     <div className={`set__user__wr ${user.active == "true" ? "arc":""}`}>
@@ -76,7 +73,6 @@ const SetUser = ()=>{
                             {<img id="bookImg" src={bookImg} alt="" onClick={()=>{
                                if(user.id == localStorage.getItem("id") || user?.type == "root"){
                                 setModal(true); 
-                                console.log(user)
                                 setModalInfo({message: "Ви не можете змінювати права доступу для цього користувача"})
                                }else{
                                 changeSpecification(user)
@@ -146,7 +142,12 @@ const SetUser = ()=>{
                         </div>
                     </div>
                 </div>
-            <SpecificateForm props = {specificate} active = {activeSpecificate} levela = {level} close = {()=>{setActiveSpecificate(false)}}/>
+            
+            {activeSpecificate ? <Specification categoriesCont = {categoriesCont} 
+                                                categories = {categories} 
+                                                close = {()=>{setActiveSpecificate(false)}} 
+                                                level = {level} 
+                                                user = {specificate}/> : null}
         </div>
         
         {modal ? <ModalSimple>

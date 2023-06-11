@@ -23,7 +23,6 @@ const Footer = ()=>{
             data : JSON.stringify(obj),
         })
         .then((data)=>{ 
-            console.log(data)
             data.data > version ? setNewVersion(data.data) : setNewVersion(false)    
         })
         .catch((error)=>console.log(error)) 
@@ -40,7 +39,6 @@ const Footer = ()=>{
             data : JSON.stringify(obj),
         })
         .then((data)=>{ 
-            console.log(data)
             if(!data.data?.message) setRight(true)
             setVersion(data.data.version);
             checkVersion()    

@@ -6,9 +6,8 @@ import { serverAddres } from "../../Functions/serverAddres";
 import LoadingPage from "../../Loading/LoadingPage";
 
 let categoriesStr = "";
-const SetCategories = ({props})=>{
+const SetCategories = ({cats})=>{
     const [categoriesCase, setCategoriesCase] = useState(false)
-    const [count, setCount] = useState(0)
     const [page, setPage] = useState({loading:true,effload:false,message:""})
     useEffect(()=>{
         let obj = {
@@ -28,7 +27,8 @@ const SetCategories = ({props})=>{
               }else{
                  setCategoriesCase(data.data.mas);
                   setPage({loading:false,effload:true})
-              }      
+              }  
+              cats(data.data.mas)    
         })
         .catch((error)=>console.log(error)) 
     },[])
@@ -52,9 +52,7 @@ const SetCategories = ({props})=>{
             data : JSON.stringify(obj),
         })
         .then((data)=>{ 
-            console.log(data)
             setCategoriesCase(data.data);
-          // window.location.reload()        
         })
         .catch((error)=>console.log(error)) 
     }
@@ -77,15 +75,12 @@ const SetCategories = ({props})=>{
             data : JSON.stringify(obj),
         })
         .then((data)=>{ 
-            console.log(data)
             document.querySelector("#" + id).value = ""
             setCategoriesCase(data.data);
-          // window.location.reload()        
         })
         .catch((error)=>console.log(error)) 
     }
     const CategoriesData = ({category, index})=>{
-        console.log(category)
         return (
         <div className={`set__categories__case__list__category ${index % 2 == 0 ?  "arc":""}`}>
             <div className="set__categories__case__list__category__title">
@@ -99,7 +94,6 @@ const SetCategories = ({props})=>{
         )
     }
     const CategoriesMas = (pos)=>{
-        console.log(pos)
         if(pos.length < 1 || pos == false) return;
                 categoriesStr =  pos.map((post,index)=>{
                 return <CategoriesData key={index} category={post} index={index}/>

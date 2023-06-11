@@ -1,9 +1,6 @@
 import React from "react";
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
 import s from "./search.module.css"
 const SearchResult =({elems,close})=>{
-    console.log(elems)
     return(
         <div className={s.items}>
            {elems.map((elem,ind)=>{

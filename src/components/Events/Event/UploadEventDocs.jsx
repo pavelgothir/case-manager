@@ -24,18 +24,15 @@ const UploadEventDocs = ({eventID})=>{
           data: formData,
           onUploadProgress: (event) => {
             setLoaderProgress(Math.round((event.loaded * 100) / event.total))
-            console.log(Math.round((event.loaded * 100) / event.total));
           },
         })
           .then((data) => {
-            console.log(data.data)
             setBload(false)
             setLoaderProgress(0)
             if(data.data?.message){
                 window.alert(data.data.message)
             }else{
                 window.alert("Файл успішно завантажено");
-               // window.location.reload();
             }
             setMeta({
                 title:"",

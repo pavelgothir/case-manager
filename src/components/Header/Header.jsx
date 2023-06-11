@@ -39,13 +39,9 @@ const Header = () => {
           data = data.data;
           if ("message" in data) {
             dispatch(removeUser());
-            console.log(data,125);
           }
           if (data == "null") {
-            console.log(data,125);
             dispatch(removeUser());
-          } else {
-            // console.log(data)
           }
         })
         .catch((error) => setErrorNet(error))

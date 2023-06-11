@@ -20,3 +20,25 @@ export function get_apiObj(setState,url,objData){
     })
     .catch((error)=>console.log(error)) 
 }
+
+export async function apiResponse(objTo, url){
+
+    objTo.id = obj.id;
+    objTo.token = obj.token;
+   return await axios({
+         url: serverAddres(url),
+         method: "POST",
+         header: {'application/x-www-form-urlencoded': 'application/json;charset=utf-8'},
+         data: JSON.stringify(objTo),
+         onUploadProgress: (event) => {
+             console.log(event)
+         } 
+     })
+     .then((data)=>{
+         console.log("Received data: ", data.data);
+         return (data.data)
+     })
+     .catch((error)=>{
+         throw error;
+     })
+ }

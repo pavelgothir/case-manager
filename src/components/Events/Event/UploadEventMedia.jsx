@@ -24,11 +24,9 @@ const UploadEventMedia = ({eventID})=>{
           data: formData,
           onUploadProgress: (event) => {
             setLoaderProgress(Math.round((event.loaded * 100) / event.total))
-            console.log(Math.round((event.loaded * 100) / event.total));
           },
         })
           .then((data) => {
-            console.log(data.data)
             let a = index + 1;
             if(a < meta.lengthFiles){
                 sendResources(a);
@@ -104,8 +102,7 @@ const UploadEventMedia = ({eventID})=>{
                                 if(bload) return;
                                 if(meta.file == null) return window.alert("Оберіть файл")
                                 if(meta.title == "") return window.alert("Введіть назву файлу")
-                                setBload(true)
-                                
+                                    setBload(true)
                                     sendResources(0)
                                 
                                

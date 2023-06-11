@@ -66,9 +66,7 @@ const Bell = ()=>{
                             return(
                                 <div className={s.item} key={item.id * index} onClick={()=>{
                                     doneBells(item.id);
-                                    /*let bul = bells;
-                                    setBells(bul.splice(index,1))
-                                    setBellsCount(bells.length)*/
+                                   
                                     getBells()
                                 }}>
                                     <div className={s.date__bell}>{item.date}</div>

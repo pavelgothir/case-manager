@@ -3,9 +3,10 @@ import imgDelete from "./../../img/icons/delete-48.png";
 import axios from "axios";
 import { serverAddres } from "../Functions/serverAddres";
 import LoadingPage from "../Loading/LoadingPage";
+import { translateString } from "../Functions/translateString";
 
 let categoriesStr = "";
-const SetContactCategory = ()=>{
+const SetContactCategory = ({cats})=>{
     const [categoriesContact, setCategoriesContact] = useState(false)
     const [page, setPage] = useState({loading:true,effload:false,message:""})
     useEffect(()=>{
@@ -20,7 +21,6 @@ const SetContactCategory = ()=>{
             data : JSON.stringify(obj),
         })
         .then((data)=>{ 
-          //  return console.log(data.data)
             if(data.data?.message){
               setPage({loading:true,effload:false,message:data.data.message})
               setCategoriesContact(data.data.mas);  
@@ -28,18 +28,10 @@ const SetContactCategory = ()=>{
                 setCategoriesContact(data.data.mas);
                 setPage({loading:false,effload:true})
             }
-          // window.location.reload()        
+            cats(data.data.mas);
         })
         .catch((error)=>console.log(error)) 
     },[])
-        function transliterate(key){
-
-            var a = {"Ё":"YO","Й":"I","Ц":"TS","У":"U","К":"K","Е":"E","Н":"N","Г":"G","Ш":"SH","Щ":"SCH","З":"Z","Х":"H","Ъ":"","ё":"yo","й":"i","ц":"ts","у":"u","к":"k","е":"e","н":"n","г":"g","ш":"sh","щ":"sch","з":"z","х":"h","ъ":"","Ф":"F","Ы":"I","В":"V","А":"a","П":"P","Р":"R","О":"O","Л":"L","Д":"D","Ж":"ZH","Э":"E","ф":"f","ы":"i","в":"v","а":"a","п":"p","р":"r","о":"o","л":"l","д":"d","ж":"zh","э":"e","Я":"Ya","Ч":"CH","С":"S","М":"M","И":"I","Т":"T","Ь":"i","Б":"B","Ю":"YU","я":"ya","ч":"ch","с":"s","м":"m","и":"i","т":"t","ь":"i","ъ":"i","Ъ":"i","'":"i","б":"b","ю":"yu"," ":"_"};
-            key = key.replace(/ /g,'');
-            return key.split('').map(function (char) { 
-            return a[char] || char; 
-          }).join("");
-        }
     function deleteCategory(arg){
         let obj = {
             id: localStorage.getItem("id"),
@@ -53,16 +45,14 @@ const SetContactCategory = ()=>{
             data : JSON.stringify(obj),
         })
         .then((data)=>{ 
-            console.log(data)
             setCategoriesContact(data.data);
-          // window.location.reload()        
         })
         .catch((error)=>console.log(error)) 
     }
     function addNewCategory(id){
         if(document.querySelector("#" + id).value == "") return alert("Заповніть поле");
         let category = {
-            value: transliterate(document.querySelector("#" + id).value),
+            value: translateString(document.querySelector("#" + id).value),
             text:document.querySelector("#" + id).value.replace("'", "’"),
             color:document.querySelector("#colorBackground__contact").value
         }
@@ -78,14 +68,12 @@ const SetContactCategory = ()=>{
             data : JSON.stringify(obj),
         })
         .then((data)=>{ 
-            console.log(data)
             document.querySelector("#" + id).value = ""
             setCategoriesContact(data.data);     
         })
         .catch((error)=>console.log(error)) 
     }
     const CategoriesData = ({category, index})=>{
-        console.log(category)
         return (
         <div className={`set__categories__case__list__category ${index % 2 == 0 ?  "arc":""}`}>
             <div className="set__categories__case__list__category__title">
@@ -101,7 +89,6 @@ const SetContactCategory = ()=>{
         )
     }
     const CategoriesMas = (pos)=>{
-        console.log(pos)
         if(pos.length < 1 || pos == false) return;
                 categoriesStr =  pos.map((post,index)=>{
                 return <CategoriesData key={index} category={post} index={index}/>
